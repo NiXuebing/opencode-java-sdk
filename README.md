@@ -49,7 +49,7 @@ node script/generate.mjs
 <dependency>
   <groupId>ai.opencode</groupId>
   <artifactId>opencode-java-sdk</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
 </dependency>
 ```
 
@@ -125,4 +125,4 @@ mvn deploy
 3. Create a GitHub Release.
 4. Let the `Publish Package` workflow upload the artifact to GitHub Packages.
 
-If you want to keep publishing snapshot builds, leave the version as `*-SNAPSHOT` and trigger the publish workflow manually.
+For the first stable release in this repository, use `0.1.0` and create the GitHub Release with tag `v0.1.0`.
