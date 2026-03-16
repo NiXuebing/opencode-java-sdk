@@ -7,9 +7,41 @@
   <groupId>ai.opencode</groupId>
   <artifactId>opencode-java-sdk</artifactId>
   <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>opencode Java SDK</name>
   <description>JDK 17 Java SDK for the opencode HTTP API.</description>
-  <url>https://github.com/anomalyco/opencode</url>
+  <url>https://github.com/NiXuebing/opencode-java-sdk</url>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://opensource.org/license/mit</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>NiXuebing</id>
+      <name>NiXuebing</name>
+      <url>https://github.com/NiXuebing</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/NiXuebing/opencode-java-sdk</url>
+    <connection>scm:git:git://github.com/NiXuebing/opencode-java-sdk.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/NiXuebing/opencode-java-sdk.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/nixuebing/opencode-java-sdk</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
