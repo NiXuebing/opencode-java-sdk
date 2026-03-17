@@ -9,19 +9,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装LSP 接口相关的 HTTP 调用。 */
 public final class LspApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建LSP 接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public LspApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 获取 LSP 状态。 */
+  /**
+   * 获取 LSP 状态。
+   *
+   * @return LSP 状态。
+   */
   public List<LSPStatus> status() {
     return status(new LspStatusRequest(null));
   }
 
-  /** 获取 LSP 状态。 可传入请求参数。 */
+  /**
+   * 获取 LSP 状态。
+   *
+   * @param request 获取 LSP 状态所需的请求参数。
+   * @return LSP 状态。
+   */
   public List<LSPStatus> status(LspStatusRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

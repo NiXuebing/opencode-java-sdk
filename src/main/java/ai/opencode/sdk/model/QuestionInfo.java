@@ -5,6 +5,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * 问题信息数据模型。
+ *
+ * @param question 问题。
+ * @param header header。
+ * @param options options列表。
+ * @param multiple multiple标记。
+ * @param custom custom标记。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record QuestionInfo(

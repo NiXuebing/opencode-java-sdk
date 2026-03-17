@@ -9,19 +9,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装工具接口相关的 HTTP 调用。 */
 public final class ToolApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建工具接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public ToolApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 获取工具 ID 列表。 */
+  /**
+   * 获取工具 ID 列表。
+   *
+   * @return 工具 ID 列表。
+   */
   public ToolIDs ids() {
     return ids(new ToolIdsRequest(null));
   }
 
-  /** 获取工具 ID 列表。 可传入请求参数。 */
+  /**
+   * 获取工具 ID 列表。
+   *
+   * @param request 获取工具 ID 列表所需的请求参数。
+   * @return 工具 ID 列表。
+   */
   public ToolIDs ids(ToolIdsRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -33,7 +48,12 @@ public final class ToolApi {
         "GET", "/experimental/tool/ids", path, query, headers, body, ToolIDs.class);
   }
 
-  /** 获取工具列表。 可传入请求参数。 */
+  /**
+   * 获取工具列表。
+   *
+   * @param request 获取工具列表所需的请求参数，其中 provider、model 为必填项。
+   * @return 工具列表。
+   */
   public ToolList list(ToolListRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.provider(), "request.provider");

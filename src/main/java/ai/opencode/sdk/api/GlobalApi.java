@@ -6,14 +6,24 @@ import ai.opencode.sdk.model.GlobalEvent;
 import ai.opencode.sdk.model.GlobalHealthResponse;
 import java.util.Map;
 
+/** 封装全局接口相关的 HTTP 调用。 */
 public final class GlobalApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建全局接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public GlobalApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 获取全局健康状态。 */
+  /**
+   * 获取全局健康状态。
+   *
+   * @return 全局健康状态。
+   */
   public GlobalHealthResponse health() {
     Map<String, Object> path = Map.of();
     Map<String, Object> query = Map.of();
@@ -23,7 +33,11 @@ public final class GlobalApi {
         "GET", "/global/health", path, query, headers, body, GlobalHealthResponse.class);
   }
 
-  /** 订阅全局事件。 */
+  /**
+   * 订阅全局事件。
+   *
+   * @return 服务端持续推送的事件流。
+   */
   public SseEventStream<GlobalEvent> event() {
     Map<String, Object> path = Map.of();
     Map<String, Object> query = Map.of();

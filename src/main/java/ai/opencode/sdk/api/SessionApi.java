@@ -39,19 +39,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装会话接口相关的 HTTP 调用。 */
 public final class SessionApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建会话接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public SessionApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 列出会话。 */
+  /**
+   * 列出会话。
+   *
+   * @return 会话列表。
+   */
   public List<Session> list() {
     return list(new SessionListRequest(null, null, null, null, null));
   }
 
-  /** 列出会话。 可传入请求参数。 */
+  /**
+   * 列出会话。
+   *
+   * @param request 列出会话所需的请求参数。
+   * @return 会话列表。
+   */
   public List<Session> list(SessionListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -67,7 +82,12 @@ public final class SessionApi {
         "GET", "/session", path, query, headers, body, new TypeReference<List<Session>>() {});
   }
 
-  /** 创建会话。 可传入请求参数。 */
+  /**
+   * 创建会话。
+   *
+   * @param request 创建会话所需的请求参数，其中 body 为必填项。
+   * @return 会话结果。
+   */
   public Session create(SessionCreateRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");
@@ -79,12 +99,21 @@ public final class SessionApi {
     return transport.execute("POST", "/session", path, query, headers, body, Session.class);
   }
 
-  /** 获取会话状态。 */
+  /**
+   * 获取会话状态。
+   *
+   * @return 会话状态。
+   */
   public Map<String, SessionStatus> status() {
     return status(new SessionStatusRequest(null));
   }
 
-  /** 获取会话状态。 可传入请求参数。 */
+  /**
+   * 获取会话状态。
+   *
+   * @param request 获取会话状态所需的请求参数。
+   * @return 会话状态。
+   */
   public Map<String, SessionStatus> status(SessionStatusRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -102,7 +131,12 @@ public final class SessionApi {
         new TypeReference<Map<String, SessionStatus>>() {});
   }
 
-  /** 获取会话。 可传入请求参数。 */
+  /**
+   * 获取会话。
+   *
+   * @param request 获取会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话。
+   */
   public Session get(SessionGetRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -116,7 +150,12 @@ public final class SessionApi {
         "GET", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
-  /** 删除会话。 可传入请求参数。 */
+  /**
+   * 删除会话。
+   *
+   * @param request 删除会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 操作是否成功。
+   */
   public Boolean delete(SessionDeleteRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -130,7 +169,12 @@ public final class SessionApi {
         "DELETE", "/session/{sessionID}", path, query, headers, body, Boolean.class);
   }
 
-  /** 更新会话。 可传入请求参数。 */
+  /**
+   * 更新会话。
+   *
+   * @param request 更新会话所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话结果。
+   */
   public Session update(SessionUpdateRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -145,7 +189,12 @@ public final class SessionApi {
         "PATCH", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
-  /** 获取子会话。 可传入请求参数。 */
+  /**
+   * 获取子会话。
+   *
+   * @param request 获取子会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 子会话。
+   */
   public List<Session> children(SessionChildrenRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -165,7 +214,12 @@ public final class SessionApi {
         new TypeReference<List<Session>>() {});
   }
 
-  /** 获取会话待办。 可传入请求参数。 */
+  /**
+   * 获取会话待办。
+   *
+   * @param request 获取会话待办所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话待办。
+   */
   public List<Todo> todo(SessionTodoRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -185,7 +239,12 @@ public final class SessionApi {
         new TypeReference<List<Todo>>() {});
   }
 
-  /** 初始化会话。 可传入请求参数。 */
+  /**
+   * 初始化会话。
+   *
+   * @param request 初始化会话所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 操作是否成功。
+   */
   public Boolean init(SessionInitRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -200,7 +259,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/init", path, query, headers, body, Boolean.class);
   }
 
-  /** 派生会话。 可传入请求参数。 */
+  /**
+   * 派生会话。
+   *
+   * @param request 派生会话所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话数据模型。
+   */
   public Session fork(SessionForkRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -215,7 +279,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/fork", path, query, headers, body, Session.class);
   }
 
-  /** 中止会话。 可传入请求参数。 */
+  /**
+   * 中止会话。
+   *
+   * @param request 中止会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 操作是否成功。
+   */
   public Boolean abort(SessionAbortRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -229,7 +298,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/abort", path, query, headers, body, Boolean.class);
   }
 
-  /** 分享会话。 可传入请求参数。 */
+  /**
+   * 分享会话。
+   *
+   * @param request 分享会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话数据模型。
+   */
   public Session share(SessionShareRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -243,7 +317,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
-  /** 取消分享会话。 可传入请求参数。 */
+  /**
+   * 取消分享会话。
+   *
+   * @param request 取消分享会话所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话数据模型。
+   */
   public Session unshare(SessionUnshareRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -257,7 +336,12 @@ public final class SessionApi {
         "DELETE", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
-  /** 获取会话差异。 可传入请求参数。 */
+  /**
+   * 获取会话差异。
+   *
+   * @param request 获取会话差异所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话差异。
+   */
   public List<FileDiff> diff(SessionDiffRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -278,7 +362,12 @@ public final class SessionApi {
         new TypeReference<List<FileDiff>>() {});
   }
 
-  /** 总结会话。 可传入请求参数。 */
+  /**
+   * 总结会话。
+   *
+   * @param request 总结会话所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 操作是否成功。
+   */
   public Boolean summarize(SessionSummarizeRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -293,7 +382,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/summarize", path, query, headers, body, Boolean.class);
   }
 
-  /** 列出会话消息。 可传入请求参数。 */
+  /**
+   * 列出会话消息。
+   *
+   * @param request 列出会话消息所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话消息列表。
+   */
   public List<SessionMessagesResponseItem> messages(SessionMessagesRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -314,7 +408,12 @@ public final class SessionApi {
         new TypeReference<List<SessionMessagesResponseItem>>() {});
   }
 
-  /** 发送会话提示。 可传入请求参数。 */
+  /**
+   * 发送会话提示。
+   *
+   * @param request 发送会话提示所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话提示处理结果。
+   */
   public SessionPromptResponse prompt(SessionPromptRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -335,7 +434,12 @@ public final class SessionApi {
         SessionPromptResponse.class);
   }
 
-  /** 获取消息详情。 可传入请求参数。 */
+  /**
+   * 获取消息详情。
+   *
+   * @param request 获取消息详情所需的请求参数，其中 sessionID、messageID 为必填项。
+   * @return 消息详情。
+   */
   public SessionMessageResponse message(SessionMessageRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -357,7 +461,12 @@ public final class SessionApi {
         SessionMessageResponse.class);
   }
 
-  /** 异步发送提示。 可传入请求参数。 */
+  /**
+   * 异步发送提示。
+   *
+   * @param request 异步发送提示所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 无返回值。
+   */
   public Void promptAsync(SessionPromptAsyncRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -372,7 +481,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/prompt_async", path, query, headers, body, Void.class);
   }
 
-  /** 发送会话命令。 可传入请求参数。 */
+  /**
+   * 发送会话命令。
+   *
+   * @param request 发送会话命令所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话命令处理结果。
+   */
   public SessionCommandResponse command(SessionCommandRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -393,7 +507,12 @@ public final class SessionApi {
         SessionCommandResponse.class);
   }
 
-  /** 执行会话 Shell 命令。 可传入请求参数。 */
+  /**
+   * 执行会话 Shell 命令。
+   *
+   * @param request 执行会话 Shell 命令所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话 Shell 命令结果。
+   */
   public AssistantMessage shell(SessionShellRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -408,7 +527,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/shell", path, query, headers, body, AssistantMessage.class);
   }
 
-  /** 撤回消息。 可传入请求参数。 */
+  /**
+   * 撤回消息。
+   *
+   * @param request 撤回消息所需的请求参数，其中 sessionID、body 为必填项。
+   * @return 会话数据模型。
+   */
   public Session revert(SessionRevertRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -423,7 +547,12 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/revert", path, query, headers, body, Session.class);
   }
 
-  /** 恢复已撤回消息。 可传入请求参数。 */
+  /**
+   * 恢复已撤回消息。
+   *
+   * @param request 恢复已撤回消息所需的请求参数，其中 sessionID 为必填项。
+   * @return 会话数据模型。
+   */
   public Session unrevert(SessionUnrevertRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");

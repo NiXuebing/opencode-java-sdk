@@ -6,6 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Map;
 
+/**
+ * 工具StateRunning数据模型。
+ *
+ * @param status 当前状态。
+ * @param input 输入映射。
+ * @param title 标题。
+ * @param metadata metadata映射。
+ * @param time 时间。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ToolStateRunning(

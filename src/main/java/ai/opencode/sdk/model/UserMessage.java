@@ -5,6 +5,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
+/**
+ * 用户消息数据模型。
+ *
+ * @param id 唯一标识。
+ * @param sessionID 目标会话 ID。
+ * @param role 消息角色。
+ * @param time 时间。
+ * @param format 输出格式配置。
+ * @param summary summary。
+ * @param agent 代理名称或代理配置。
+ * @param model 模型配置。
+ * @param system 系统提示词。
+ * @param tools 工具开关配置。
+ * @param variant 变体名称。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record UserMessage(

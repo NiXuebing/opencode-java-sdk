@@ -6,14 +6,25 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装认证接口相关的 HTTP 调用。 */
 public final class AuthApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建认证接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public AuthApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 设置提供商认证。 可传入请求参数。 */
+  /**
+   * 设置提供商认证。
+   *
+   * @param request 设置提供商认证所需的请求参数，其中 providerID、body 为必填项。
+   * @return 操作是否成功。
+   */
   public Boolean set(AuthSetRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.providerID(), "request.providerID");

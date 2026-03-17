@@ -4,6 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 会话撤回数据模型。
+ *
+ * @param messageID 目标消息 ID。
+ * @param partID 片段 ID。
+ * @param snapshot snapshot。
+ * @param diff 差异。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record SessionRevert(

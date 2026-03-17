@@ -5,8 +5,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * 权限Rule配置值对象。
+ *
+ * @param value 实际值。
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record PermissionRuleConfig(@JsonValue JsonNode value) {
+  /**
+   * 使用实际值创建对象。
+   *
+   * @param value 实际值。
+   */
   @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
   public PermissionRuleConfig {}
 }

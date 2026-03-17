@@ -23,6 +23,7 @@ import ai.opencode.sdk.api.VcsApi;
 import ai.opencode.sdk.core.ApiTransport;
 import ai.opencode.sdk.core.OpencodeClientConfig;
 
+/** 用于访问 OpenCode serve HTTP 接口的 Java 客户端。 */
 public final class OpencodeClient {
   private final ApiTransport transport;
   private final GlobalApi global;
@@ -46,10 +47,16 @@ public final class OpencodeClient {
   private final FormatterApi formatter;
   private final EventApi event;
 
+  /** 使用默认配置创建客户端。 */
   public OpencodeClient() {
     this(OpencodeClientConfig.builder().build());
   }
 
+  /**
+   * 使用指定配置创建客户端。
+   *
+   * @param config 客户端配置。
+   */
   public OpencodeClient(OpencodeClientConfig config) {
     this.transport = new ApiTransport(config);
     this.global = new GlobalApi(transport);
@@ -74,102 +81,182 @@ public final class OpencodeClient {
     this.event = new EventApi(transport);
   }
 
-  /** 访问全局接口。 */
+  /**
+   * 获取全局接口。
+   *
+   * @return 全局接口实例。
+   */
   public GlobalApi global() {
     return global;
   }
 
-  /** 访问认证接口。 */
+  /**
+   * 获取认证接口。
+   *
+   * @return 认证接口实例。
+   */
   public AuthApi auth() {
     return auth;
   }
 
-  /** 访问项目接口。 */
+  /**
+   * 获取项目接口。
+   *
+   * @return 项目接口实例。
+   */
   public ProjectApi project() {
     return project;
   }
 
-  /** 访问配置接口。 */
+  /**
+   * 获取配置接口。
+   *
+   * @return 配置接口实例。
+   */
   public ConfigApi config() {
     return config;
   }
 
-  /** 访问工具接口。 */
+  /**
+   * 获取工具接口。
+   *
+   * @return 工具接口实例。
+   */
   public ToolApi tool() {
     return tool;
   }
 
-  /** 访问会话接口。 */
+  /**
+   * 获取会话接口。
+   *
+   * @return 会话接口实例。
+   */
   public SessionApi session() {
     return session;
   }
 
-  /** 访问权限接口。 */
+  /**
+   * 获取权限接口。
+   *
+   * @return 权限接口实例。
+   */
   public PermissionApi permission() {
     return permission;
   }
 
-  /** 访问提供商接口。 */
+  /**
+   * 获取提供商接口。
+   *
+   * @return 提供商接口实例。
+   */
   public ProviderApi provider() {
     return provider;
   }
 
-  /** 访问检索接口。 */
+  /**
+   * 获取检索接口。
+   *
+   * @return 检索接口实例。
+   */
   public FindApi find() {
     return find;
   }
 
-  /** 访问文件接口。 */
+  /**
+   * 获取文件接口。
+   *
+   * @return 文件接口实例。
+   */
   public FileApi file() {
     return file;
   }
 
-  /** 访问MCP 接口。 */
+  /**
+   * 获取 MCP 接口。
+   *
+   * @return MCP 接口实例。
+   */
   public McpApi mcp() {
     return mcp;
   }
 
-  /** 访问TUI HTTP 接口。 */
+  /**
+   * 获取 TUI HTTP 接口。
+   *
+   * @return TUI HTTP 接口实例。
+   */
   public TuiApi tui() {
     return tui;
   }
 
-  /** 访问实例接口。 */
+  /**
+   * 获取实例接口。
+   *
+   * @return 实例接口实例。
+   */
   public InstanceApi instance() {
     return instance;
   }
 
-  /** 访问路径接口。 */
+  /**
+   * 获取路径接口。
+   *
+   * @return 路径接口实例。
+   */
   public PathApi path() {
     return path;
   }
 
-  /** 访问版本控制接口。 */
+  /**
+   * 获取版本控制接口。
+   *
+   * @return 版本控制接口实例。
+   */
   public VcsApi vcs() {
     return vcs;
   }
 
-  /** 访问命令接口。 */
+  /**
+   * 获取命令接口。
+   *
+   * @return 命令接口实例。
+   */
   public CommandApi command() {
     return command;
   }
 
-  /** 访问应用接口。 */
+  /**
+   * 获取应用接口。
+   *
+   * @return 应用接口实例。
+   */
   public AppApi app() {
     return app;
   }
 
-  /** 访问LSP 接口。 */
+  /**
+   * 获取 LSP 接口。
+   *
+   * @return LSP 接口实例。
+   */
   public LspApi lsp() {
     return lsp;
   }
 
-  /** 访问格式化器接口。 */
+  /**
+   * 获取格式化器接口。
+   *
+   * @return 格式化器接口实例。
+   */
   public FormatterApi formatter() {
     return formatter;
   }
 
-  /** 访问事件订阅接口。 */
+  /**
+   * 获取事件订阅接口。
+   *
+   * @return 事件订阅接口实例。
+   */
   public EventApi event() {
     return event;
   }

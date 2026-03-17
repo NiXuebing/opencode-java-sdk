@@ -7,19 +7,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装路径接口相关的 HTTP 调用。 */
 public final class PathApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建路径接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public PathApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 获取路径信息。 */
+  /**
+   * 获取路径信息。
+   *
+   * @return 路径信息。
+   */
   public Path get() {
     return get(new PathGetRequest(null));
   }
 
-  /** 获取路径信息。 可传入请求参数。 */
+  /**
+   * 获取路径信息。
+   *
+   * @param request 获取路径信息所需的请求参数。
+   * @return 路径信息。
+   */
   public Path get(PathGetRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

@@ -5,6 +5,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * 命令数据模型。
+ *
+ * @param name 名称。
+ * @param description 描述信息。
+ * @param agent 代理名称或代理配置。
+ * @param model 模型配置。
+ * @param source 来源。
+ * @param template template。
+ * @param subtask 子任务标记。
+ * @param hints hints列表。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record Command(

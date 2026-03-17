@@ -6,6 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 提供商列表响应AllItem数据模型。
+ *
+ * @param api API。
+ * @param name 名称。
+ * @param env env列表。
+ * @param id 唯一标识。
+ * @param npm npm。
+ * @param models 模型映射。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ProviderListResponseAllItem(

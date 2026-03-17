@@ -12,11 +12,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/** 按需读取服务端 SSE 响应的事件流。 */
 public final class SseEventStream<T> implements AutoCloseable, Iterable<SseEvent<T>> {
   private final BufferedReader reader;
   private final ObjectMapper mapper;
   private final JavaType type;
 
+  /**
+   * 发送请求并建立 SSE 事件流。
+   *
+   * @param client HTTP 客户端。
+   * @param mapper JSON 反序列化器。
+   * @param request 已构造好的 HTTP 请求。
+   * @param type 事件数据类型。
+   * @throws ApiException 当请求失败或事件流无法建立时抛出。
+   */
   public SseEventStream(
       HttpClient client, ObjectMapper mapper, HttpRequest request, JavaType type) {
     try {
@@ -37,6 +47,11 @@ public final class SseEventStream<T> implements AutoCloseable, Iterable<SseEvent
     }
   }
 
+  /**
+   * 返回用于顺序读取事件的迭代器。
+   *
+   * @return SSE 事件迭代器。
+   */
   @Override
   public Iterator<SseEvent<T>> iterator() {
     return new Iterator<>() {
@@ -71,10 +86,9 @@ public final class SseEventStream<T> implements AutoCloseable, Iterable<SseEvent
 
       while ((line = reader.readLine()) != null) {
         if (line.isEmpty()) {
-          if (data.length() == 0 && event == null && id == null && retry == null) continue;
-          var raw = data.length() == 0 ? null : data.toString();
-          T value = raw == null ? null : mapper.readValue(raw, type);
-          return new SseEvent<>(value, event, id, retry);
+          var value = toEvent(data, event, id, retry);
+          if (value == null) continue;
+          return value;
         }
         if (line.startsWith("data:")) {
           if (data.length() > 0) data.append("\n");
@@ -93,15 +107,25 @@ public final class SseEventStream<T> implements AutoCloseable, Iterable<SseEvent
           retry = Integer.parseInt(line.substring(6).stripLeading());
         }
       }
-      if (data.length() == 0 && event == null && id == null && retry == null) return null;
-      var raw = data.length() == 0 ? null : data.toString();
-      T value = raw == null ? null : mapper.readValue(raw, type);
-      return new SseEvent<>(value, event, id, retry);
+      return toEvent(data, event, id, retry);
     } catch (IOException error) {
       throw new ApiException("Failed to read SSE stream", error);
     }
   }
 
+  private SseEvent<T> toEvent(StringBuilder data, String event, String id, Integer retry)
+      throws IOException {
+    if (data.length() == 0 && event == null && id == null && retry == null) return null;
+    var raw = data.length() == 0 ? null : data.toString();
+    T value = raw == null ? null : mapper.readValue(raw, type);
+    return new SseEvent<>(value, event, id, retry);
+  }
+
+  /**
+   * 关闭底层响应流并释放资源。
+   *
+   * @throws IOException 当关闭流失败时抛出。
+   */
   @Override
   public void close() throws IOException {
     reader.close();

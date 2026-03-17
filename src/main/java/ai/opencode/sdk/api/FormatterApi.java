@@ -9,19 +9,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装格式化器接口相关的 HTTP 调用。 */
 public final class FormatterApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建格式化器接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public FormatterApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 获取格式化器状态。 */
+  /**
+   * 获取格式化器状态。
+   *
+   * @return 格式化器状态。
+   */
   public List<FormatterStatus> status() {
     return status(new FormatterStatusRequest(null));
   }
 
-  /** 获取格式化器状态。 可传入请求参数。 */
+  /**
+   * 获取格式化器状态。
+   *
+   * @param request 获取格式化器状态所需的请求参数。
+   * @return 格式化器状态。
+   */
   public List<FormatterStatus> status(FormatterStatusRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

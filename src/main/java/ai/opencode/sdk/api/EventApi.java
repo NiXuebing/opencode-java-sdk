@@ -8,19 +8,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装事件订阅接口相关的 HTTP 调用。 */
 public final class EventApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建事件订阅接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public EventApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 订阅服务事件。 */
+  /**
+   * 订阅服务事件。
+   *
+   * @return 服务端持续推送的事件流。
+   */
   public SseEventStream<Event> subscribe() {
     return subscribe(new EventSubscribeRequest(null));
   }
 
-  /** 订阅服务事件。 可传入请求参数。 */
+  /**
+   * 订阅服务事件。
+   *
+   * @param request 订阅服务事件所需的请求参数。
+   * @return 服务端持续推送的事件流。
+   */
   public SseEventStream<Event> subscribe(EventSubscribeRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

@@ -4,6 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 提供商列表响应AllItem模型值成本数据模型。
+ *
+ * @param input 输入。
+ * @param output 输出。
+ * @param cacheRead 缓存read。
+ * @param cacheWrite 缓存write。
+ * @param contextOver200k 上下文overk。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ProviderListResponseAllItemModelsValueCost(

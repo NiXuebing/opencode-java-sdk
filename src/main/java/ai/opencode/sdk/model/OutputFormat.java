@@ -3,6 +3,7 @@ package ai.opencode.sdk.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/** 输出格式联合类型。 实际实现类型由 type 字段判别。 */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.EXISTING_PROPERTY,

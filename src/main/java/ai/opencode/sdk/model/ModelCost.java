@@ -4,6 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 模型成本数据模型。
+ *
+ * @param input 输入。
+ * @param output 输出。
+ * @param cache 缓存。
+ * @param experimentalOver200K 实验性OverK。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ModelCost(

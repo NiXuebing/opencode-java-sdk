@@ -11,26 +11,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装提供商接口相关的 HTTP 调用。 */
 public final class ProviderApi {
   private final ApiTransport transport;
   private final ProviderOauthApi oauth;
 
+  /**
+   * 使用底层传输器创建提供商接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public ProviderApi(ApiTransport transport) {
     this.transport = transport;
     this.oauth = new ProviderOauthApi(transport);
   }
 
-  /** 访问提供商 OAuth 子接口。 */
+  /**
+   * 获取提供商 OAuth 子接口。
+   *
+   * @return 提供商 OAuth 子接口实例。
+   */
   public ProviderOauthApi oauth() {
     return oauth;
   }
 
-  /** 列出提供商。 */
+  /**
+   * 列出提供商。
+   *
+   * @return 提供商列表。
+   */
   public ProviderListResponse list() {
     return list(new ProviderListRequest(null));
   }
 
-  /** 列出提供商。 可传入请求参数。 */
+  /**
+   * 列出提供商。
+   *
+   * @param request 列出提供商所需的请求参数。
+   * @return 提供商列表。
+   */
   public ProviderListResponse list(ProviderListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -42,12 +61,21 @@ public final class ProviderApi {
         "GET", "/provider", path, query, headers, body, ProviderListResponse.class);
   }
 
-  /** 获取提供商认证信息。 */
+  /**
+   * 获取提供商认证信息。
+   *
+   * @return 提供商认证信息。
+   */
   public Map<String, List<ProviderAuthMethod>> auth() {
     return auth(new ProviderAuthRequest(null));
   }
 
-  /** 获取提供商认证信息。 可传入请求参数。 */
+  /**
+   * 获取提供商认证信息。
+   *
+   * @param request 获取提供商认证信息所需的请求参数。
+   * @return 提供商认证信息。
+   */
   public Map<String, List<ProviderAuthMethod>> auth(ProviderAuthRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

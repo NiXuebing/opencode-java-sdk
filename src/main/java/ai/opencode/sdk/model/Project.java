@@ -5,6 +5,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * 项目数据模型。
+ *
+ * @param id 唯一标识。
+ * @param worktree 工作树。
+ * @param vcs 版本控制。
+ * @param name 名称。
+ * @param icon icon。
+ * @param commands 命令。
+ * @param time 时间。
+ * @param sandboxes sandboxes列表。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record Project(

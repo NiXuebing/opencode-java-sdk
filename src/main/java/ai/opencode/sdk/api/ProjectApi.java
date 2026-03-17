@@ -10,19 +10,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装项目接口相关的 HTTP 调用。 */
 public final class ProjectApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建项目接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public ProjectApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 列出项目。 */
+  /**
+   * 列出项目。
+   *
+   * @return 项目列表。
+   */
   public List<Project> list() {
     return list(new ProjectListRequest(null));
   }
 
-  /** 列出项目。 可传入请求参数。 */
+  /**
+   * 列出项目。
+   *
+   * @param request 列出项目所需的请求参数。
+   * @return 项目列表。
+   */
   public List<Project> list(ProjectListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -34,12 +49,21 @@ public final class ProjectApi {
         "GET", "/project", path, query, headers, body, new TypeReference<List<Project>>() {});
   }
 
-  /** 获取当前项目。 */
+  /**
+   * 获取当前项目。
+   *
+   * @return 当前项目。
+   */
   public Project current() {
     return current(new ProjectCurrentRequest(null));
   }
 
-  /** 获取当前项目。 可传入请求参数。 */
+  /**
+   * 获取当前项目。
+   *
+   * @param request 获取当前项目所需的请求参数。
+   * @return 当前项目。
+   */
   public Project current(ProjectCurrentRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

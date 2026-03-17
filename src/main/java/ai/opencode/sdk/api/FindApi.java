@@ -12,14 +12,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装检索接口相关的 HTTP 调用。 */
 public final class FindApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建检索接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public FindApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 执行文本检索。 可传入请求参数。 */
+  /**
+   * 执行文本检索。
+   *
+   * @param request 执行文本检索所需的请求参数，其中 pattern 为必填项。
+   * @return 文本检索结果。
+   */
   public List<FindTextResponseItem> text(FindTextRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.pattern(), "request.pattern");
@@ -39,7 +50,12 @@ public final class FindApi {
         new TypeReference<List<FindTextResponseItem>>() {});
   }
 
-  /** 检索文件。 可传入请求参数。 */
+  /**
+   * 检索文件。
+   *
+   * @param request 检索文件所需的请求参数，其中 query 为必填项。
+   * @return 文件结果。
+   */
   public List<String> files(FindFilesRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.query(), "request.query");
@@ -56,7 +72,12 @@ public final class FindApi {
         "GET", "/find/file", path, query, headers, body, new TypeReference<List<String>>() {});
   }
 
-  /** 检索符号。 可传入请求参数。 */
+  /**
+   * 检索符号。
+   *
+   * @param request 检索符号所需的请求参数，其中 query 为必填项。
+   * @return 符号结果。
+   */
   public List<Symbol> symbols(FindSymbolsRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.query(), "request.query");

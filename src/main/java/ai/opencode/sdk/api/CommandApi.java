@@ -9,19 +9,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/** 封装命令接口相关的 HTTP 调用。 */
 public final class CommandApi {
   private final ApiTransport transport;
 
+  /**
+   * 使用底层传输器创建命令接口封装。
+   *
+   * @param transport 底层传输器。
+   */
   public CommandApi(ApiTransport transport) {
     this.transport = transport;
   }
 
-  /** 列出命令。 */
+  /**
+   * 列出命令。
+   *
+   * @return 命令列表。
+   */
   public List<Command> list() {
     return list(new CommandListRequest(null));
   }
 
-  /** 列出命令。 可传入请求参数。 */
+  /**
+   * 列出命令。
+   *
+   * @param request 列出命令所需的请求参数。
+   * @return 命令列表。
+   */
   public List<Command> list(CommandListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

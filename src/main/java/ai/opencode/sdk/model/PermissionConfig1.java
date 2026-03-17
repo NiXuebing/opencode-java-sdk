@@ -5,6 +5,28 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * 权限配置数据模型。
+ *
+ * @param originalKeys originalKeys列表。
+ * @param read read。
+ * @param edit edit。
+ * @param glob glob。
+ * @param grep grep。
+ * @param list 列表。
+ * @param bash bash。
+ * @param task task。
+ * @param externalDirectory external目录。
+ * @param todowrite todowrite。
+ * @param todoread todoread。
+ * @param question 问题。
+ * @param webfetch webfetch。
+ * @param websearch websearch。
+ * @param codesearch codesearch。
+ * @param lsp LSP。
+ * @param doomLoop doomloop。
+ * @param skill 技能。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record PermissionConfig1(

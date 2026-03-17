@@ -6,6 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Map;
 
+/**
+ * MCP远程配置。
+ *
+ * @param type 类型标识。
+ * @param url 可访问的地址。
+ * @param enabled enabled标记。
+ * @param headers 自定义请求头集合。
+ * @param oauth OAuth。
+ * @param timeout 请求超时时间。
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record McpRemoteConfig(
