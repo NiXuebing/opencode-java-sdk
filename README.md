@@ -2,6 +2,8 @@
 
 JDK 17 Java SDK for the documented `opencode serve` HTTP API.
 
+[中文说明](./README.zh-CN.md)
+
 This project is generated from the official OpenAPI schema snapshot and intentionally focuses on API access only:
 
 - Typed HTTP API calls
@@ -14,6 +16,40 @@ It does not include local `opencode serve` startup helpers, TUI process wrappers
 The generated Java surface intentionally follows the endpoints documented in the official SDK and Server docs. Internal or undocumented routes that may still appear in the raw OpenAPI are not exposed through `OpencodeClient`.
 
 The SDK also intentionally omits `tui.control` endpoints to keep the public surface focused on direct HTTP API calls instead of terminal control queue coordination.
+
+## API groups
+
+The current public surface exposed by `OpencodeClient` includes these API groups:
+
+- `global`
+- `auth`
+- `project`
+- `config`
+- `tool`
+- `session`
+- `permission`
+- `provider`
+- `find`
+- `file`
+- `mcp`
+- `tui`
+- `instance`
+- `path`
+- `vcs`
+- `command`
+- `app`
+- `lsp`
+- `formatter`
+- `event`
+
+Notable exclusions from the public Java surface:
+
+- `mirror`
+- `pty`
+- `worktree`
+- `question`
+- `tui.control`
+- undocumented internal route groups from the raw OpenAPI snapshot
 
 ## What is included
 
@@ -120,6 +156,16 @@ var client = new OpencodeClient(
 var health = client.global().health();
 System.out.println(health.version());
 ```
+
+## Supported workflows
+
+This SDK is best suited for:
+
+- remote control of an already running `opencode serve` instance
+- typed session, project, provider, file, search, and event operations
+- integrations that need SSE subscription support for `/event` and `/global/event`
+
+It is intentionally not a wrapper for local CLI process orchestration.
 
 ## Publish to GitHub Packages
 
