@@ -1,10 +1,15 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.ProviderAuthMethod;
+import ai.opencode.sdk.model.ProviderListResponse;
+import ai.opencode.sdk.request.ProviderAuthRequest;
+import ai.opencode.sdk.request.ProviderListRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class ProviderApi {
   private final ApiTransport transport;
@@ -15,18 +20,17 @@ public final class ProviderApi {
     this.oauth = new ProviderOauthApi(transport);
   }
 
+  /** 访问提供商 OAuth 子接口。 */
   public ProviderOauthApi oauth() {
     return oauth;
   }
 
-  /**
-   * List providers Get a list of all available AI providers, including both available and connected
-   * ones.
-   */
+  /** 列出提供商。 */
   public ProviderListResponse list() {
     return list(new ProviderListRequest(null));
   }
 
+  /** 列出提供商。 可传入请求参数。 */
   public ProviderListResponse list(ProviderListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -38,11 +42,12 @@ public final class ProviderApi {
         "GET", "/provider", path, query, headers, body, ProviderListResponse.class);
   }
 
-  /** Get provider auth methods Retrieve available authentication methods for all AI providers. */
+  /** 获取提供商认证信息。 */
   public Map<String, List<ProviderAuthMethod>> auth() {
     return auth(new ProviderAuthRequest(null));
   }
 
+  /** 获取提供商认证信息。 可传入请求参数。 */
   public Map<String, List<ProviderAuthMethod>> auth(ProviderAuthRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

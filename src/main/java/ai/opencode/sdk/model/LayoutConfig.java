@@ -1,6 +1,7 @@
 package ai.opencode.sdk.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum LayoutConfig {
   AUTO("auto"),

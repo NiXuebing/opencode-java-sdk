@@ -1,10 +1,16 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.FindTextResponseItem;
+import ai.opencode.sdk.model.Symbol;
+import ai.opencode.sdk.request.FindFilesRequest;
+import ai.opencode.sdk.request.FindSymbolsRequest;
+import ai.opencode.sdk.request.FindTextRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class FindApi {
   private final ApiTransport transport;
@@ -13,7 +19,7 @@ public final class FindApi {
     this.transport = transport;
   }
 
-  /** Find text Search for text patterns across files in the project using ripgrep. */
+  /** 执行文本检索。 可传入请求参数。 */
   public List<FindTextResponseItem> text(FindTextRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.pattern(), "request.pattern");
@@ -33,7 +39,7 @@ public final class FindApi {
         new TypeReference<List<FindTextResponseItem>>() {});
   }
 
-  /** Find files Search for files or directories by name or pattern in the project directory. */
+  /** 检索文件。 可传入请求参数。 */
   public List<String> files(FindFilesRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.query(), "request.query");
@@ -50,7 +56,7 @@ public final class FindApi {
         "GET", "/find/file", path, query, headers, body, new TypeReference<List<String>>() {});
   }
 
-  /** Find symbols Search for workspace symbols like functions, classes, and variables using LSP. */
+  /** 检索符号。 可传入请求参数。 */
   public List<Symbol> symbols(FindSymbolsRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.query(), "request.query");

@@ -1,9 +1,10 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.request.InstanceDisposeRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class InstanceApi {
   private final ApiTransport transport;
@@ -12,13 +13,12 @@ public final class InstanceApi {
     this.transport = transport;
   }
 
-  /**
-   * Dispose instance Clean up and dispose the current OpenCode instance, releasing all resources.
-   */
+  /** 释放实例。 */
   public Boolean dispose() {
     return dispose(new InstanceDisposeRequest(null));
   }
 
+  /** 释放实例。 可传入请求参数。 */
   public Boolean dispose(InstanceDisposeRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

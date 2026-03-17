@@ -10,9 +10,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
 
-public final class ApiTransport {
+public class ApiTransport {
   private final OpencodeClientConfig config;
   private final HttpClient client;
   private final ObjectMapper mapper;

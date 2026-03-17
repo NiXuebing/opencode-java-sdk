@@ -1,9 +1,18 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.request.TuiAppendPromptRequest;
+import ai.opencode.sdk.request.TuiClearPromptRequest;
+import ai.opencode.sdk.request.TuiExecuteCommandRequest;
+import ai.opencode.sdk.request.TuiOpenHelpRequest;
+import ai.opencode.sdk.request.TuiOpenModelsRequest;
+import ai.opencode.sdk.request.TuiOpenSessionsRequest;
+import ai.opencode.sdk.request.TuiOpenThemesRequest;
+import ai.opencode.sdk.request.TuiShowToastRequest;
+import ai.opencode.sdk.request.TuiSubmitPromptRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class TuiApi {
   private final ApiTransport transport;
@@ -12,7 +21,7 @@ public final class TuiApi {
     this.transport = transport;
   }
 
-  /** Append TUI prompt Append prompt to the TUI */
+  /** 追加 TUI 输入。 可传入请求参数。 */
   public Boolean appendPrompt(TuiAppendPromptRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");
@@ -25,11 +34,12 @@ public final class TuiApi {
         "POST", "/tui/append-prompt", path, query, headers, body, Boolean.class);
   }
 
-  /** Open help dialog Open the help dialog in the TUI to display user assistance information. */
+  /** 打开 TUI 帮助。 */
   public Boolean openHelp() {
     return openHelp(new TuiOpenHelpRequest(null));
   }
 
+  /** 打开 TUI 帮助。 可传入请求参数。 */
   public Boolean openHelp(TuiOpenHelpRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -40,11 +50,12 @@ public final class TuiApi {
     return transport.execute("POST", "/tui/open-help", path, query, headers, body, Boolean.class);
   }
 
-  /** Open sessions dialog Open the session dialog */
+  /** 打开 TUI 会话面板。 */
   public Boolean openSessions() {
     return openSessions(new TuiOpenSessionsRequest(null));
   }
 
+  /** 打开 TUI 会话面板。 可传入请求参数。 */
   public Boolean openSessions(TuiOpenSessionsRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -56,11 +67,12 @@ public final class TuiApi {
         "POST", "/tui/open-sessions", path, query, headers, body, Boolean.class);
   }
 
-  /** Open themes dialog Open the theme dialog */
+  /** 打开 TUI 主题面板。 */
   public Boolean openThemes() {
     return openThemes(new TuiOpenThemesRequest(null));
   }
 
+  /** 打开 TUI 主题面板。 可传入请求参数。 */
   public Boolean openThemes(TuiOpenThemesRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -71,11 +83,12 @@ public final class TuiApi {
     return transport.execute("POST", "/tui/open-themes", path, query, headers, body, Boolean.class);
   }
 
-  /** Open models dialog Open the model dialog */
+  /** 打开 TUI 模型面板。 */
   public Boolean openModels() {
     return openModels(new TuiOpenModelsRequest(null));
   }
 
+  /** 打开 TUI 模型面板。 可传入请求参数。 */
   public Boolean openModels(TuiOpenModelsRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -86,11 +99,12 @@ public final class TuiApi {
     return transport.execute("POST", "/tui/open-models", path, query, headers, body, Boolean.class);
   }
 
-  /** Submit TUI prompt Submit the prompt */
+  /** 提交 TUI 输入。 */
   public Boolean submitPrompt() {
     return submitPrompt(new TuiSubmitPromptRequest(null));
   }
 
+  /** 提交 TUI 输入。 可传入请求参数。 */
   public Boolean submitPrompt(TuiSubmitPromptRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -102,11 +116,12 @@ public final class TuiApi {
         "POST", "/tui/submit-prompt", path, query, headers, body, Boolean.class);
   }
 
-  /** Clear TUI prompt Clear the prompt */
+  /** 清空 TUI 输入。 */
   public Boolean clearPrompt() {
     return clearPrompt(new TuiClearPromptRequest(null));
   }
 
+  /** 清空 TUI 输入。 可传入请求参数。 */
   public Boolean clearPrompt(TuiClearPromptRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -118,7 +133,7 @@ public final class TuiApi {
         "POST", "/tui/clear-prompt", path, query, headers, body, Boolean.class);
   }
 
-  /** Execute TUI command Execute a TUI command (e.g. agent_cycle) */
+  /** 执行 TUI 命令。 可传入请求参数。 */
   public Boolean executeCommand(TuiExecuteCommandRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");
@@ -131,7 +146,7 @@ public final class TuiApi {
         "POST", "/tui/execute-command", path, query, headers, body, Boolean.class);
   }
 
-  /** Show TUI toast Show a toast notification in the TUI */
+  /** 显示 TUI 提示。 可传入请求参数。 */
   public Boolean showToast(TuiShowToastRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");

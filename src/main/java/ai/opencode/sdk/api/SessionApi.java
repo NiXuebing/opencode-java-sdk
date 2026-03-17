@@ -1,10 +1,43 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.AssistantMessage;
+import ai.opencode.sdk.model.FileDiff;
+import ai.opencode.sdk.model.Session;
+import ai.opencode.sdk.model.SessionCommandResponse;
+import ai.opencode.sdk.model.SessionMessageResponse;
+import ai.opencode.sdk.model.SessionMessagesResponseItem;
+import ai.opencode.sdk.model.SessionPromptResponse;
+import ai.opencode.sdk.model.SessionStatus;
+import ai.opencode.sdk.model.Todo;
+import ai.opencode.sdk.request.SessionAbortRequest;
+import ai.opencode.sdk.request.SessionChildrenRequest;
+import ai.opencode.sdk.request.SessionCommandRequest;
+import ai.opencode.sdk.request.SessionCreateRequest;
+import ai.opencode.sdk.request.SessionDeleteRequest;
+import ai.opencode.sdk.request.SessionDiffRequest;
+import ai.opencode.sdk.request.SessionForkRequest;
+import ai.opencode.sdk.request.SessionGetRequest;
+import ai.opencode.sdk.request.SessionInitRequest;
+import ai.opencode.sdk.request.SessionListRequest;
+import ai.opencode.sdk.request.SessionMessageRequest;
+import ai.opencode.sdk.request.SessionMessagesRequest;
+import ai.opencode.sdk.request.SessionPromptAsyncRequest;
+import ai.opencode.sdk.request.SessionPromptRequest;
+import ai.opencode.sdk.request.SessionRevertRequest;
+import ai.opencode.sdk.request.SessionShareRequest;
+import ai.opencode.sdk.request.SessionShellRequest;
+import ai.opencode.sdk.request.SessionStatusRequest;
+import ai.opencode.sdk.request.SessionSummarizeRequest;
+import ai.opencode.sdk.request.SessionTodoRequest;
+import ai.opencode.sdk.request.SessionUnrevertRequest;
+import ai.opencode.sdk.request.SessionUnshareRequest;
+import ai.opencode.sdk.request.SessionUpdateRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class SessionApi {
   private final ApiTransport transport;
@@ -13,11 +46,12 @@ public final class SessionApi {
     this.transport = transport;
   }
 
-  /** List sessions Get a list of all OpenCode sessions, sorted by most recently updated. */
+  /** 列出会话。 */
   public List<Session> list() {
     return list(new SessionListRequest(null, null, null, null, null));
   }
 
+  /** 列出会话。 可传入请求参数。 */
   public List<Session> list(SessionListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -33,10 +67,7 @@ public final class SessionApi {
         "GET", "/session", path, query, headers, body, new TypeReference<List<Session>>() {});
   }
 
-  /**
-   * Create session Create a new OpenCode session for interacting with AI assistants and managing
-   * conversations.
-   */
+  /** 创建会话。 可传入请求参数。 */
   public Session create(SessionCreateRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");
@@ -48,14 +79,12 @@ public final class SessionApi {
     return transport.execute("POST", "/session", path, query, headers, body, Session.class);
   }
 
-  /**
-   * Get session status Retrieve the current status of all sessions, including active, idle, and
-   * completed states.
-   */
+  /** 获取会话状态。 */
   public Map<String, SessionStatus> status() {
     return status(new SessionStatusRequest(null));
   }
 
+  /** 获取会话状态。 可传入请求参数。 */
   public Map<String, SessionStatus> status(SessionStatusRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -73,7 +102,7 @@ public final class SessionApi {
         new TypeReference<Map<String, SessionStatus>>() {});
   }
 
-  /** Get session Retrieve detailed information about a specific OpenCode session. */
+  /** 获取会话。 可传入请求参数。 */
   public Session get(SessionGetRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -87,10 +116,7 @@ public final class SessionApi {
         "GET", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
-  /**
-   * Delete session Delete a session and permanently remove all associated data, including messages
-   * and history.
-   */
+  /** 删除会话。 可传入请求参数。 */
   public Boolean delete(SessionDeleteRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -104,7 +130,7 @@ public final class SessionApi {
         "DELETE", "/session/{sessionID}", path, query, headers, body, Boolean.class);
   }
 
-  /** Update session Update properties of an existing session, such as title or other metadata. */
+  /** 更新会话。 可传入请求参数。 */
   public Session update(SessionUpdateRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -119,10 +145,7 @@ public final class SessionApi {
         "PATCH", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
-  /**
-   * Get session children Retrieve all child sessions that were forked from the specified parent
-   * session.
-   */
+  /** 获取子会话。 可传入请求参数。 */
   public List<Session> children(SessionChildrenRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -142,10 +165,7 @@ public final class SessionApi {
         new TypeReference<List<Session>>() {});
   }
 
-  /**
-   * Get session todos Retrieve the todo list associated with a specific session, showing tasks and
-   * action items.
-   */
+  /** 获取会话待办。 可传入请求参数。 */
   public List<Todo> todo(SessionTodoRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -165,10 +185,7 @@ public final class SessionApi {
         new TypeReference<List<Todo>>() {});
   }
 
-  /**
-   * Initialize session Analyze the current application and create an AGENTS.md file with
-   * project-specific agent configurations.
-   */
+  /** 初始化会话。 可传入请求参数。 */
   public Boolean init(SessionInitRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -183,9 +200,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/init", path, query, headers, body, Boolean.class);
   }
 
-  /**
-   * Fork session Create a new session by forking an existing session at a specific message point.
-   */
+  /** 派生会话。 可传入请求参数。 */
   public Session fork(SessionForkRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -200,9 +215,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/fork", path, query, headers, body, Session.class);
   }
 
-  /**
-   * Abort session Abort an active session and stop any ongoing AI processing or command execution.
-   */
+  /** 中止会话。 可传入请求参数。 */
   public Boolean abort(SessionAbortRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -216,9 +229,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/abort", path, query, headers, body, Boolean.class);
   }
 
-  /**
-   * Share session Create a shareable link for a session, allowing others to view the conversation.
-   */
+  /** 分享会话。 可传入请求参数。 */
   public Session share(SessionShareRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -232,7 +243,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
-  /** Unshare session Remove the shareable link for a session, making it private again. */
+  /** 取消分享会话。 可传入请求参数。 */
   public Session unshare(SessionUnshareRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -246,10 +257,7 @@ public final class SessionApi {
         "DELETE", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
-  /**
-   * Get message diff Get the file changes (diff) that resulted from a specific user message in the
-   * session.
-   */
+  /** 获取会话差异。 可传入请求参数。 */
   public List<FileDiff> diff(SessionDiffRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -270,10 +278,7 @@ public final class SessionApi {
         new TypeReference<List<FileDiff>>() {});
   }
 
-  /**
-   * Summarize session Generate a concise summary of the session using AI compaction to preserve key
-   * information.
-   */
+  /** 总结会话。 可传入请求参数。 */
   public Boolean summarize(SessionSummarizeRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -288,10 +293,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/summarize", path, query, headers, body, Boolean.class);
   }
 
-  /**
-   * Get session messages Retrieve all messages in a session, including user prompts and AI
-   * responses.
-   */
+  /** 列出会话消息。 可传入请求参数。 */
   public List<SessionMessagesResponseItem> messages(SessionMessagesRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -312,7 +314,7 @@ public final class SessionApi {
         new TypeReference<List<SessionMessagesResponseItem>>() {});
   }
 
-  /** Send message Create and send a new message to a session, streaming the AI response. */
+  /** 发送会话提示。 可传入请求参数。 */
   public SessionPromptResponse prompt(SessionPromptRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -333,7 +335,7 @@ public final class SessionApi {
         SessionPromptResponse.class);
   }
 
-  /** Get message Retrieve a specific message from a session by its message ID. */
+  /** 获取消息详情。 可传入请求参数。 */
   public SessionMessageResponse message(SessionMessageRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -355,10 +357,7 @@ public final class SessionApi {
         SessionMessageResponse.class);
   }
 
-  /**
-   * Send async message Create and send a new message to a session asynchronously, starting the
-   * session if needed and returning immediately.
-   */
+  /** 异步发送提示。 可传入请求参数。 */
   public Void promptAsync(SessionPromptAsyncRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -373,7 +372,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/prompt_async", path, query, headers, body, Void.class);
   }
 
-  /** Send command Send a new command to a session for execution by the AI assistant. */
+  /** 发送会话命令。 可传入请求参数。 */
   public SessionCommandResponse command(SessionCommandRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -394,10 +393,7 @@ public final class SessionApi {
         SessionCommandResponse.class);
   }
 
-  /**
-   * Run shell command Execute a shell command within the session context and return the AI's
-   * response.
-   */
+  /** 执行会话 Shell 命令。 可传入请求参数。 */
   public AssistantMessage shell(SessionShellRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -412,10 +408,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/shell", path, query, headers, body, AssistantMessage.class);
   }
 
-  /**
-   * Revert message Revert a specific message in a session, undoing its effects and restoring the
-   * previous state.
-   */
+  /** 撤回消息。 可传入请求参数。 */
   public Session revert(SessionRevertRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");
@@ -430,7 +423,7 @@ public final class SessionApi {
         "POST", "/session/{sessionID}/revert", path, query, headers, body, Session.class);
   }
 
-  /** Restore reverted messages Restore all previously reverted messages in a session. */
+  /** 恢复已撤回消息。 可传入请求参数。 */
   public Session unrevert(SessionUnrevertRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");

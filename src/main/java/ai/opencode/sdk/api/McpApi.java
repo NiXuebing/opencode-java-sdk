@@ -1,10 +1,13 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.MCPStatus;
+import ai.opencode.sdk.request.McpAddRequest;
+import ai.opencode.sdk.request.McpStatusRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class McpApi {
   private final ApiTransport transport;
@@ -13,11 +16,12 @@ public final class McpApi {
     this.transport = transport;
   }
 
-  /** Get MCP status Get the status of all Model Context Protocol (MCP) servers. */
+  /** 获取 MCP 状态。 */
   public Map<String, MCPStatus> status() {
     return status(new McpStatusRequest(null));
   }
 
+  /** 获取 MCP 状态。 可传入请求参数。 */
   public Map<String, MCPStatus> status(McpStatusRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -29,7 +33,7 @@ public final class McpApi {
         "GET", "/mcp", path, query, headers, body, new TypeReference<Map<String, MCPStatus>>() {});
   }
 
-  /** Add MCP server Dynamically add a new Model Context Protocol (MCP) server to the system. */
+  /** 添加 MCP 服务。 可传入请求参数。 */
   public Map<String, MCPStatus> add(McpAddRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");

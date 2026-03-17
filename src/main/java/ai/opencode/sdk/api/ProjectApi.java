@@ -1,10 +1,14 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.Project;
+import ai.opencode.sdk.request.ProjectCurrentRequest;
+import ai.opencode.sdk.request.ProjectListRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class ProjectApi {
   private final ApiTransport transport;
@@ -13,11 +17,12 @@ public final class ProjectApi {
     this.transport = transport;
   }
 
-  /** List all projects Get a list of projects that have been opened with OpenCode. */
+  /** 列出项目。 */
   public List<Project> list() {
     return list(new ProjectListRequest(null));
   }
 
+  /** 列出项目。 可传入请求参数。 */
   public List<Project> list(ProjectListRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -29,11 +34,12 @@ public final class ProjectApi {
         "GET", "/project", path, query, headers, body, new TypeReference<List<Project>>() {});
   }
 
-  /** Get current project Retrieve the currently active project that OpenCode is working with. */
+  /** 获取当前项目。 */
   public Project current() {
     return current(new ProjectCurrentRequest(null));
   }
 
+  /** 获取当前项目。 可传入请求参数。 */
   public Project current(ProjectCurrentRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

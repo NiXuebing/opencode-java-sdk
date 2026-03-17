@@ -1,9 +1,11 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.VcsInfo;
+import ai.opencode.sdk.request.VcsGetRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class VcsApi {
   private final ApiTransport transport;
@@ -12,14 +14,12 @@ public final class VcsApi {
     this.transport = transport;
   }
 
-  /**
-   * Get VCS info Retrieve version control system (VCS) information for the current project, such as
-   * git branch.
-   */
+  /** 获取版本控制信息。 */
   public VcsInfo get() {
     return get(new VcsGetRequest(null));
   }
 
+  /** 获取版本控制信息。 可传入请求参数。 */
   public VcsInfo get(VcsGetRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

@@ -1,10 +1,14 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.Agent;
+import ai.opencode.sdk.request.AppAgentsRequest;
+import ai.opencode.sdk.request.AppLogRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public final class AppApi {
   private final ApiTransport transport;
@@ -13,7 +17,7 @@ public final class AppApi {
     this.transport = transport;
   }
 
-  /** Write log Write a log entry to the server logs with specified level and metadata. */
+  /** 写入日志。 可传入请求参数。 */
   public Boolean log(AppLogRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.body(), "request.body");
@@ -25,11 +29,12 @@ public final class AppApi {
     return transport.execute("POST", "/log", path, query, headers, body, Boolean.class);
   }
 
-  /** List agents Get a list of all available AI agents in the OpenCode system. */
+  /** 列出代理。 */
   public List<Agent> agents() {
     return agents(new AppAgentsRequest(null));
   }
 
+  /** 列出代理。 可传入请求参数。 */
   public List<Agent> agents(AppAgentsRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

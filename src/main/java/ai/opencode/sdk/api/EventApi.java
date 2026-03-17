@@ -1,9 +1,12 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.core.SseEventStream;
+import ai.opencode.sdk.model.Event;
+import ai.opencode.sdk.request.EventSubscribeRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class EventApi {
   private final ApiTransport transport;
@@ -12,11 +15,12 @@ public final class EventApi {
     this.transport = transport;
   }
 
-  /** Subscribe to events Get events */
+  /** 订阅服务事件。 */
   public SseEventStream<Event> subscribe() {
     return subscribe(new EventSubscribeRequest(null));
   }
 
+  /** 订阅服务事件。 可传入请求参数。 */
   public SseEventStream<Event> subscribe(EventSubscribeRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();

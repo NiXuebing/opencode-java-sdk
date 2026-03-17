@@ -1,9 +1,10 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.request.PermissionRespondRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class PermissionApi {
   private final ApiTransport transport;
@@ -12,7 +13,7 @@ public final class PermissionApi {
     this.transport = transport;
   }
 
-  /** Respond to permission Approve or deny a permission request from the AI assistant. */
+  /** 响应权限请求。 可传入请求参数。 */
   public Boolean respond(PermissionRespondRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.sessionID(), "request.sessionID");

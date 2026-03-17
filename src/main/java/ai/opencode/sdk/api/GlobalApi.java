@@ -1,9 +1,10 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.core.SseEventStream;
+import ai.opencode.sdk.model.GlobalEvent;
+import ai.opencode.sdk.model.GlobalHealthResponse;
+import java.util.Map;
 
 public final class GlobalApi {
   private final ApiTransport transport;
@@ -12,7 +13,7 @@ public final class GlobalApi {
     this.transport = transport;
   }
 
-  /** Get health Get health information about the OpenCode server. */
+  /** 获取全局健康状态。 */
   public GlobalHealthResponse health() {
     Map<String, Object> path = Map.of();
     Map<String, Object> query = Map.of();
@@ -22,9 +23,7 @@ public final class GlobalApi {
         "GET", "/global/health", path, query, headers, body, GlobalHealthResponse.class);
   }
 
-  /**
-   * Get global events Subscribe to global events from the OpenCode system using server-sent events.
-   */
+  /** 订阅全局事件。 */
   public SseEventStream<GlobalEvent> event() {
     Map<String, Object> path = Map.of();
     Map<String, Object> query = Map.of();

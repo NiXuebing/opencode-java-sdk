@@ -1,9 +1,12 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.ProviderAuthAuthorization;
+import ai.opencode.sdk.request.ProviderOauthAuthorizeRequest;
+import ai.opencode.sdk.request.ProviderOauthCallbackRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class ProviderOauthApi {
   private final ApiTransport transport;
@@ -12,10 +15,7 @@ public final class ProviderOauthApi {
     this.transport = transport;
   }
 
-  /**
-   * OAuth authorize Initiate OAuth authorization for a specific AI provider to get an authorization
-   * URL.
-   */
+  /** 发起提供商 OAuth 授权。 可传入请求参数。 */
   public ProviderAuthAuthorization authorize(ProviderOauthAuthorizeRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.providerID(), "request.providerID");
@@ -36,7 +36,7 @@ public final class ProviderOauthApi {
         ProviderAuthAuthorization.class);
   }
 
-  /** OAuth callback Handle the OAuth callback from a provider after user authorization. */
+  /** 处理提供商 OAuth 回调。 可传入请求参数。 */
   public Boolean callback(ProviderOauthCallbackRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.providerID(), "request.providerID");

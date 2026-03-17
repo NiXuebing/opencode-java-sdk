@@ -1,9 +1,13 @@
 package ai.opencode.sdk.api;
 
-import ai.opencode.sdk.core.*;
-import ai.opencode.sdk.model.*;
-import ai.opencode.sdk.request.*;
-import java.util.*;
+import ai.opencode.sdk.core.ApiTransport;
+import ai.opencode.sdk.model.ToolIDs;
+import ai.opencode.sdk.model.ToolList;
+import ai.opencode.sdk.request.ToolIdsRequest;
+import ai.opencode.sdk.request.ToolListRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class ToolApi {
   private final ApiTransport transport;
@@ -12,14 +16,12 @@ public final class ToolApi {
     this.transport = transport;
   }
 
-  /**
-   * List tool IDs Get a list of all available tool IDs, including both built-in tools and
-   * dynamically registered tools.
-   */
+  /** 获取工具 ID 列表。 */
   public ToolIDs ids() {
     return ids(new ToolIdsRequest(null));
   }
 
+  /** 获取工具 ID 列表。 可传入请求参数。 */
   public ToolIDs ids(ToolIdsRequest request) {
     Objects.requireNonNull(request, "request");
     Map<String, Object> path = Map.of();
@@ -31,10 +33,7 @@ public final class ToolApi {
         "GET", "/experimental/tool/ids", path, query, headers, body, ToolIDs.class);
   }
 
-  /**
-   * List tools Get a list of available tools with their JSON schema parameters for a specific
-   * provider and model combination.
-   */
+  /** 获取工具列表。 可传入请求参数。 */
   public ToolList list(ToolListRequest request) {
     Objects.requireNonNull(request, "request");
     Objects.requireNonNull(request.provider(), "request.provider");

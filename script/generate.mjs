@@ -114,6 +114,100 @@ const documentedOperations = new Set([
   "PUT /auth/{providerID}",
   "GET /event",
 ])
+const zhOperationSummary = new Map([
+  ["GET /global/health", "获取全局健康状态"],
+  ["GET /global/event", "订阅全局事件"],
+  ["GET /project", "列出项目"],
+  ["GET /project/current", "获取当前项目"],
+  ["GET /path", "获取路径信息"],
+  ["GET /vcs", "获取版本控制信息"],
+  ["POST /instance/dispose", "释放实例"],
+  ["GET /config", "获取配置"],
+  ["PATCH /config", "更新配置"],
+  ["GET /config/providers", "获取提供商配置"],
+  ["GET /provider", "列出提供商"],
+  ["GET /provider/auth", "获取提供商认证信息"],
+  ["POST /provider/{providerID}/oauth/authorize", "发起提供商 OAuth 授权"],
+  ["POST /provider/{providerID}/oauth/callback", "处理提供商 OAuth 回调"],
+  ["GET /session", "列出会话"],
+  ["POST /session", "创建会话"],
+  ["GET /session/status", "获取会话状态"],
+  ["GET /session/{sessionID}", "获取会话"],
+  ["DELETE /session/{sessionID}", "删除会话"],
+  ["PATCH /session/{sessionID}", "更新会话"],
+  ["GET /session/{sessionID}/children", "获取子会话"],
+  ["GET /session/{sessionID}/todo", "获取会话待办"],
+  ["POST /session/{sessionID}/init", "初始化会话"],
+  ["POST /session/{sessionID}/fork", "派生会话"],
+  ["POST /session/{sessionID}/abort", "中止会话"],
+  ["POST /session/{sessionID}/share", "分享会话"],
+  ["DELETE /session/{sessionID}/share", "取消分享会话"],
+  ["GET /session/{sessionID}/diff", "获取会话差异"],
+  ["POST /session/{sessionID}/summarize", "总结会话"],
+  ["POST /session/{sessionID}/revert", "撤回消息"],
+  ["POST /session/{sessionID}/unrevert", "恢复已撤回消息"],
+  ["POST /session/{sessionID}/permissions/{permissionID}", "响应权限请求"],
+  ["GET /session/{sessionID}/message", "列出会话消息"],
+  ["POST /session/{sessionID}/message", "发送会话提示"],
+  ["GET /session/{sessionID}/message/{messageID}", "获取消息详情"],
+  ["POST /session/{sessionID}/prompt_async", "异步发送提示"],
+  ["POST /session/{sessionID}/command", "发送会话命令"],
+  ["POST /session/{sessionID}/shell", "执行会话 Shell 命令"],
+  ["GET /command", "列出命令"],
+  ["GET /find", "执行文本检索"],
+  ["GET /find/file", "检索文件"],
+  ["GET /find/symbol", "检索符号"],
+  ["GET /file", "列出文件"],
+  ["GET /file/content", "读取文件内容"],
+  ["GET /file/status", "获取文件状态"],
+  ["GET /experimental/tool/ids", "获取工具 ID 列表"],
+  ["GET /experimental/tool", "获取工具列表"],
+  ["GET /lsp", "获取 LSP 状态"],
+  ["GET /formatter", "获取格式化器状态"],
+  ["GET /mcp", "获取 MCP 状态"],
+  ["POST /mcp", "添加 MCP 服务"],
+  ["GET /agent", "列出代理"],
+  ["POST /log", "写入日志"],
+  ["POST /tui/append-prompt", "追加 TUI 输入"],
+  ["POST /tui/open-help", "打开 TUI 帮助"],
+  ["POST /tui/open-sessions", "打开 TUI 会话面板"],
+  ["POST /tui/open-themes", "打开 TUI 主题面板"],
+  ["POST /tui/open-models", "打开 TUI 模型面板"],
+  ["POST /tui/submit-prompt", "提交 TUI 输入"],
+  ["POST /tui/clear-prompt", "清空 TUI 输入"],
+  ["POST /tui/execute-command", "执行 TUI 命令"],
+  ["POST /tui/show-toast", "显示 TUI 提示"],
+  ["PUT /auth/{providerID}", "设置提供商认证"],
+  ["GET /event", "订阅服务事件"],
+])
+const zhApiAccessorSummary = new Map([
+  ["global", "全局接口"],
+  ["auth", "认证接口"],
+  ["project", "项目接口"],
+  ["config", "配置接口"],
+  ["tool", "工具接口"],
+  ["session", "会话接口"],
+  ["permission", "权限接口"],
+  ["provider", "提供商接口"],
+  ["provider.oauth", "提供商 OAuth 子接口"],
+  ["find", "检索接口"],
+  ["file", "文件接口"],
+  ["mcp", "MCP 接口"],
+  ["tui", "TUI HTTP 接口"],
+  ["instance", "实例接口"],
+  ["path", "路径接口"],
+  ["vcs", "版本控制接口"],
+  ["command", "命令接口"],
+  ["app", "应用接口"],
+  ["lsp", "LSP 接口"],
+  ["formatter", "格式化器接口"],
+  ["event", "事件订阅接口"],
+])
+for (const item of documentedOperations) {
+  if (!zhOperationSummary.has(item)) {
+    throw new Error(`Missing Chinese summary for documented operation: ${item}`)
+  }
+}
 const undocumentedQueryParams = new Set(["workspace", "cursor", "archived", "before"])
 const javaKeywords = new Set([
   "abstract",
@@ -523,6 +617,111 @@ function simpleTypeReference(type) {
   return !type.includes("<")
 }
 
+const javaLangTypes = new Set([
+  "Boolean",
+  "Class",
+  "Double",
+  "Integer",
+  "Long",
+  "Object",
+  "Override",
+  "RuntimeException",
+  "String",
+  "Thread",
+  "Throwable",
+  "Void",
+])
+const namedImports = new Map([
+  ["ArrayList", "java.util.ArrayList"],
+  ["BufferedReader", "java.io.BufferedReader"],
+  ["DeserializationFeature", "com.fasterxml.jackson.databind.DeserializationFeature"],
+  ["Duration", "java.time.Duration"],
+  ["HttpClient", "java.net.http.HttpClient"],
+  ["HttpHeaders", "java.net.http.HttpHeaders"],
+  ["HttpRequest", "java.net.http.HttpRequest"],
+  ["HttpResponse", "java.net.http.HttpResponse"],
+  ["IOException", "java.io.IOException"],
+  ["InputStreamReader", "java.io.InputStreamReader"],
+  ["InputStream", "java.io.InputStream"],
+  ["Iterator", "java.util.Iterator"],
+  ["JavaType", "com.fasterxml.jackson.databind.JavaType"],
+  ["JsonCreator", "com.fasterxml.jackson.annotation.JsonCreator"],
+  ["JsonIgnoreProperties", "com.fasterxml.jackson.annotation.JsonIgnoreProperties"],
+  ["JsonInclude", "com.fasterxml.jackson.annotation.JsonInclude"],
+  ["JsonNode", "com.fasterxml.jackson.databind.JsonNode"],
+  ["JsonProperty", "com.fasterxml.jackson.annotation.JsonProperty"],
+  ["JsonSubTypes", "com.fasterxml.jackson.annotation.JsonSubTypes"],
+  ["JsonTypeInfo", "com.fasterxml.jackson.annotation.JsonTypeInfo"],
+  ["JsonValue", "com.fasterxml.jackson.annotation.JsonValue"],
+  ["LinkedHashMap", "java.util.LinkedHashMap"],
+  ["List", "java.util.List"],
+  ["Map", "java.util.Map"],
+  ["NoSuchElementException", "java.util.NoSuchElementException"],
+  ["ObjectMapper", "com.fasterxml.jackson.databind.ObjectMapper"],
+  ["Objects", "java.util.Objects"],
+  ["StandardCharsets", "java.nio.charset.StandardCharsets"],
+  ["TypeReference", "com.fasterxml.jackson.core.type.TypeReference"],
+  ["URI", "java.net.URI"],
+  ["URLEncoder", "java.net.URLEncoder"],
+])
+
+function knownImport(name) {
+  if (javaLangTypes.has(name)) return null
+  if (namedImports.has(name)) return namedImports.get(name)
+  if (defs.has(name)) return `${modelPackage}.${name}`
+  if (operationTypes.has(name)) return `${requestPackage}.${name}`
+  if (name.endsWith("Api")) return `${apiPackage}.${name}`
+  if (["ApiException", "ApiTransport", "OpencodeClientConfig", "SseEvent", "SseEventStream"].includes(name)) {
+    return `${corePackage}.${name}`
+  }
+  return null
+}
+
+function importsForTypes(values, currentPackage) {
+  const imports = new Set()
+  for (const value of values.filter(Boolean)) {
+    for (const token of value.match(/\b[A-Z][A-Za-z0-9_]*\b/g) ?? []) {
+      const item = knownImport(token)
+      if (!item) continue
+      const itemPackage = item.slice(0, item.lastIndexOf("."))
+      if (itemPackage !== currentPackage) imports.add(item)
+    }
+  }
+  return imports
+}
+
+function mergeImports(...groups) {
+  const imports = new Set()
+  for (const group of groups) {
+    for (const item of group ?? []) imports.add(item)
+  }
+  return imports
+}
+
+function renderImports(currentPackage, imports) {
+  const lines = [...imports]
+    .filter(Boolean)
+    .filter((item) => item.slice(0, item.lastIndexOf(".")) !== currentPackage)
+    .sort()
+    .map((item) => `import ${item};`)
+  return lines.length === 0 ? "" : `${lines.join("\n")}\n\n`
+}
+
+function docBlock(lines, indent = "  ") {
+  const content = lines.filter(Boolean)
+  if (content.length === 0) return ""
+  if (content.length === 1) return `${indent}/** ${content[0]} */\n`
+  return `${indent}/**\n${content.map((line) => `${indent} * ${line}`).join("\n")}\n${indent} */\n`
+}
+
+function operationSummary(operation) {
+  return zhOperationSummary.get(`${operation.method} ${operation.route}`)
+}
+
+function accessorSummary(parts) {
+  return zhApiAccessorSummary.get(parts.join("."))
+}
+
 const operations = []
 for (const [route, methods] of Object.entries(spec.paths)) {
   for (const [method, operation] of Object.entries(methods)) {
@@ -610,6 +809,14 @@ async function emitJava(pkg, name, body) {
 }
 
 function recordFile(def) {
+  const imports = mergeImports(
+    [
+      "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
+      "com.fasterxml.jackson.annotation.JsonInclude",
+    ],
+    def.fields.length > 0 ? ["com.fasterxml.jackson.annotation.JsonProperty"] : [],
+    importsForTypes(def.fields.map((field) => field.type), modelPackage),
+  )
   const interfaces = variantInterfaces.get(def.name) ?? []
   const impl = interfaces.length ? ` implements ${interfaces.join(", ")}` : ""
   const fields = def.fields
@@ -621,11 +828,7 @@ function recordFile(def) {
   return `
 package ${modelPackage};
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import java.util.*;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
+${renderImports(modelPackage, imports)}@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ${def.name}(
 ${fields}
@@ -635,14 +838,14 @@ ${fields}
 }
 
 function mapFile(def) {
+  const imports = mergeImports(
+    ["com.fasterxml.jackson.annotation.JsonInclude", "java.util.LinkedHashMap"],
+    importsForTypes([def.valueType], modelPackage),
+  )
   return `
 package ${modelPackage};
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import java.util.*;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
+${renderImports(modelPackage, imports)}@JsonInclude(JsonInclude.Include.NON_NULL)
 public final class ${def.name} extends LinkedHashMap<String, ${def.valueType}> {
   public ${def.name}() {
     super();
@@ -652,14 +855,18 @@ public final class ${def.name} extends LinkedHashMap<String, ${def.valueType}> {
 }
 
 function wrapperFile(def) {
+  const imports = mergeImports(
+    [
+      "com.fasterxml.jackson.annotation.JsonCreator",
+      "com.fasterxml.jackson.annotation.JsonInclude",
+      "com.fasterxml.jackson.annotation.JsonValue",
+    ],
+    importsForTypes([def.valueType], modelPackage),
+  )
   return `
 package ${modelPackage};
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import java.util.*;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
+${renderImports(modelPackage, imports)}@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ${def.name}(@JsonValue ${def.valueType} value) {
   @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
   public ${def.name} {
@@ -678,15 +885,14 @@ function enumConstant(value) {
 }
 
 function enumFile(def) {
+  const imports = ["com.fasterxml.jackson.annotation.JsonCreator", "com.fasterxml.jackson.annotation.JsonValue"]
   const values = def.values
     .map((value) => `  ${enumConstant(value)}("${escape(value)}")`)
     .join(",\n")
   return `
 package ${modelPackage};
 
-import com.fasterxml.jackson.annotation.*;
-
-public enum ${def.name} {
+${renderImports(modelPackage, imports)}public enum ${def.name} {
 ${values};
 
   private final String value;
@@ -712,6 +918,10 @@ ${values};
 }
 
 function unionFile(def) {
+  const imports = [
+    "com.fasterxml.jackson.annotation.JsonSubTypes",
+    "com.fasterxml.jackson.annotation.JsonTypeInfo",
+  ]
   const permits = def.variants.map((variant) => variant.name).join(", ")
   const subTypes = def.variants
     .map((variant) => `    @JsonSubTypes.Type(value = ${variant.name}.class, name = "${escape(variant.label)}")`)
@@ -719,9 +929,7 @@ function unionFile(def) {
   return `
 package ${modelPackage};
 
-import com.fasterxml.jackson.annotation.*;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "${escape(def.discriminator)}", visible = true)
+${renderImports(modelPackage, imports)}@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "${escape(def.discriminator)}", visible = true)
 @JsonSubTypes({
 ${subTypes}
 })
@@ -731,6 +939,11 @@ public sealed interface ${def.name} permits ${permits} {
 }
 
 function requestFile(def) {
+  const imports = mergeImports(
+    ["com.fasterxml.jackson.annotation.JsonInclude"],
+    def.fields.length > 0 ? ["com.fasterxml.jackson.annotation.JsonProperty"] : [],
+    importsForTypes(def.fields.map((field) => field.type), requestPackage),
+  )
   const fields = def.fields
     .map(
       (field) =>
@@ -740,24 +953,12 @@ function requestFile(def) {
   return `
 package ${requestPackage};
 
-import ${modelPackage}.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import java.util.*;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
+${renderImports(requestPackage, imports)}@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ${def.name}(
 ${fields}
 ) {
 }
 `
-}
-
-function javadoc(operation) {
-  const lines = [operation.summary, operation.description].filter(Boolean)
-  if (lines.length === 0) return ""
-  const body = lines.map((line) => ` * ${line}`).join("\n")
-  return `  /**\n${body}\n   */\n`
 }
 
 function responseRef(operation) {
@@ -822,6 +1023,7 @@ function bodyLine(operation) {
 
 function operationMethod(operation) {
   const name = camel(operation.parts.at(-1))
+  const summary = operationSummary(operation)
   const ref = responseRef(operation)
   const request = requestArg(operation)
   const optionalOnly = operation.requestFields.length > 0 && operation.requestFields.every((field) => !field.required)
@@ -834,9 +1036,10 @@ function operationMethod(operation) {
       : `    return transport.execute("${operation.method}", "${operation.route}", path, query, headers, body, ${ref.value});`
   const returnType = operation.sse ? `SseEventStream<${operation.responseType}>` : operation.responseType
   const overload = optionalOnly
-    ? `  public ${returnType} ${name}() {\n    return ${name}(new ${operation.requestName}(${operation.requestFields.map(() => "null").join(", ")}));\n  }\n\n`
+    ? `${docBlock([`${summary}。`])}  public ${returnType} ${name}() {\n    return ${name}(new ${operation.requestName}(${operation.requestFields.map(() => "null").join(", ")}));\n  }\n\n`
     : ""
-  return `${javadoc(operation)}${overload}  public ${returnType} ${name}(${request}) {
+  const requestDoc = operation.requestFields.length > 0 ? [`${summary}。`, "可传入请求参数。"] : [`${summary}。`]
+  return `${overload}${docBlock(requestDoc)}  public ${returnType} ${name}(${request}) {
 ${requireRequest(operation)}${requireFields(operation)}${mapLines(operation.pathParams, "path")}${mapLines(operation.queryParams, "query")}${headerLines(operation)}${bodyLine(operation)}${call}
   }
 `
@@ -867,27 +1070,46 @@ function apiFile(parts, node) {
   const fields = children.map(([part]) => `  private final ${classNameFor([...parts, part])} ${camel(part)};`).join("\n")
   const init = children.map(([part]) => `    this.${camel(part)} = new ${classNameFor([...parts, part])}(transport);`).join("\n")
   const getters = children
-    .map(([part]) => `  public ${classNameFor([...parts, part])} ${camel(part)}() {\n    return ${camel(part)};\n  }\n`)
+    .map(([part]) => `${docBlock([`访问${accessorSummary([...parts, part]) ?? classNameFor([...parts, part])}。`])}  public ${classNameFor([...parts, part])} ${camel(part)}() {\n    return ${camel(part)};\n  }\n`)
     .join("\n")
   const methods = node.operations.map(operationMethod).join("\n")
+  const needsTypeReference = node.operations.some(
+    (operation) => responseRef(operation).kind === "typeRef",
+  )
+  const needsObjects = node.operations.some((operation) => operation.requestFields.length > 0)
+  const needsLinkedHashMap = node.operations.some(
+    (operation) =>
+      operation.pathParams.length > 0 ||
+      operation.queryParams.length > 0 ||
+      operation.headerParams.length > 0,
+  )
+  const imports = mergeImports(
+    ["java.util.Map"],
+    needsObjects ? ["java.util.Objects"] : [],
+    needsLinkedHashMap ? ["java.util.LinkedHashMap"] : [],
+    needsTypeReference ? ["com.fasterxml.jackson.core.type.TypeReference"] : [],
+    node.operations.some((operation) => operation.sse) ? [`${corePackage}.SseEventStream`] : [],
+    [`${corePackage}.ApiTransport`],
+    importsForTypes(
+      [
+        ...node.operations
+          .filter((operation) => operation.requestFields.length > 0)
+          .map((operation) => operation.requestName),
+        ...node.operations.map((operation) => operation.responseType),
+      ],
+      apiPackage,
+    ),
+  )
   return `
 package ${apiPackage};
 
-import ${corePackage}.*;
-import ${modelPackage}.*;
-import ${requestPackage}.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import java.util.*;
-
-public final class ${className} {
+${renderImports(apiPackage, imports)}public final class ${className} {
   private final ApiTransport transport;
 ${fields ? `${fields}\n` : ""}
   public ${className}(ApiTransport transport) {
     this.transport = transport;
 ${init ? `${init}\n` : ""}
   }
-
 ${getters}${methods ? `\n${methods}` : ""}
 }
 `
@@ -903,18 +1125,19 @@ async function emitApi(parts, node) {
 }
 
 function rootClientFile(children) {
+  const imports = mergeImports(
+    [`${corePackage}.ApiTransport`, `${corePackage}.OpencodeClientConfig`],
+    children.map((part) => `${apiPackage}.${classNameFor([part])}`),
+  )
   const fields = children.map((part) => `  private final ${classNameFor([part])} ${camel(part)};`).join("\n")
   const init = children.map((part) => `    this.${camel(part)} = new ${classNameFor([part])}(transport);`).join("\n")
   const getters = children
-    .map((part) => `  public ${classNameFor([part])} ${camel(part)}() {\n    return ${camel(part)};\n  }\n`)
+    .map((part) => `${docBlock([`访问${accessorSummary([part]) ?? classNameFor([part])}。`])}  public ${classNameFor([part])} ${camel(part)}() {\n    return ${camel(part)};\n  }\n`)
     .join("\n")
   return `
 package ${rootPackage};
 
-import ${apiPackage}.*;
-import ${corePackage}.*;
-
-public final class OpencodeClient {
+${renderImports(rootPackage, imports)}public final class OpencodeClient {
   private final ApiTransport transport;
 ${fields}
 
@@ -938,20 +1161,18 @@ package ${corePackage};
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
 
-public final class ApiTransport {
+public class ApiTransport {
   private final OpencodeClientConfig config;
   private final HttpClient client;
   private final ObjectMapper mapper;
