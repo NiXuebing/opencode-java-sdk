@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 会话提示词Async请求体模型数据模型。
+ * 会话提示词异步请求体模型数据模型。
  *
  * @param providerID 目标提供商 ID。
  * @param modelID 模型 ID。

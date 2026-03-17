@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.List;
 
 /**
- * 工具IDs值对象。
+ * 工具I Ds值对象。
  *
  * @param value 实际值。
  */

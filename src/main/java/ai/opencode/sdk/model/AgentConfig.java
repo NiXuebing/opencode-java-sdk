@@ -9,20 +9,20 @@ import java.util.Map;
 /**
  * 代理配置。
  *
- * @param model 模型配置。
+ * @param model 模型 ID 或名称。
  * @param variant 变体名称。
- * @param temperature temperature。
- * @param topP topp。
+ * @param temperature 采样温度。
+ * @param topP Top P 采样参数。
  * @param prompt 提示词。
  * @param tools 工具开关配置。
- * @param disable disable标记。
+ * @param disable 是否禁用。
  * @param description 描述信息。
- * @param mode mode。
- * @param hidden hidden标记。
- * @param options options映射。
- * @param color color。
- * @param steps steps。
- * @param maxSteps maxSteps。
+ * @param mode 运行模式。
+ * @param hidden 是否隐藏。
+ * @param options 扩展选项映射。
+ * @param color 颜色标识。
+ * @param steps 步骤数上限。
+ * @param maxSteps 最大步骤数。
  * @param permission 权限配置。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

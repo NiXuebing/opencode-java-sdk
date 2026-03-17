@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 符号Location数据模型。
  *
- * @param uri uri。
- * @param range range。
+ * @param uri URI 地址。
+ * @param range 范围信息。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

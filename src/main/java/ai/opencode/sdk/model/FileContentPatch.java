@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * 文件内容补丁数据模型。
  *
- * @param oldFileName old文件Name。
+ * @param oldFileName 旧文件Name。
  * @param newFileName new文件Name。
- * @param oldHeader oldHeader。
- * @param newHeader newHeader。
- * @param hunks hunks列表。
- * @param index index。
+ * @param oldHeader 旧标题头。
+ * @param newHeader new标题头。
+ * @param hunks 代码块列表。
+ * @param index 索引。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

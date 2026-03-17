@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 设置提供商认证接口的请求参数。
+ * 设置提供商认证接口请求参数。
  *
  * @param providerID 目标提供商 ID。
- * @param body 设置提供商认证对应的请求体。
+ * @param body 设置提供商认证的请求体。
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record AuthSetRequest(

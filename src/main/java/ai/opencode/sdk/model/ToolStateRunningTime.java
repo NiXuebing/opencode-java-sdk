@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 工具StateRunning时间数据模型。
+ * 工具状态运行中时间数据模型。
  *
  * @param start 分页起始位置或游标。
  */

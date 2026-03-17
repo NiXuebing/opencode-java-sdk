@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 符号数据模型。
  *
  * @param name 名称。
- * @param kind kind。
- * @param location location。
+ * @param kind 类型值。
+ * @param location 位置信息。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

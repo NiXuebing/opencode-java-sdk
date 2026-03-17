@@ -3,7 +3,7 @@ package ai.opencode.sdk.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-/** 事件会话错误属性错误联合类型。 实际实现类型由 name 字段判别。 */
+/** 会话错误事件中的错误联合类型。 实际实现类型由 name 字段判别。 */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.EXISTING_PROPERTY,

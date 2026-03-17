@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。
  * @param type 类型标识。
- * @param auto auto标记。
+ * @param auto 是否自动执行。
  * @param overflow 溢出标记。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

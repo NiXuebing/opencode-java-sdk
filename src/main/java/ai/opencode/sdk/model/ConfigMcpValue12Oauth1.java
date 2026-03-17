@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 配置MCP值OAuth数据模型。
  *
- * @param clientId 客户端Id。
- * @param clientSecret 客户端Secret。
- * @param scope scope。
+ * @param clientId 客户端 ID。
+ * @param clientSecret 客户端密钥。
+ * @param scope 授权范围。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

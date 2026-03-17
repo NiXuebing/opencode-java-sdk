@@ -8,23 +8,23 @@ import java.util.List;
 /**
  * 权限配置数据模型。
  *
- * @param originalKeys originalKeys列表。
- * @param read read。
- * @param edit edit。
- * @param glob glob。
- * @param grep grep。
+ * @param originalKeys 原始键列表。
+ * @param read 读取信息。
+ * @param edit 编辑。
+ * @param glob 通配。
+ * @param grep Grep 权限配置。
  * @param list 列表。
- * @param bash bash。
- * @param task task。
- * @param externalDirectory external目录。
- * @param todowrite todowrite。
- * @param todoread todoread。
+ * @param bash Bash 权限配置。
+ * @param task 任务。
+ * @param externalDirectory 外部目录权限。
+ * @param todowrite 待办写入权限配置。
+ * @param todoread 待办读取权限配置。
  * @param question 问题。
- * @param webfetch webfetch。
- * @param websearch websearch。
- * @param codesearch codesearch。
- * @param lsp LSP。
- * @param doomLoop doomloop。
+ * @param webfetch WebFetch 权限配置。
+ * @param websearch WebSearch 权限配置。
+ * @param codesearch CodeSearch 权限配置。
+ * @param lsp LSP 配置。
+ * @param doomLoop 是否允许死循环。
  * @param skill 技能。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

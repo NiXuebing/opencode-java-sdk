@@ -11,22 +11,22 @@ import java.util.Map;
  *
  * @param id 唯一标识。
  * @param name 名称。
- * @param family family。
- * @param releaseDate releasedate。
- * @param attachment attachment标记。
- * @param reasoning reasoning标记。
- * @param temperature temperature标记。
- * @param toolCall 工具call标记。
- * @param interleaved interleaved。
+ * @param family 家族。
+ * @param releaseDate 发布date。
+ * @param attachment 是否支持附件。
+ * @param reasoning 是否支持推理。
+ * @param temperature 采样温度。
+ * @param toolCall 是否支持工具调用。
+ * @param interleaved 交错。
  * @param cost 成本。
  * @param limit 返回结果数量上限。
- * @param modalities modalities。
+ * @param modalities 模态。
  * @param experimental 实验性标记。
  * @param status 当前状态。
- * @param options options映射。
+ * @param options 扩展选项映射。
  * @param headers 自定义请求头集合。
- * @param provider 提供商标识。
- * @param variants variants映射。
+ * @param provider 提供商配置。
+ * @param variants 变体映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

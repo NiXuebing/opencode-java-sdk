@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装实例接口相关的 HTTP 调用。 */
+/** 实例接口的 HTTP 客户端封装。 */
 public final class InstanceApi {
   private final ApiTransport transport;
 

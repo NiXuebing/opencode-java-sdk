@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件版本控制分支已更新属性。
+ * 版本控制分支已更新事件属性。
  *
  * @param branch 分支。
  */

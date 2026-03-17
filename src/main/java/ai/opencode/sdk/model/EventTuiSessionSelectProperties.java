@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件TUI会话Select属性。
+ * TUI会话选择事件属性。
  *
  * @param sessionID 目标会话 ID。
  */

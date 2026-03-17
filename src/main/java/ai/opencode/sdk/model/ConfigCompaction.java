@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 配置压缩数据模型。
  *
- * @param auto auto标记。
- * @param prune prune标记。
- * @param reserved reserved。
+ * @param auto 是否自动执行。
+ * @param prune 是否执行裁剪。
+ * @param reserved 预留。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

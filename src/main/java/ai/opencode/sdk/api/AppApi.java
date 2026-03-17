@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装应用接口相关的 HTTP 调用。 */
+/** 应用接口的 HTTP 客户端封装。 */
 public final class AppApi {
   private final ApiTransport transport;
 

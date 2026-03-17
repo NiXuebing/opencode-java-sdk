@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param messageID 目标消息 ID。
  * @param partID 片段 ID。
- * @param snapshot snapshot。
+ * @param snapshot 是否启用快照。
  * @param diff 差异。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

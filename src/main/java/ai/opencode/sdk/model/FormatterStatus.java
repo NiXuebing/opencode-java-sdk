@@ -9,8 +9,8 @@ import java.util.List;
  * 格式化器状态。
  *
  * @param name 名称。
- * @param extensions extensions列表。
- * @param enabled enabled标记。
+ * @param extensions 扩展名列表。
+ * @param enabled 是否启用。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

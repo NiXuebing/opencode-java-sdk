@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装提供商 OAuth 子接口相关的 HTTP 调用。 */
+/** 提供商 OAuth 子接口的 HTTP 客户端封装。 */
 public final class ProviderOauthApi {
   private final ApiTransport transport;
 
@@ -25,7 +25,7 @@ public final class ProviderOauthApi {
    * 发起提供商 OAuth 授权。
    *
    * @param request 发起提供商 OAuth 授权所需的请求参数，其中 providerID、body 为必填项。
-   * @return 提供商 OAuth 授权结果。
+   * @return 提供商认证授权。
    */
   public ProviderAuthAuthorization authorize(ProviderOauthAuthorizeRequest request) {
     Objects.requireNonNull(request, "request");

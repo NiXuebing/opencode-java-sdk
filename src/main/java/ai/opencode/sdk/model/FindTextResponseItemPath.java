@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 检索文本响应Item路径数据模型。
+ * 检索文本响应项路径数据模型。
  *
  * @param text 文本内容。
  */

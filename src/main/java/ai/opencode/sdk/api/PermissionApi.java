@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装权限接口相关的 HTTP 调用。 */
+/** 权限接口的 HTTP 客户端封装。 */
 public final class PermissionApi {
   private final ApiTransport transport;
 

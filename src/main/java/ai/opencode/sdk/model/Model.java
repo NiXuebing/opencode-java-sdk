@@ -13,15 +13,15 @@ import java.util.Map;
  * @param providerID 目标提供商 ID。
  * @param api API。
  * @param name 名称。
- * @param family family。
- * @param capabilities capabilities。
+ * @param family 家族。
+ * @param capabilities 能力。
  * @param cost 成本。
  * @param limit 返回结果数量上限。
  * @param status 当前状态。
- * @param options options映射。
+ * @param options 扩展选项映射。
  * @param headers 自定义请求头集合。
- * @param releaseDate releasedate。
- * @param variants variants映射。
+ * @param releaseDate 发布date。
+ * @param variants 变体映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

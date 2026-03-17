@@ -14,7 +14,7 @@ import java.util.Map;
  * @param sessionID 目标会话 ID。
  * @param permission 权限配置。
  * @param patterns patterns列表。
- * @param metadata metadata映射。
+ * @param metadata 元数据映射。
  * @param always always列表。
  * @param tool 工具。
  */

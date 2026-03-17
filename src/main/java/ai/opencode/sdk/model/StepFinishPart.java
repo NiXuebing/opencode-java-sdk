@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * StepFinish片段数据模型。
+ * Step Finish片段数据模型。
  *
  * @param id 唯一标识。
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。
  * @param type 类型标识。
  * @param reason 原因说明。
- * @param snapshot snapshot。
+ * @param snapshot 是否启用快照。
  * @param cost 成本。
  * @param tokens 令牌。
  */

@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param content 正文内容。
  * @param diff 差异。
  * @param patch 补丁。
- * @param encoding encoding。
- * @param mimeType mime类型。
+ * @param encoding 内容编码。
+ * @param mimeType MIME 类型。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

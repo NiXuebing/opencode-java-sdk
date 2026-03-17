@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件TUI提示词追加属性。
+ * TUI提示词追加事件属性。
  *
  * @param text 文本内容。
  */

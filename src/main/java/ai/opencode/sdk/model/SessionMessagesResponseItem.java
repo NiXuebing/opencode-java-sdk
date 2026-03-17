@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 会话消息响应Item数据模型。
+ * 会话消息响应项数据模型。
  *
  * @param info 元信息。
  * @param parts 片段列表。

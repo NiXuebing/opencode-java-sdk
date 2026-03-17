@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 提供商配置模型值提供商数据模型。
  *
- * @param npm npm。
+ * @param npm npm 包名。
  * @param api API。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

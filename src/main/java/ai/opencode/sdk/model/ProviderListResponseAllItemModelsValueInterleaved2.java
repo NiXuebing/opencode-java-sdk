@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 提供商列表响应AllItem模型值Interleaved数据模型。
+ * 提供商列表响应所有项模型值交错数据模型。
  *
- * @param field field。
+ * @param field 字段。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

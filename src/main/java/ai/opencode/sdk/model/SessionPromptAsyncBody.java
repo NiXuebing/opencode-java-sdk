@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 会话提示词Async请求体。
+ * 会话提示词异步请求体。
  *
  * @param messageID 目标消息 ID。
  * @param model 模型配置。
- * @param agent 代理名称或代理配置。
+ * @param agent 代理名称。
  * @param noReply 是否不等待助手回复。
  * @param tools 工具开关配置。
  * @param format 输出格式配置。

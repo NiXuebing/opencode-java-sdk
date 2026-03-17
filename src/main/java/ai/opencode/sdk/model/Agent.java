@@ -11,18 +11,18 @@ import java.util.Map;
  *
  * @param name 名称。
  * @param description 描述信息。
- * @param mode mode。
- * @param nativeValue native标记。
- * @param hidden hidden标记。
- * @param topP topP。
- * @param temperature temperature。
- * @param color color。
+ * @param mode 运行模式。
+ * @param nativeValue 是否使用原生能力。
+ * @param hidden 是否隐藏。
+ * @param topP Top P 采样参数。
+ * @param temperature 采样温度。
+ * @param color 颜色标识。
  * @param permission 权限配置。
  * @param model 模型配置。
  * @param variant 变体名称。
  * @param prompt 提示词。
- * @param options options映射。
- * @param steps steps。
+ * @param options 扩展选项映射。
+ * @param steps 步骤数上限。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

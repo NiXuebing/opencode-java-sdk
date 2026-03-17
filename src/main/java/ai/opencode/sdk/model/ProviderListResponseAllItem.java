@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 提供商列表响应AllItem数据模型。
+ * 提供商列表响应所有项数据模型。
  *
  * @param api API。
  * @param name 名称。
- * @param env env列表。
+ * @param env 环境变量列表。
  * @param id 唯一标识。
- * @param npm npm。
+ * @param npm npm 包名。
  * @param models 模型映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

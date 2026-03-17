@@ -181,9 +181,9 @@ public final class OpencodeClient {
   }
 
   /**
-   * 获取 TUI HTTP 接口。
+   * 获取 TUI 接口。
    *
-   * @return TUI HTTP 接口实例。
+   * @return TUI 接口实例。
    */
   public TuiApi tui() {
     return tui;

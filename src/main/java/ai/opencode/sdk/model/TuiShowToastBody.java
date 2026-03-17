@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param title 标题。
  * @param message 消息内容。
  * @param variant 变体名称。
- * @param duration duration。
+ * @param duration 持续时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

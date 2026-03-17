@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 权限请求工具数据模型。
  *
  * @param messageID 目标消息 ID。
- * @param callID call ID。
+ * @param callID 调用 ID。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

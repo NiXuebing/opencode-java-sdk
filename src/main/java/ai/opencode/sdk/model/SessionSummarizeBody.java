@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param providerID 目标提供商 ID。
  * @param modelID 模型 ID。
- * @param auto auto标记。
+ * @param auto 是否自动执行。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

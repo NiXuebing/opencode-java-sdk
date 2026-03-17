@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * WellKnown认证数据模型。
+ * Well Known认证数据模型。
  *
  * @param type 类型标识。
- * @param key key。
+ * @param key 密钥。
  * @param token 令牌。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

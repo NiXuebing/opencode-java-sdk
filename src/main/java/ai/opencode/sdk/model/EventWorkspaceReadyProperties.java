@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件工作区就绪属性。
+ * 工作区就绪事件属性。
  *
  * @param name 名称。
  */

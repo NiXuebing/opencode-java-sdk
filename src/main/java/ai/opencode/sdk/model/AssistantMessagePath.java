@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 助手消息路径数据模型。
  *
- * @param cwd cwd。
- * @param root root。
+ * @param cwd 当前工作目录。
+ * @param root 根目录路径。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

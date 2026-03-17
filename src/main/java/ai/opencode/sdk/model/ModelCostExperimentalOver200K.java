@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 模型成本实验性OverK数据模型。
+ * 模型成本实验性超长K数据模型。
  *
  * @param input 输入。
  * @param output 输出。

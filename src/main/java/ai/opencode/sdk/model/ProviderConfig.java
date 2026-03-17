@@ -11,13 +11,13 @@ import java.util.Map;
  *
  * @param api API。
  * @param name 名称。
- * @param env env列表。
+ * @param env 环境变量列表。
  * @param id 唯一标识。
- * @param npm npm。
+ * @param npm npm 包名。
  * @param models 模型映射。
- * @param whitelist whitelist列表。
+ * @param whitelist 白名单列表。
  * @param blacklist blacklist列表。
- * @param options options。
+ * @param options 扩展选项映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

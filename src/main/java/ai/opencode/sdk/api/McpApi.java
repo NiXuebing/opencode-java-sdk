@@ -9,12 +9,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装MCP 接口相关的 HTTP 调用。 */
+/** MCP 接口的 HTTP 客户端封装。 */
 public final class McpApi {
   private final ApiTransport transport;
 
   /**
-   * 使用底层传输器创建MCP 接口封装。
+   * 使用底层传输器创建 MCP 接口封装。
    *
    * @param transport 底层传输器。
    */
@@ -52,7 +52,7 @@ public final class McpApi {
    * 添加 MCP 服务。
    *
    * @param request 添加 MCP 服务所需的请求参数，其中 body 为必填项。
-   * @return MCP 服务结果。
+   * @return MCP状态映射。
    */
   public Map<String, MCPStatus> add(McpAddRequest request) {
     Objects.requireNonNull(request, "request");

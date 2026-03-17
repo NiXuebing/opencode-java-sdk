@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 配置命令值数据模型。
  *
- * @param template template。
+ * @param template 模板内容。
  * @param description 描述信息。
- * @param agent 代理名称或代理配置。
- * @param model 模型配置。
+ * @param agent 代理名称。
+ * @param model 模型 ID 或名称。
  * @param subtask 子任务标记。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

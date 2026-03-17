@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 打开 TUI 帮助接口的请求参数。
+ * 打开 TUI 帮助接口请求参数。
  *
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
  */

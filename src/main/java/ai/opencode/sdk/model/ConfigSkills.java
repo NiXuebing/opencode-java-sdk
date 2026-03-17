@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 配置Skills数据模型。
+ * 配置技能数据模型。
  *
- * @param paths paths列表。
- * @param urls urls列表。
+ * @param paths 路径列表。
+ * @param urls 地址列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

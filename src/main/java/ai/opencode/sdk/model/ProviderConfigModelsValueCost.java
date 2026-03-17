@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param input 输入。
  * @param output 输出。
- * @param cacheRead 缓存read。
- * @param cacheWrite 缓存write。
- * @param contextOver200k 上下文overk。
+ * @param cacheRead 缓存读取量。
+ * @param cacheWrite 缓存写入量。
+ * @param contextOver200k 超长上下文成本。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装提供商接口相关的 HTTP 调用。 */
+/** 提供商接口的 HTTP 客户端封装。 */
 public final class ProviderApi {
   private final ApiTransport transport;
   private final ProviderOauthApi oauth;

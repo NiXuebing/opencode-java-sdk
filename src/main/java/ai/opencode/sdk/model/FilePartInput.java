@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param id 唯一标识。
  * @param type 类型标识。
- * @param mime mime。
- * @param filename filename。
+ * @param mime MIME 类型。
+ * @param filename 文件名。
  * @param url 可访问的地址。
  * @param source 来源。
  */

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 提供商配置模型值Variants值数据模型。
+ * 提供商配置模型值变体值数据模型。
  *
  * @param disabled 已禁用标记。
  */

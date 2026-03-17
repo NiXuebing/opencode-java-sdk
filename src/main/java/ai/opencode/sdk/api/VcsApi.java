@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装版本控制接口相关的 HTTP 调用。 */
+/** 版本控制接口的 HTTP 客户端封装。 */
 public final class VcsApi {
   private final ApiTransport transport;
 

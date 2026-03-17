@@ -7,12 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 配置代理数据模型。
  *
- * @param plan plan。
- * @param build build。
- * @param general general。
- * @param explore explore。
+ * @param plan 规划。
+ * @param build 构建。
+ * @param general 通用。
+ * @param explore 探索模式配置。
  * @param title 标题。
- * @param summary summary。
+ * @param summary 摘要相关配置。
  * @param compaction 压缩。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

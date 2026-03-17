@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 项目Icon数据模型。
  *
  * @param url 可访问的地址。
- * @param override override。
- * @param color color。
+ * @param override 覆盖配置。
+ * @param color 颜色标识。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件安装已更新属性。
+ * 安装已更新事件属性。
  *
  * @param version 版本号。
  */

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 提供商列表响应AllItem模型值Modalities数据模型。
+ * 提供商列表响应所有项模型值模态数据模型。
  *
  * @param input 输入列表。
  * @param output 输出列表。

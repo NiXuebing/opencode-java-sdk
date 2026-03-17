@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件问题Rejected事件数据。
+ * 问题已拒绝事件数据。
  *
  * @param type 类型标识。
  * @param properties 附加属性。

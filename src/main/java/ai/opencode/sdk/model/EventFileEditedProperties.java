@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件文件Edited属性。
+ * 文件已编辑事件属性。
  *
  * @param file 文件信息。
  */

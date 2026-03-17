@@ -7,11 +7,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Map;
 
 /**
- * 工具StatePending数据模型。
+ * 工具状态等待中数据模型。
  *
  * @param status 当前状态。
  * @param input 输入映射。
- * @param raw raw。
+ * @param raw 原始状态值。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

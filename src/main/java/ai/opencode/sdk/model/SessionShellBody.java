@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 会话Shell请求体。
  *
- * @param agent 代理名称或代理配置。
+ * @param agent 代理名称。
  * @param model 模型配置。
  * @param command 命令内容。
  */

@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装事件订阅接口相关的 HTTP 调用。 */
+/** 事件订阅接口的 HTTP 客户端封装。 */
 public final class EventApi {
   private final ApiTransport transport;
 

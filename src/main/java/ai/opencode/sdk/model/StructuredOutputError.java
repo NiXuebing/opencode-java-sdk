@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Structured输出错误信息。
+ * 结构化输出错误信息。
  *
  * @param name 名称。
  * @param data 数据内容。

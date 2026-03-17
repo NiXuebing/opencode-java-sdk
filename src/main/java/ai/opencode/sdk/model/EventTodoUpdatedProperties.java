@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 事件待办已更新属性。
+ * 待办已更新事件属性。
  *
  * @param sessionID 目标会话 ID。
- * @param todos todos列表。
+ * @param todos 待办列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

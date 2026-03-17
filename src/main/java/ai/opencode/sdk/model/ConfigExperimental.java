@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * 配置实验性数据模型。
  *
- * @param disablePasteSummary disablepastesummary标记。
- * @param batchTool batch工具标记。
- * @param openTelemetry 打开Telemetry标记。
- * @param primaryTools primary工具列表。
- * @param continueLoopOnDeny continueloopondeny标记。
- * @param mcpTimeout MCPtimeout。
+ * @param disablePasteSummary 是否禁用粘贴摘要。
+ * @param batchTool 是否启用批量工具。
+ * @param openTelemetry 是否启用 OpenTelemetry。
+ * @param primaryTools 主要工具列表。
+ * @param continueLoopOnDeny 是否在拒绝后继续循环。
+ * @param mcpTimeout MCP 请求超时时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

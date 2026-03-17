@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件MCP浏览器打开失败事件数据。
+ * MCP浏览器打开失败事件数据。
  *
  * @param type 类型标识。
  * @param properties 附加属性。

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 全局事件数据模型。
  *
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
- * @param payload payload。
+ * @param payload 载荷。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

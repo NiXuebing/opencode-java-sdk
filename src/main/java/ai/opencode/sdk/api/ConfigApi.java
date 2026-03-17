@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装配置接口相关的 HTTP 调用。 */
+/** 配置接口的 HTTP 客户端封装。 */
 public final class ConfigApi {
   private final ApiTransport transport;
 
@@ -52,7 +52,7 @@ public final class ConfigApi {
    * 更新配置。
    *
    * @param request 更新配置所需的请求参数，其中 body 为必填项。
-   * @return 配置结果。
+   * @return 配置。
    */
   public Config update(ConfigUpdateRequest request) {
     Objects.requireNonNull(request, "request");

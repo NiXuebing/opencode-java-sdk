@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param name 名称。
  * @param path 目标文件或目录路径。
- * @param absolute absolute。
+ * @param absolute 绝对。
  * @param type 类型标识。
- * @param ignored ignored标记。
+ * @param ignored 是否忽略。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -13,18 +13,18 @@ import com.fasterxml.jackson.databind.JsonNode;
  * @param role 消息角色。
  * @param time 时间。
  * @param error 错误信息。
- * @param parentID parent ID。
+ * @param parentID 父级消息 ID。
  * @param modelID 模型 ID。
  * @param providerID 目标提供商 ID。
- * @param mode mode。
- * @param agent 代理名称或代理配置。
+ * @param mode 运行模式。
+ * @param agent 代理名称。
  * @param path 目标文件或目录路径。
- * @param summary summary标记。
+ * @param summary 是否为摘要内容。
  * @param cost 成本。
  * @param tokens 令牌。
- * @param structured structured。
+ * @param structured 结构化输出内容。
  * @param variant 变体名称。
- * @param finish finish。
+ * @param finish 结束原因。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

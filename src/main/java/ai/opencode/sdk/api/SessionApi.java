@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装会话接口相关的 HTTP 调用。 */
+/** 会话接口的 HTTP 客户端封装。 */
 public final class SessionApi {
   private final ApiTransport transport;
 
@@ -86,7 +86,7 @@ public final class SessionApi {
    * 创建会话。
    *
    * @param request 创建会话所需的请求参数，其中 body 为必填项。
-   * @return 会话结果。
+   * @return 会话。
    */
   public Session create(SessionCreateRequest request) {
     Objects.requireNonNull(request, "request");
@@ -173,7 +173,7 @@ public final class SessionApi {
    * 更新会话。
    *
    * @param request 更新会话所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话结果。
+   * @return 会话。
    */
   public Session update(SessionUpdateRequest request) {
     Objects.requireNonNull(request, "request");
@@ -263,7 +263,7 @@ public final class SessionApi {
    * 派生会话。
    *
    * @param request 派生会话所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话数据模型。
+   * @return 会话。
    */
   public Session fork(SessionForkRequest request) {
     Objects.requireNonNull(request, "request");
@@ -302,7 +302,7 @@ public final class SessionApi {
    * 分享会话。
    *
    * @param request 分享会话所需的请求参数，其中 sessionID 为必填项。
-   * @return 会话数据模型。
+   * @return 会话。
    */
   public Session share(SessionShareRequest request) {
     Objects.requireNonNull(request, "request");
@@ -321,7 +321,7 @@ public final class SessionApi {
    * 取消分享会话。
    *
    * @param request 取消分享会话所需的请求参数，其中 sessionID 为必填项。
-   * @return 会话数据模型。
+   * @return 会话。
    */
   public Session unshare(SessionUnshareRequest request) {
     Objects.requireNonNull(request, "request");
@@ -412,7 +412,7 @@ public final class SessionApi {
    * 发送会话提示。
    *
    * @param request 发送会话提示所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话提示处理结果。
+   * @return 会话提示词响应。
    */
   public SessionPromptResponse prompt(SessionPromptRequest request) {
     Objects.requireNonNull(request, "request");
@@ -485,7 +485,7 @@ public final class SessionApi {
    * 发送会话命令。
    *
    * @param request 发送会话命令所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话命令处理结果。
+   * @return 会话命令响应。
    */
   public SessionCommandResponse command(SessionCommandRequest request) {
     Objects.requireNonNull(request, "request");
@@ -511,7 +511,7 @@ public final class SessionApi {
    * 执行会话 Shell 命令。
    *
    * @param request 执行会话 Shell 命令所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话 Shell 命令结果。
+   * @return 助手消息。
    */
   public AssistantMessage shell(SessionShellRequest request) {
     Objects.requireNonNull(request, "request");
@@ -531,7 +531,7 @@ public final class SessionApi {
    * 撤回消息。
    *
    * @param request 撤回消息所需的请求参数，其中 sessionID、body 为必填项。
-   * @return 会话数据模型。
+   * @return 会话。
    */
   public Session revert(SessionRevertRequest request) {
     Objects.requireNonNull(request, "request");
@@ -551,7 +551,7 @@ public final class SessionApi {
    * 恢复已撤回消息。
    *
    * @param request 恢复已撤回消息所需的请求参数，其中 sessionID 为必填项。
-   * @return 会话数据模型。
+   * @return 会话。
    */
   public Session unrevert(SessionUnrevertRequest request) {
     Objects.requireNonNull(request, "request");

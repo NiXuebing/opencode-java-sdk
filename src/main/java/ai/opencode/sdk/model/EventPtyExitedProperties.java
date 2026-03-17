@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件PtyExited属性。
+ * PTY已退出事件属性。
  *
  * @param id 唯一标识。
- * @param exitCode exit代码。
+ * @param exitCode 退出码。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

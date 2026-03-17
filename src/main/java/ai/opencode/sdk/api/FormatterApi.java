@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装格式化器接口相关的 HTTP 调用。 */
+/** 格式化器接口的 HTTP 客户端封装。 */
 public final class FormatterApi {
   private final ApiTransport transport;
 

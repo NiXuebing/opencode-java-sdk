@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * 服务端配置。
  *
- * @param port port。
- * @param hostname hostname。
- * @param mdns mdns标记。
- * @param mdnsDomain mdnsDomain。
- * @param cors cors列表。
+ * @param port 端口。
+ * @param hostname 主机名。
+ * @param mdns 是否启用 mDNS。
+ * @param mdnsDomain mDNS 域名。
+ * @param cors 跨域来源列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

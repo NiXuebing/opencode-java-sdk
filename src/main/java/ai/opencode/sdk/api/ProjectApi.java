@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装项目接口相关的 HTTP 调用。 */
+/** 项目接口的 HTTP 客户端封装。 */
 public final class ProjectApi {
   private final ApiTransport transport;
 

@@ -11,30 +11,30 @@ import java.util.Map;
  * 配置。
  *
  * @param schema 结构。
- * @param logLevel 日志Level。
+ * @param logLevel 日志级别。
  * @param server 服务端。
  * @param command 命令内容。
- * @param skills skills。
+ * @param skills 技能配置。
  * @param watcher 监听器。
- * @param plugin plugin列表。
- * @param snapshot snapshot标记。
+ * @param plugin 插件列表。
+ * @param snapshot 是否启用快照。
  * @param share 分享。
- * @param autoshare autoshare标记。
- * @param autoupdate autoupdate。
- * @param disabledProviders 已禁用提供商列表。
- * @param enabledProviders enabled提供商列表。
- * @param model 模型配置。
- * @param smallModel small模型。
- * @param defaultAgent 默认代理。
- * @param username username。
- * @param mode mode。
- * @param agent 代理名称或代理配置。
- * @param provider 提供商标识。
- * @param mcp MCP映射。
- * @param formatter 格式化器。
- * @param lsp LSP。
+ * @param autoshare 是否自动分享。
+ * @param autoupdate 自动更新配置。
+ * @param disabledProviders 已禁用的提供商列表。
+ * @param enabledProviders 已启用的提供商列表。
+ * @param model 模型 ID 或名称。
+ * @param smallModel 轻量模型 ID 或名称。
+ * @param defaultAgent 默认代理名称。
+ * @param username 用户名。
+ * @param mode 运行模式。
+ * @param agent 代理配置。
+ * @param provider 提供商配置。
+ * @param mcp MCP 配置。
+ * @param formatter 格式化器配置。
+ * @param lsp LSP 配置。
  * @param instructions 操作说明。
- * @param layout 布局。
+ * @param layout 布局配置。
  * @param permission 权限配置。
  * @param tools 工具开关配置。
  * @param enterprise 企业版。

@@ -12,10 +12,10 @@ import java.util.List;
  * @param worktree 工作树。
  * @param vcs 版本控制。
  * @param name 名称。
- * @param icon icon。
+ * @param icon 图标配置。
  * @param commands 命令。
  * @param time 时间。
- * @param sandboxes sandboxes列表。
+ * @param sandboxes 沙箱列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

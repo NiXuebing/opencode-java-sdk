@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 获取工具列表接口的请求参数。
+ * 获取工具列表接口请求参数。
  *
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
- * @param provider 提供商标识。
- * @param model 模型配置。
+ * @param provider 提供商 ID 或名称。
+ * @param model 模型 ID 或名称。
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ToolListRequest(

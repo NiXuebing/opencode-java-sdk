@@ -11,10 +11,10 @@ import java.util.Map;
  * 配置LSP值数据模型。
  *
  * @param command 命令内容。
- * @param extensions extensions列表。
+ * @param extensions 扩展名列表。
  * @param disabled 已禁用标记。
- * @param env env映射。
- * @param initialization initialization映射。
+ * @param env 环境变量映射。
+ * @param initialization 初始化参数映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

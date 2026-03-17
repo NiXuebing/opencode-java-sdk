@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件消息已移除属性。
+ * 消息已移除事件属性。
  *
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。

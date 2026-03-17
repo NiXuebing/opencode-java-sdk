@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param id 唯一标识。
  * @param name 名称。
- * @param root root。
+ * @param root 根目录路径。
  * @param status 当前状态。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

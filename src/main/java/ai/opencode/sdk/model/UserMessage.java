@@ -13,8 +13,8 @@ import java.util.Map;
  * @param role 消息角色。
  * @param time 时间。
  * @param format 输出格式配置。
- * @param summary summary。
- * @param agent 代理名称或代理配置。
+ * @param summary 摘要内容。
+ * @param agent 代理名称。
  * @param model 模型配置。
  * @param system 系统提示词。
  * @param tools 工具开关配置。

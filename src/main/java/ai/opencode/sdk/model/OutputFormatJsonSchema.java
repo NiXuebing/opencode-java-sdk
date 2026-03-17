@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param type 类型标识。
  * @param schema 结构。
- * @param retryCount retryCount。
+ * @param retryCount 重试次数。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

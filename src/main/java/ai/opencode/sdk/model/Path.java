@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 路径数据模型。
  *
- * @param home home。
- * @param state state。
+ * @param home 主目录路径。
+ * @param state 状态。
  * @param config 配置内容。
  * @param worktree 工作树。
  * @param directory 可选的工作目录，会作为查询参数传给服务端。

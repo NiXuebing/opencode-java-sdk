@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 发送会话命令接口的请求参数。
+ * 发送会话命令接口请求参数。
  *
  * @param sessionID 目标会话 ID。
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
- * @param body 发送会话命令对应的请求体。
+ * @param body 发送会话命令的请求体。
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record SessionCommandRequest(

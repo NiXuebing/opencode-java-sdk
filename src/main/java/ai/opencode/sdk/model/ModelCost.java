@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param input 输入。
  * @param output 输出。
  * @param cache 缓存。
- * @param experimentalOver200K 实验性OverK。
+ * @param experimentalOver200K 实验性超长K。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

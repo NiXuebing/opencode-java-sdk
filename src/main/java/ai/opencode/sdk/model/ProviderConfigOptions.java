@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 提供商配置Options数据模型。
+ * 提供商配置选项数据模型。
  *
- * @param apiKey APIKey。
- * @param baseURL base地址。
+ * @param apiKey API 密钥。
+ * @param baseURL 服务端基础地址。
  * @param enterpriseUrl 企业版地址。
- * @param setCacheKey set缓存Key标记。
+ * @param setCacheKey 是否设置缓存键。
  * @param timeout 请求超时时间。
- * @param chunkTimeout chunkTimeout。
+ * @param chunkTimeout 分块超时时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

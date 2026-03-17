@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装路径接口相关的 HTTP 调用。 */
+/** 路径接口的 HTTP 客户端封装。 */
 public final class PathApi {
   private final ApiTransport transport;
 

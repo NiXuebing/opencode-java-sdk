@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装工具接口相关的 HTTP 调用。 */
+/** 工具接口的 HTTP 客户端封装。 */
 public final class ToolApi {
   private final ApiTransport transport;
 

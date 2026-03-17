@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @param type 类型标识。
  * @param url 可访问的地址。
- * @param enabled enabled标记。
+ * @param enabled 是否启用。
  * @param headers 自定义请求头集合。
  * @param oauth OAuth。
  * @param timeout 请求超时时间。

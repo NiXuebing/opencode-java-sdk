@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装命令接口相关的 HTTP 调用。 */
+/** 命令接口的 HTTP 客户端封装。 */
 public final class CommandApi {
   private final ApiTransport transport;
 

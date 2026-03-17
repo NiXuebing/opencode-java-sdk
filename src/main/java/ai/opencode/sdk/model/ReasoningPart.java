@@ -7,14 +7,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Map;
 
 /**
- * Reasoning片段数据模型。
+ * 推理片段数据模型。
  *
  * @param id 唯一标识。
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。
  * @param type 类型标识。
  * @param text 文本内容。
- * @param metadata metadata映射。
+ * @param metadata 元数据映射。
  * @param time 时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

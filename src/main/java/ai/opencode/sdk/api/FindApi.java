@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装检索接口相关的 HTTP 调用。 */
+/** 检索接口的 HTTP 客户端封装。 */
 public final class FindApi {
   private final ApiTransport transport;
 
@@ -29,7 +29,7 @@ public final class FindApi {
    * 执行文本检索。
    *
    * @param request 执行文本检索所需的请求参数，其中 pattern 为必填项。
-   * @return 文本检索结果。
+   * @return 匹配的文本片段列表。
    */
   public List<FindTextResponseItem> text(FindTextRequest request) {
     Objects.requireNonNull(request, "request");
@@ -54,7 +54,7 @@ public final class FindApi {
    * 检索文件。
    *
    * @param request 检索文件所需的请求参数，其中 query 为必填项。
-   * @return 文件结果。
+   * @return 匹配的文件路径列表。
    */
   public List<String> files(FindFilesRequest request) {
     Objects.requireNonNull(request, "request");
@@ -76,7 +76,7 @@ public final class FindApi {
    * 检索符号。
    *
    * @param request 检索符号所需的请求参数，其中 query 为必填项。
-   * @return 符号结果。
+   * @return 匹配的符号列表。
    */
   public List<Symbol> symbols(FindSymbolsRequest request) {
     Objects.requireNonNull(request, "request");

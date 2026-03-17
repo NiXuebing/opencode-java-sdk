@@ -9,10 +9,10 @@ import java.util.Map;
 /**
  * 应用日志请求体。
  *
- * @param service service。
- * @param level level。
+ * @param service 服务名称。
+ * @param level 日志级别。
  * @param message 消息内容。
- * @param extra extra映射。
+ * @param extra 附加信息映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

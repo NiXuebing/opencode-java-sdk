@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件命令Executed属性。
+ * 命令已执行事件属性。
  *
  * @param name 名称。
  * @param sessionID 目标会话 ID。
- * @param arguments arguments。
+ * @param arguments 参数内容。
  * @param messageID 目标消息 ID。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

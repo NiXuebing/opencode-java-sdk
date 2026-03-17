@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param created 已创建。
  * @param updated 已更新。
  * @param compacting compacting。
- * @param archived archived。
+ * @param archived 归档时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

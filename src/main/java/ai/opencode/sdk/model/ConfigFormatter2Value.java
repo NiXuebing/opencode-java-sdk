@@ -11,8 +11,8 @@ import java.util.Map;
  *
  * @param disabled 已禁用标记。
  * @param command 命令内容。
- * @param environment environment映射。
- * @param extensions extensions列表。
+ * @param environment 环境变量映射。
+ * @param extensions 扩展名列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

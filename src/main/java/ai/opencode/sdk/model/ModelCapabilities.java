@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 模型Capabilities数据模型。
+ * 模型能力数据模型。
  *
- * @param temperature temperature标记。
- * @param reasoning reasoning标记。
- * @param attachment attachment标记。
- * @param toolcall toolcall标记。
+ * @param temperature 采样温度。
+ * @param reasoning 是否支持推理。
+ * @param attachment 是否支持附件。
+ * @param toolcall 是否支持工具调用。
  * @param input 输入。
  * @param output 输出。
- * @param interleaved interleaved。
+ * @param interleaved 交错。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

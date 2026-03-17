@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 获取消息详情接口的请求参数。
+ * 获取消息详情接口请求参数。
  *
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。

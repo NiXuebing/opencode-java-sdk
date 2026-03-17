@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件工作树失败属性。
+ * 工作树失败事件属性。
  *
  * @param message 消息内容。
  */

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 问题Option数据模型。
  *
- * @param label label。
+ * @param label 显示标签。
  * @param description 描述信息。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

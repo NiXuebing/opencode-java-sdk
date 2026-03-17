@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件TUI提示显示属性。
+ * TUI提示显示事件属性。
  *
  * @param title 标题。
  * @param message 消息内容。
  * @param variant 变体名称。
- * @param duration duration。
+ * @param duration 持续时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

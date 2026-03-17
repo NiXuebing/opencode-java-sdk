@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 提供商列表响应数据。
  *
- * @param all all列表。
+ * @param all 所有列表。
  * @param defaultValue 默认映射。
  * @param connected 已连接列表。
  */

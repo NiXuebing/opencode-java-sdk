@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/** 封装认证接口相关的 HTTP 调用。 */
+/** 认证接口的 HTTP 客户端封装。 */
 public final class AuthApi {
   private final ApiTransport transport;
 

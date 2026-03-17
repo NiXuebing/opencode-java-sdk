@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 提供商配置模型值成本上下文Overk数据模型。
+ * 提供商配置模型值成本超长上下文数据模型。
  *
  * @param input 输入。
  * @param output 输出。
- * @param cacheRead 缓存read。
- * @param cacheWrite 缓存write。
+ * @param cacheRead 缓存读取量。
+ * @param cacheWrite 缓存写入量。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

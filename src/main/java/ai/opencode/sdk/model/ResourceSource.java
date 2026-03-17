@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param text 文本内容。
  * @param type 类型标识。
- * @param clientName 客户端Name。
- * @param uri uri。
+ * @param clientName 客户端名称。
+ * @param uri URI 地址。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

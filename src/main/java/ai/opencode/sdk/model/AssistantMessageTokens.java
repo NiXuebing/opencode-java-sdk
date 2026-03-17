@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 助手消息令牌数据模型。
  *
- * @param total total。
+ * @param total 总量。
  * @param input 输入。
  * @param output 输出。
- * @param reasoning reasoning。
+ * @param reasoning 推理信息。
  * @param cache 缓存。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

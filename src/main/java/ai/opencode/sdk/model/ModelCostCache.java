@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 模型成本缓存数据模型。
  *
- * @param read read。
- * @param write write。
+ * @param read 读取信息。
+ * @param write 写入信息。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

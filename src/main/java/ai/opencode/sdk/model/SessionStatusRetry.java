@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 会话状态Retry数据模型。
+ * 会话状态重试数据模型。
  *
  * @param type 类型标识。
- * @param attempt attempt。
+ * @param attempt 尝试次数。
  * @param message 消息内容。
- * @param next next。
+ * @param next 下一项。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

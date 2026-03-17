@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param type 类型标识。
  * @param prompt 提示词。
  * @param description 描述信息。
- * @param agent 代理名称或代理配置。
+ * @param agent 代理名称。
  * @param model 模型配置。
  * @param command 命令内容。
  */

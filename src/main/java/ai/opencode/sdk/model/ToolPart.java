@@ -13,10 +13,10 @@ import java.util.Map;
  * @param sessionID 目标会话 ID。
  * @param messageID 目标消息 ID。
  * @param type 类型标识。
- * @param callID call ID。
+ * @param callID 调用 ID。
  * @param tool 工具。
- * @param state state。
- * @param metadata metadata映射。
+ * @param state 状态。
+ * @param metadata 元数据映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

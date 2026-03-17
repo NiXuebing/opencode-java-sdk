@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件MCP浏览器打开失败属性。
+ * MCP浏览器打开失败事件属性。
  *
- * @param mcpName MCPName。
+ * @param mcpName MCP 服务名称。
  * @param url 可访问的地址。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件会话状态。
+ * 会话状态事件。
  *
  * @param type 类型标识。
  * @param properties 附加属性。

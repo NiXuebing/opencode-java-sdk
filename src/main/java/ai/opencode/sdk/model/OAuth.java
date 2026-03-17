@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * O认证数据模型。
+ * OAuth数据模型。
  *
  * @param type 类型标识。
- * @param refresh refresh。
- * @param access access。
- * @param expires expires。
- * @param accountId accountId。
+ * @param refresh 刷新令牌。
+ * @param access 访问令牌。
+ * @param expires 过期时间。
+ * @param accountId 账户 ID。
  * @param enterpriseUrl 企业版地址。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

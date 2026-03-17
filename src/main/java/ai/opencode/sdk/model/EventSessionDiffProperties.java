@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 事件会话差异属性。
+ * 会话差异事件属性。
  *
  * @param sessionID 目标会话 ID。
  * @param diff 差异列表。

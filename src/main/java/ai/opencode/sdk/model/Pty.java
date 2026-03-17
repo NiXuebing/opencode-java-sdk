@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * Pty数据模型。
+ * PTY数据模型。
  *
  * @param id 唯一标识。
  * @param title 标题。
  * @param command 命令内容。
  * @param args 参数列表。
- * @param cwd cwd。
+ * @param cwd 当前工作目录。
  * @param status 当前状态。
- * @param pid pid。
+ * @param pid 进程 ID。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 提供商列表响应AllItem模型值限制数据模型。
+ * 提供商列表响应所有项模型值限制数据模型。
  *
  * @param context 上下文。
  * @param input 输入。

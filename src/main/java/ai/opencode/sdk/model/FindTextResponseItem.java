@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 检索文本响应Item数据模型。
+ * 检索文本响应项数据模型。
  *
  * @param path 目标文件或目录路径。
  * @param lines 行。
- * @param lineNumber 行number。
- * @param absoluteOffset absoluteoffset。
+ * @param lineNumber 行号。
+ * @param absoluteOffset 绝对偏移量。
  * @param submatches 子匹配列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -6,7 +6,7 @@ import ai.opencode.sdk.model.GlobalEvent;
 import ai.opencode.sdk.model.GlobalHealthResponse;
 import java.util.Map;
 
-/** 封装全局接口相关的 HTTP 调用。 */
+/** 全局接口的 HTTP 客户端封装。 */
 public final class GlobalApi {
   private final ApiTransport transport;
 

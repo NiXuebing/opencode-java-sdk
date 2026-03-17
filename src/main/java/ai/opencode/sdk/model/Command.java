@@ -10,12 +10,12 @@ import java.util.List;
  *
  * @param name 名称。
  * @param description 描述信息。
- * @param agent 代理名称或代理配置。
- * @param model 模型配置。
+ * @param agent 代理名称。
+ * @param model 模型 ID 或名称。
  * @param source 来源。
- * @param template template。
+ * @param template 模板内容。
  * @param subtask 子任务标记。
- * @param hints hints列表。
+ * @param hints 提示列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

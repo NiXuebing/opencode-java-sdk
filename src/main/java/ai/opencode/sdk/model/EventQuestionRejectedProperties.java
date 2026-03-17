@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件问题Rejected属性。
+ * 问题已拒绝事件属性。
  *
  * @param sessionID 目标会话 ID。
  * @param requestID 请求 ID。

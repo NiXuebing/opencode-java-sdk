@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 检索文件接口的请求参数。
+ * 检索文件接口请求参数。
  *
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
  * @param query 检索关键字。

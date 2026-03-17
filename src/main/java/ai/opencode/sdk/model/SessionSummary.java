@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 会话Summary数据模型。
+ * 会话摘要数据模型。
  *
- * @param additions additions。
- * @param deletions deletions。
- * @param files 文件。
- * @param diffs diffs列表。
+ * @param additions 新增行数。
+ * @param deletions 删除行数。
+ * @param files 文件数量。
+ * @param diffs 差异列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

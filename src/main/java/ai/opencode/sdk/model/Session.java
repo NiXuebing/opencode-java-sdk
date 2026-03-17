@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 会话数据模型。
  *
  * @param id 唯一标识。
- * @param slug slug。
+ * @param slug 短标识。
  * @param projectID 项目 ID。
  * @param workspaceID 工作区 ID。
  * @param directory 可选的工作目录，会作为查询参数传给服务端。
- * @param parentID parent ID。
- * @param summary summary。
+ * @param parentID 父级消息 ID。
+ * @param summary 摘要内容。
  * @param share 分享。
  * @param title 标题。
  * @param version 版本号。

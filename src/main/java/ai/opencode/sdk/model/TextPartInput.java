@@ -12,10 +12,10 @@ import java.util.Map;
  * @param id 唯一标识。
  * @param type 类型标识。
  * @param text 文本内容。
- * @param synthetic synthetic标记。
- * @param ignored ignored标记。
+ * @param synthetic 合成标记。
+ * @param ignored 是否忽略。
  * @param time 时间。
- * @param metadata metadata映射。
+ * @param metadata 元数据映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

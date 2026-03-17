@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Retry片段时间数据模型。
+ * 重试片段时间数据模型。
  *
  * @param created 已创建。
  */

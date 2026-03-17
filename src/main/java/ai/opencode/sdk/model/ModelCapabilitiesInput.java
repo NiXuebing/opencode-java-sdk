@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 模型Capabilities输入数据模型。
+ * 模型能力输入数据模型。
  *
  * @param text 文本内容。
- * @param audio audio标记。
- * @param image image标记。
- * @param video video标记。
- * @param pdf pdf标记。
+ * @param audio 是否支持音频。
+ * @param image 是否支持图像。
+ * @param video 是否支持视频。
+ * @param pdf 是否支持 PDF。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

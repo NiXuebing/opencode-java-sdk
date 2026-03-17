@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * 事件问题已响应属性。
+ * 问题已响应事件属性。
  *
  * @param sessionID 目标会话 ID。
  * @param requestID 请求 ID。
- * @param answers answers列表。
+ * @param answers 回答列表。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)

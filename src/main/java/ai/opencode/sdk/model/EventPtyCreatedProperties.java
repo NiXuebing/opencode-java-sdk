@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 事件Pty已创建属性。
+ * PTY已创建事件属性。
  *
  * @param info 元信息。
  */

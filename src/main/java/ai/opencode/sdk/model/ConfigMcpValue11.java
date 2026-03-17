@@ -11,8 +11,8 @@ import java.util.Map;
  *
  * @param type 类型标识。
  * @param command 命令内容。
- * @param environment environment映射。
- * @param enabled enabled标记。
+ * @param environment 环境变量映射。
+ * @param enabled 是否启用。
  * @param timeout 请求超时时间。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

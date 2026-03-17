@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * 提供商OAuth回调请求体。
  *
- * @param method method。
+ * @param method 方法。
  * @param code 授权码或标识代码。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

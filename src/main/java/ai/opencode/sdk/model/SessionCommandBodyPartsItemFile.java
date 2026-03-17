@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 会话命令请求体片段Item文件数据模型。
+ * 会话命令请求体片段项文件数据模型。
  *
  * @param id 唯一标识。
  * @param type 类型标识。
- * @param mime mime。
- * @param filename filename。
+ * @param mime MIME 类型。
+ * @param filename 文件名。
  * @param url 可访问的地址。
  * @param source 来源。
  */

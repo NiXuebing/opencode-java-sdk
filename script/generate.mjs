@@ -193,7 +193,7 @@ const zhApiAccessorSummary = new Map([
   ["find", "检索接口"],
   ["file", "文件接口"],
   ["mcp", "MCP 接口"],
-  ["tui", "TUI HTTP 接口"],
+  ["tui", "TUI 接口"],
   ["instance", "实例接口"],
   ["path", "路径接口"],
   ["vcs", "版本控制接口"],
@@ -204,68 +204,124 @@ const zhApiAccessorSummary = new Map([
   ["event", "事件订阅接口"],
 ])
 const zhTokenSummary = new Map([
+  ["absolute", "绝对"],
+  ["access", "访问"],
+  ["account", "账户"],
   ["agent", "代理"],
   ["api", "API"],
   ["app", "应用"],
   ["append", "追加"],
+  ["args", "参数"],
   ["assistant", "助手"],
+  ["asked", "已请求"],
   ["auth", "认证"],
   ["authorization", "授权"],
+  ["async", "异步"],
+  ["auto", "自动"],
+  ["attachment", "附件"],
+  ["attachments", "附件"],
+  ["audio", "音频"],
+  ["available", "可用"],
+  ["all", "所有"],
+  ["batch", "批量"],
   ["body", "请求体"],
   ["browser", "浏览器"],
+  ["build", "构建"],
   ["branch", "分支"],
   ["cache", "缓存"],
+  ["call", "调用"],
   ["callback", "回调"],
+  ["capabilities", "能力"],
+  ["character", "字符"],
+  ["changed", "已变更"],
   ["client", "客户端"],
   ["children", "子项"],
+  ["clear", "清空"],
   ["code", "代码"],
   ["command", "命令"],
   ["commands", "命令"],
+  ["completed", "已完成"],
+  ["compacted", "已压缩"],
   ["compaction", "压缩"],
   ["config", "配置"],
   ["connected", "已连接"],
   ["connection", "连接"],
+  ["continue", "继续"],
   ["content", "内容"],
   ["context", "上下文"],
   ["cost", "成本"],
+  ["deletions", "删除行数"],
+  ["cwd", "工作目录"],
   ["create", "创建"],
   ["created", "已创建"],
   ["current", "当前"],
   ["data", "数据"],
   ["default", "默认"],
   ["delta", "增量"],
+  ["deny", "拒绝"],
   ["delete", "删除"],
   ["deleted", "已删除"],
   ["diagnostics", "诊断"],
   ["diff", "差异"],
   ["directory", "目录"],
   ["disabled", "已禁用"],
+  ["doom", "死循环"],
   ["dispose", "释放"],
   ["disposed", "已释放"],
+  ["edit", "编辑"],
+  ["edited", "已编辑"],
+  ["enabled", "启用"],
   ["enterprise", "企业版"],
+  ["env", "环境变量"],
+  ["environment", "环境变量"],
   ["error", "错误"],
   ["event", "事件"],
   ["execute", "执行"],
+  ["executed", "已执行"],
   ["experimental", "实验性"],
+  ["exit", "退出"],
+  ["exited", "已退出"],
+  ["extension", "扩展名"],
+  ["extensions", "扩展名"],
   ["failed", "失败"],
+  ["family", "家族"],
+  ["field", "字段"],
   ["file", "文件"],
   ["files", "文件"],
   ["find", "检索"],
   ["fork", "派生"],
   ["format", "格式"],
   ["formatter", "格式化器"],
+  ["general", "通用"],
   ["get", "获取"],
   ["global", "全局"],
+  ["glob", "通配"],
+  ["grep", "grep"],
+  ["header", "标题头"],
   ["health", "健康状态"],
   ["help", "帮助"],
+  ["hidden", "隐藏"],
+  ["hints", "提示"],
+  ["home", "主目录"],
+  ["hunk", "代码块"],
+  ["hunks", "代码块"],
   ["idle", "空闲"],
+  ["ignore", "忽略"],
+  ["ignored", "已忽略"],
+  ["image", "图像"],
   ["info", "信息"],
   ["init", "初始化"],
+  ["initialization", "初始化"],
   ["input", "输入"],
   ["installation", "安装"],
+  ["instance", "实例"],
   ["instructions", "说明"],
+  ["interleaved", "交错"],
+  ["item", "项"],
+  ["kind", "类型"],
   ["json", "JSON"],
   ["layout", "布局"],
+  ["label", "标签"],
   ["line", "行"],
   ["lines", "行"],
   ["limit", "限制"],
@@ -273,30 +329,60 @@ const zhTokenSummary = new Map([
   ["local", "本地"],
   ["log", "日志"],
   ["lsp", "LSP"],
+  ["max", "最大"],
   ["match", "匹配"],
   ["mcp", "MCP"],
+  ["mdns", "mDNS"],
   ["message", "消息"],
   ["messages", "消息"],
+  ["method", "方法"],
+  ["mime", "MIME"],
+  ["mode", "模式"],
   ["model", "模型"],
   ["models", "模型"],
+  ["modalities", "模态"],
+  ["multiple", "多选"],
+  ["native", "原生"],
   ["needs", "需要"],
+  ["next", "下一项"],
+  ["npm", "npm"],
   ["oauth", "OAuth"],
   ["open", "打开"],
+  ["options", "选项"],
+  ["offset", "偏移"],
   ["output", "输出"],
+  ["over", "超长"],
   ["overflow", "溢出"],
+  ["old", "旧"],
+  ["original", "原始"],
   ["part", "片段"],
   ["parts", "片段"],
   ["patch", "补丁"],
   ["path", "路径"],
+  ["paths", "路径"],
+  ["payload", "载荷"],
+  ["pdf", "PDF"],
+  ["pending", "等待中"],
   ["permission", "权限"],
+  ["plan", "规划"],
+  ["plugin", "插件"],
+  ["port", "端口"],
+  ["primary", "主要"],
+  ["priority", "优先级"],
   ["project", "项目"],
   ["projects", "项目"],
+  ["prune", "裁剪"],
   ["prompt", "提示词"],
   ["properties", "属性"],
   ["provider", "提供商"],
   ["providers", "提供商"],
+  ["pty", "PTY"],
   ["question", "问题"],
+  ["range", "范围"],
   ["ready", "就绪"],
+  ["reasoning", "推理"],
+  ["answers", "回答"],
+  ["read", "读取"],
   ["registration", "注册"],
   ["remote", "远程"],
   ["remove", "移除"],
@@ -305,35 +391,62 @@ const zhTokenSummary = new Map([
   ["request", "请求"],
   ["respond", "响应"],
   ["response", "响应"],
+  ["retry", "重试"],
+  ["retries", "重试"],
+  ["retryable", "可重试"],
   ["replied", "已响应"],
+  ["rejected", "已拒绝"],
+  ["release", "发布"],
+  ["reserved", "预留"],
+  ["root", "根目录"],
   ["revert", "撤回"],
   ["role", "角色"],
+  ["running", "运行中"],
+  ["sandbox", "沙箱"],
+  ["sandboxes", "沙箱"],
   ["schema", "结构"],
+  ["scope", "范围"],
+  ["secret", "密钥"],
+  ["select", "选择"],
   ["server", "服务端"],
   ["session", "会话"],
   ["sessions", "会话"],
+  ["service", "服务"],
+  ["set", "设置"],
   ["share", "分享"],
   ["shell", "Shell"],
   ["show", "显示"],
   ["skill", "技能"],
+  ["skills", "技能"],
+  ["small", "轻量"],
   ["source", "来源"],
+  ["state", "状态"],
   ["status", "状态"],
   ["stream", "流"],
+  ["structured", "结构化"],
   ["subtask", "子任务"],
   ["submatches", "子匹配"],
+  ["submit", "提交"],
+  ["summary", "摘要"],
+  ["synthetic", "合成"],
   ["summarize", "总结"],
   ["symbol", "符号"],
   ["symbols", "符号"],
+  ["task", "任务"],
+  ["telemetry", "遥测"],
+  ["temperature", "温度"],
   ["text", "文本"],
   ["theme", "主题"],
   ["themes", "主题"],
   ["time", "时间"],
   ["todo", "待办"],
+  ["todos", "待办"],
   ["toast", "提示"],
   ["token", "令牌"],
   ["tokens", "令牌"],
   ["tool", "工具"],
   ["tools", "工具"],
+  ["top", "Top"],
   ["tui", "TUI"],
   ["type", "类型"],
   ["unknown", "未知"],
@@ -341,76 +454,245 @@ const zhTokenSummary = new Map([
   ["unshare", "取消分享"],
   ["update", "更新"],
   ["updated", "已更新"],
+  ["uri", "URI"],
   ["url", "地址"],
+  ["urls", "地址"],
   ["user", "用户"],
+  ["username", "用户名"],
   ["value", "值"],
   ["variant", "变体"],
+  ["variants", "变体"],
   ["vcs", "版本控制"],
+  ["video", "视频"],
   ["version", "版本"],
   ["watcher", "监听器"],
+  ["web", "Web"],
   ["workspace", "工作区"],
+  ["whitelist", "白名单"],
   ["worktree", "工作树"],
+  ["write", "写入"],
 ])
 const zhFieldSummary = new Map([
+  ["access", "访问令牌。"],
+  ["accountId", "账户 ID。"],
   ["agent", "代理名称或代理配置。"],
+  ["apiKey", "API 密钥。"],
   ["args", "参数列表。"],
+  ["autoshare", "是否自动分享。"],
+  ["autoupdate", "自动更新配置。"],
+  ["additions", "新增行数。"],
+  ["after", "变更后内容。"],
+  ["archived", "归档时间。"],
+  ["arguments", "参数内容。"],
+  ["attempt", "尝试次数。"],
   ["baseUrl", "服务端基础地址。"],
+  ["baseURL", "服务端基础地址。"],
+  ["before", "变更前内容。"],
   ["body", "请求体内容。"],
+  ["callID", "调用 ID。"],
+  ["cacheRead", "缓存读取量。"],
+  ["cacheWrite", "缓存写入量。"],
+  ["cache_read", "缓存读取量。"],
+  ["cache_write", "缓存写入量。"],
+  ["character", "字符位置。"],
+  ["chunkTimeout", "分块超时时间。"],
+  ["clientId", "客户端 ID。"],
+  ["clientName", "客户端名称。"],
+  ["clientSecret", "客户端密钥。"],
   ["code", "授权码或标识代码。"],
+  ["color", "颜色标识。"],
   ["command", "命令内容。"],
+  ["compacted", "压缩完成时间。"],
   ["config", "配置内容。"],
+  ["contextOver200k", "超长上下文成本。"],
+  ["context_over_200k", "超长上下文成本。"],
   ["content", "正文内容。"],
+  ["cwd", "当前工作目录。"],
   ["data", "数据内容。"],
+  ["default_agent", "默认代理名称。"],
+  ["disabled_providers", "已禁用的提供商列表。"],
   ["description", "描述信息。"],
   ["directory", "可选的工作目录，会作为查询参数传给服务端。"],
+  ["disable", "是否禁用。"],
+  ["disable_paste_summary", "是否禁用粘贴摘要。"],
+  ["diffs", "差异列表。"],
   ["dirs", "参与检索的目录列表。"],
+  ["doom_loop", "是否允许死循环。"],
+  ["duration", "持续时间。"],
+  ["enabled", "是否启用。"],
+  ["enabled_providers", "已启用的提供商列表。"],
+  ["end", "结束位置。"],
+  ["encoding", "内容编码。"],
   ["error", "错误信息。"],
   ["event", "事件名称。"],
+  ["exitCode", "退出码。"],
+  ["extra", "附加信息映射。"],
+  ["expires", "过期时间。"],
+  ["explore", "探索模式配置。"],
+  ["extensions", "扩展名列表。"],
+  ["external_directory", "外部目录权限。"],
   ["file", "文件信息。"],
+  ["filename", "文件名。"],
+  ["finish", "结束原因。"],
   ["format", "输出格式配置。"],
+  ["formatter", "格式化器配置。"],
+  ["grep", "Grep 权限配置。"],
   ["headers", "自定义请求头集合。"],
+  ["header", "标题。"],
   ["healthy", "服务端是否健康。"],
+  ["hidden", "是否隐藏。"],
+  ["hints", "提示列表。"],
+  ["home", "主目录路径。"],
+  ["hostname", "主机名。"],
   ["httpClient", "底层 HTTP 客户端。"],
   ["id", "唯一标识。"],
   ["info", "元信息。"],
+  ["initialized", "初始化时间。"],
+  ["initialization", "初始化参数映射。"],
+  ["index", "索引。"],
   ["instructions", "操作说明。"],
+  ["isRetryable", "是否可重试。"],
+  ["icon", "图标配置。"],
+  ["kind", "类型值。"],
+  ["key", "密钥。"],
+  ["label", "显示标签。"],
+  ["layout", "布局配置。"],
+  ["level", "日志级别。"],
   ["limit", "返回结果数量上限。"],
+  ["lineNumber", "行号。"],
+  ["line_number", "行号。"],
+  ["location", "位置信息。"],
+  ["logLevel", "日志级别。"],
+  ["lsp", "LSP 配置。"],
+  ["maxSteps", "最大步骤数。"],
   ["message", "消息内容。"],
   ["messageID", "目标消息 ID。"],
-  ["model", "模型配置。"],
+  ["metadata", "元数据映射。"],
+  ["mcp", "MCP 配置。"],
+  ["mcpName", "MCP 服务名称。"],
+  ["mcpTimeout", "MCP 请求超时时间。"],
+  ["mcp_timeout", "MCP 请求超时时间。"],
+  ["mdnsDomain", "mDNS 域名。"],
+  ["mime", "MIME 类型。"],
+  ["mimeType", "MIME 类型。"],
+  ["mode", "运行模式。"],
   ["name", "名称。"],
+  ["native", "是否使用原生能力。"],
   ["noReply", "是否不等待助手回复。"],
+  ["npm", "npm 包名。"],
   ["objectMapper", "用于序列化和反序列化的 Jackson 对象映射器。"],
+  ["originalKeys", "原始键列表。"],
+  ["__originalKeys", "原始键列表。"],
+  ["options", "扩展选项映射。"],
+  ["override", "覆盖配置。"],
+  ["parentID", "父级消息 ID。"],
   ["parts", "片段列表。"],
+  ["parameters", "参数结构定义。"],
   ["path", "目标文件或目录路径。"],
   ["pattern", "匹配模式。"],
   ["permission", "权限配置。"],
   ["permissionID", "待响应的权限请求 ID。"],
+  ["pid", "进程 ID。"],
+  ["plugin", "插件列表。"],
+  ["priority", "优先级。"],
+  ["projectID", "项目 ID。"],
   ["properties", "附加属性。"],
   ["provider", "提供商标识。"],
   ["providerID", "目标提供商 ID。"],
   ["query", "检索关键字。"],
+  ["range", "范围信息。"],
+  ["raw", "原始状态值。"],
+  ["reasoning", "推理信息。"],
   ["reason", "原因说明。"],
+  ["read", "读取信息。"],
+  ["refresh", "刷新令牌。"],
+  ["requestID", "请求 ID。"],
   ["responseBody", "服务端返回的原始响应体。"],
   ["responseHeaders", "服务端返回的响应头。"],
+  ["retryCount", "重试次数。"],
   ["retry", "建议的重试间隔，单位为毫秒。"],
   ["roots", "是否仅返回根会话。"],
+  ["root", "根目录路径。"],
   ["role", "消息角色。"],
+  ["cors", "跨域来源列表。"],
+  ["scope", "授权范围。"],
   ["search", "搜索关键字。"],
+  ["serverID", "服务端 ID。"],
+  ["service", "服务名称。"],
   ["sessionID", "目标会话 ID。"],
+  ["slug", "短标识。"],
+  ["skills", "技能配置。"],
+  ["small_model", "轻量模型 ID 或名称。"],
+  ["snapshot", "是否启用快照。"],
   ["start", "分页起始位置或游标。"],
   ["status", "当前状态。"],
+  ["steps", "步骤数上限。"],
+  ["structured", "结构化输出内容。"],
+  ["summary", "摘要内容。"],
   ["system", "系统提示词。"],
+  ["temperature", "采样温度。"],
+  ["template", "模板内容。"],
   ["text", "文本内容。"],
+  ["todoread", "待办读取权限配置。"],
+  ["todowrite", "待办写入权限配置。"],
   ["timeout", "请求超时时间。"],
   ["title", "标题。"],
+  ["todos", "待办列表。"],
+  ["topP", "Top P 采样参数。"],
+  ["top_p", "Top P 采样参数。"],
+  ["total", "总量。"],
   ["tools", "工具开关配置。"],
+  ["oldStart", "旧起始位置。"],
+  ["oldLines", "旧行数。"],
+  ["newStart", "新起始位置。"],
+  ["newLines", "新行数。"],
+  ["absolute_offset", "绝对偏移量。"],
+  ["uri", "URI 地址。"],
   ["type", "类型标识。"],
   ["url", "可访问的地址。"],
+  ["username", "用户名。"],
   ["value", "实际值。"],
   ["variant", "变体名称。"],
+  ["variants", "变体映射。"],
   ["version", "版本号。"],
+  ["webfetch", "WebFetch 权限配置。"],
+  ["websearch", "WebSearch 权限配置。"],
+  ["codesearch", "CodeSearch 权限配置。"],
+  ["write", "写入信息。"],
   ["workspaceID", "工作区 ID。"],
+  ["bash", "Bash 权限配置。"],
+])
+const zhBooleanFieldLabel = new Map([
+  ["attachment", "支持附件"],
+  ["audio", "支持音频"],
+  ["auto", "自动执行"],
+  ["autoshare", "自动分享"],
+  ["batch_tool", "启用批量工具"],
+  ["continue_loop_on_deny", "在拒绝后继续循环"],
+  ["disable", "禁用"],
+  ["disable_paste_summary", "禁用粘贴摘要"],
+  ["doom_loop", "允许死循环"],
+  ["enabled", "启用"],
+  ["hidden", "隐藏"],
+  ["ignored", "忽略"],
+  ["image", "支持图像"],
+  ["multiple", "允许多选"],
+  ["native", "使用原生能力"],
+  ["custom", "允许自定义输入"],
+  ["mdns", "启用 mDNS"],
+  ["openTelemetry", "启用 OpenTelemetry"],
+  ["reasoning", "支持推理"],
+  ["snapshot", "启用快照"],
+  ["setCacheKey", "设置缓存键"],
+  ["structured", "返回结构化内容"],
+  ["success", "执行成功"],
+  ["summary", "为摘要内容"],
+  ["tool_call", "支持工具调用"],
+  ["toolCall", "支持工具调用"],
+  ["toolcall", "支持工具调用"],
+  ["video", "支持视频"],
+  ["pdf", "支持 PDF"],
+  ["prune", "执行裁剪"],
 ])
 for (const item of documentedOperations) {
   if (!zhOperationSummary.has(item)) {
@@ -934,18 +1216,39 @@ function sentence(value) {
   return text ? `${text}。` : ""
 }
 
+function leadingSpaceIfAscii(value) {
+  return /^[A-Za-z]/.test(String(value ?? "")) ? " " : ""
+}
+
 function translatedLabel(value) {
+  if (String(value ?? "") === "OAuth") return "OAuth"
   const text = String(value ?? "").replace(/\d+/g, " ")
   const items = words(text).map((item) => {
     const translated = zhTokenSummary.get(item.toLowerCase())
     if (translated) return translated
     return item === item.toUpperCase() ? item : item
   })
-  return items.join("") || String(value ?? "")
+  let out = ""
+  for (const item of items) {
+    if (
+      out &&
+      /^[A-Za-z0-9]+$/.test(out.slice(-1)) &&
+      /^[A-Za-z0-9]+$/.test(item)
+    ) {
+      out += ` ${item}`
+    } else {
+      out += item
+    }
+  }
+  return out || String(value ?? "")
 }
 
 function stripSuffix(value, suffix) {
   return value.endsWith(suffix) ? value.slice(0, -suffix.length) : value
+}
+
+function stripPrefix(value, prefix) {
+  return value.startsWith(prefix) ? value.slice(prefix.length) : value
 }
 
 function innerType(type) {
@@ -954,13 +1257,36 @@ function innerType(type) {
 }
 
 function typeDocLabel(type) {
-  return translatedLabel(String(type).replace(/[<>?,]/g, " "))
+  return typeReferenceSummary(String(type).replace(/\? extends /g, "").trim())
 }
 
 function propertyDescription(field, ownerName) {
   const key = field.jsonName ?? field.name
   if (key === "body" && operationTypes.has(ownerName)) {
-    return `${operationSummary(operationTypes.get(ownerName).operation)}对应的请求体。`
+    return `${operationSummary(operationTypes.get(ownerName).operation)}的请求体。`
+  }
+  if (key === "agent") {
+    return field.type === "String" ? "代理名称。" : "代理配置。"
+  }
+  if (key === "model") {
+    return field.type === "String" ? "模型 ID 或名称。" : "模型配置。"
+  }
+  if (key === "provider") {
+    return field.type === "String" ? "提供商 ID 或名称。" : "提供商配置。"
+  }
+  if (key === "options") {
+    if (String(field.type).startsWith("List<")) return "选项列表。"
+    if (String(field.type).startsWith("Map<")) return "扩展选项映射。"
+  }
+  if (key === "files") {
+    if (field.type === "Long" || field.type === "Double") return "文件数量。"
+    if (String(field.type).startsWith("List<")) return "文件列表。"
+  }
+  if (key === "summary" && field.type !== "Boolean") {
+    return field.type.endsWith("Config") ? "摘要相关配置。" : "摘要内容。"
+  }
+  if (field.type === "Boolean" && zhBooleanFieldLabel.has(key)) {
+    return `是否${zhBooleanFieldLabel.get(key)}。`
   }
   if (zhFieldSummary.has(key)) return zhFieldSummary.get(key)
   if (key.endsWith("IDs")) return `${translatedLabel(key.slice(0, -3))} ID 列表。`
@@ -975,23 +1301,73 @@ function propertyDescription(field, ownerName) {
   return `${translatedLabel(key)}。`
 }
 
-function typeSummary(name, kind) {
-  if (operationTypes.has(name)) {
-    return `${operationSummary(operationTypes.get(name).operation)}接口的请求参数`
+function typeLabel(name, kind) {
+  if (name === "JSONSchema" && kind === "map") return "JSON Schema 映射"
+  if (name === "JSONSchema") return "JSON Schema"
+  if (name === "OAuth") return "OAuth"
+  if (name === "EventSessionErrorPropertiesError") return "会话错误事件中的错误"
+  if (name.endsWith("ContextOver200k")) {
+    return `${translatedLabel(stripSuffix(name, "ContextOver200k"))}超长上下文`
   }
-  if (kind === "enum") return `${translatedLabel(name)}枚举`
-  if (kind === "union") return `${translatedLabel(name)}联合类型`
-  if (kind === "map") return `${translatedLabel(name)}映射结果`
+  if (operationTypes.has(name)) {
+    return `${operationSummary(operationTypes.get(name).operation)}接口请求参数`
+  }
   if (kind === "wrapper") return `${translatedLabel(stripSuffix(name, "Value"))}值对象`
-  if (name.endsWith("Response")) return `${translatedLabel(stripSuffix(name, "Response"))}响应数据`
+  if (kind === "map") return `${translatedLabel(name)}映射`
+  if (name.endsWith("Response")) return `${translatedLabel(stripSuffix(name, "Response"))}响应`
   if (name.endsWith("Body")) return `${translatedLabel(stripSuffix(name, "Body"))}请求体`
   if (name.endsWith("ErrorData")) return `${translatedLabel(stripSuffix(name, "ErrorData"))}错误详情`
-  if (name.endsWith("Error")) return `${translatedLabel(stripSuffix(name, "Error"))}错误信息`
+  if (name.startsWith("Event") && !name.includes("Properties") && name.endsWith("Error")) {
+    return `${translatedLabel(stripPrefix(stripSuffix(name, "Error"), "Event"))}错误事件`
+  }
+  if (name.endsWith("Error")) return `${translatedLabel(stripSuffix(name, "Error"))}错误`
+  if (name.startsWith("Event") && name.endsWith("Properties")) {
+    return `${translatedLabel(stripSuffix(stripPrefix(name, "Event"), "Properties"))}事件属性`
+  }
+  if (name.startsWith("Event") && !name.includes("Properties") && name.endsWith("Status")) {
+    return `${translatedLabel(stripPrefix(stripSuffix(name, "Status"), "Event"))}状态事件`
+  }
   if (name.endsWith("Properties")) return `${translatedLabel(stripSuffix(name, "Properties"))}属性`
   if (name.endsWith("Config")) return `${translatedLabel(stripSuffix(name, "Config"))}配置`
   if (name.endsWith("Status")) return `${translatedLabel(stripSuffix(name, "Status"))}状态`
-  if (name.startsWith("Event")) return `${translatedLabel(name)}事件数据`
-  return `${translatedLabel(name)}数据模型`
+  if (name.startsWith("Event")) return `${translatedLabel(stripPrefix(name, "Event"))}事件`
+  return translatedLabel(name)
+}
+
+function typeSummary(name, kind) {
+  const label = typeLabel(name, kind)
+  if (operationTypes.has(name)) return label
+  if (kind === "enum") return `${label}枚举`
+  if (kind === "union") return `${label}联合类型`
+  if (kind === "map") return `${label}`
+  if (kind === "wrapper") return label
+  if (name.endsWith("ErrorData")) return label
+  if (name.startsWith("Event") && !name.includes("Properties") && name.endsWith("Error")) {
+    return `${label}数据`
+  }
+  if (name.endsWith("Error")) return `${label}信息`
+  if (name.endsWith("Properties")) return label
+  if (name.endsWith("Config")) return label
+  if (name.endsWith("Status")) return label
+  if (name.startsWith("Event")) return `${label}数据`
+  if (name.endsWith("Body")) return label
+  if (name.endsWith("Response")) return `${label}数据`
+  return `${label}数据模型`
+}
+
+function typeReferenceSummary(type) {
+  const value = String(type)
+  if (value.startsWith("List<") && value.endsWith(">")) {
+    return `${typeReferenceSummary(innerType(value))}列表`
+  }
+  if (value.startsWith("Map<String, ") && value.endsWith(">")) {
+    return `${typeReferenceSummary(value.slice("Map<String, ".length, -1))}映射`
+  }
+  if (value === "String") return "字符串"
+  if (value === "Boolean") return "布尔值"
+  if (value === "JsonNode") return "JSON 节点"
+  if (defs.has(value)) return typeLabel(value, defs.get(value).kind)
+  return translatedLabel(value)
 }
 
 function recordDoc(name, fields, kind = "record") {
@@ -1055,19 +1431,21 @@ function operationReturnDoc(operation) {
   if (operation.sse) return "@return 服务端持续推送的事件流。"
   if (operation.responseType === "Void") return "@return 无返回值。"
   if (operation.responseType === "Boolean") return "@return 操作是否成功。"
-  if (summary.startsWith("获取")) return `@return ${summary.slice(2)}。`
-  if (summary.startsWith("读取")) return `@return ${summary.slice(2)}。`
-  if (summary.startsWith("列出")) return `@return ${summary.slice(2)}列表。`
-  if (summary.startsWith("检索")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("执行")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("发送")) return `@return ${summary.slice(2)}处理结果。`
-  if (summary.startsWith("异步发送")) return `@return ${summary.slice(4)}受理结果。`
-  if (summary.startsWith("发起")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("处理")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("创建")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("更新")) return `@return ${summary.slice(2)}结果。`
-  if (summary.startsWith("添加")) return `@return ${summary.slice(2)}结果。`
-  return `@return ${typeSummary(operation.responseType, "record")}。`
+  if (summary.startsWith("获取")) return `@return ${summary.slice(2).trim()}。`
+  if (summary.startsWith("读取")) return `@return ${summary.slice(2).trim()}。`
+  if (summary.startsWith("列出")) return `@return ${summary.slice(2).trim()}列表。`
+  if (summary === "执行文本检索") return "@return 匹配的文本片段列表。"
+  if (summary === "检索文件") return "@return 匹配的文件路径列表。"
+  if (summary === "检索符号") return "@return 匹配的符号列表。"
+  if (summary.startsWith("执行")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("发送")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("异步发送")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("发起")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("处理")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("创建")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("更新")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  if (summary.startsWith("添加")) return `@return ${typeReferenceSummary(operation.responseType)}。`
+  return `@return ${typeReferenceSummary(operation.responseType)}。`
 }
 
 function operationSummary(operation) {
@@ -1472,10 +1850,10 @@ function apiFile(parts, node) {
   return `
 package ${apiPackage};
 
-${renderImports(apiPackage, imports)}${docBlock([sentence(`封装${label}相关的 HTTP 调用`)], "")}public final class ${className} {
+${renderImports(apiPackage, imports)}${docBlock([sentence(`${label}的 HTTP 客户端封装`)], "")}public final class ${className} {
   private final ApiTransport transport;
 ${fields ? `${fields}\n` : ""}
-${docBlock([sentence(`使用底层传输器创建${label}封装`), "", "@param transport 底层传输器。"])}  public ${className}(ApiTransport transport) {
+${docBlock([sentence(`使用底层传输器创建${leadingSpaceIfAscii(label)}${label}封装`), "", "@param transport 底层传输器。"])}  public ${className}(ApiTransport transport) {
     this.transport = transport;${initBlock}
   }
 ${getters}${methods ? `\n${methods}` : ""}

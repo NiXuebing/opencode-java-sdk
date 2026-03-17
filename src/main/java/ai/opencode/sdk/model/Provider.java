@@ -13,9 +13,9 @@ import java.util.Map;
  * @param id 唯一标识。
  * @param name 名称。
  * @param source 来源。
- * @param env env列表。
- * @param key key。
- * @param options options映射。
+ * @param env 环境变量列表。
+ * @param key 密钥。
+ * @param options 扩展选项映射。
  * @param models 模型映射。
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
