@@ -50,6 +50,7 @@
     <junit.version>5.10.0</junit.version>
     <spotless.version>2.44.3</spotless.version>
     <google-java-format.version>1.35.0</google-java-format.version>
+    <jacoco.version>0.8.14</jacoco.version>
   </properties>
 
   <dependencies>
@@ -94,6 +95,69 @@
             <formatAnnotations />
           </java>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>ai/opencode/sdk/*</include>
+                <include>ai/opencode/sdk/api/*</include>
+                <include>ai/opencode/sdk/core/*</include>
+              </includes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>ai/opencode/sdk/*</include>
+                <include>ai/opencode/sdk/api/*</include>
+                <include>ai/opencode/sdk/core/*</include>
+              </includes>
+              <excludes>
+                <exclude>ai/opencode/sdk/model/*</exclude>
+                <exclude>ai/opencode/sdk/request/*</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>check</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>PACKAGE</element>
+                  <includes>
+                    <include>ai.opencode.sdk</include>
+                    <include>ai.opencode.sdk.api</include>
+                    <include>ai.opencode.sdk.core</include>
+                  </includes>
+                  <limits>
+                    <limit>
+                      <counter>LINE</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.0</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
