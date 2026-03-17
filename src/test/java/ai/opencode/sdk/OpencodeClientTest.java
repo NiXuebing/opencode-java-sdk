@@ -169,6 +169,7 @@ class OpencodeClientTest {
     assertFalse(declaredMethodNames(McpApi.class).contains("auth"));
     assertFalse(declaredMethodNames(McpApi.class).contains("connect"));
     assertFalse(declaredMethodNames(McpApi.class).contains("disconnect"));
+    assertFalse(declaredMethodNames(ai.opencode.sdk.api.TuiApi.class).contains("control"));
   }
 
   private TestServer server(Map<String, HttpHandler> handlers) throws IOException {

@@ -7,15 +7,9 @@ import java.util.*;
 
 public final class TuiApi {
   private final ApiTransport transport;
-  private final TuiControlApi control;
 
   public TuiApi(ApiTransport transport) {
     this.transport = transport;
-    this.control = new TuiControlApi(transport);
-  }
-
-  public TuiControlApi control() {
-    return control;
   }
 
   /** Append TUI prompt Append prompt to the TUI */

@@ -111,8 +111,6 @@ const documentedOperations = new Set([
   "POST /tui/clear-prompt",
   "POST /tui/execute-command",
   "POST /tui/show-toast",
-  "GET /tui/control/next",
-  "POST /tui/control/response",
   "PUT /auth/{providerID}",
   "GET /event",
 ])

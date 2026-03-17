@@ -9,9 +9,11 @@ This project is generated from the official OpenAPI schema snapshot and intentio
 - Blocking SSE event stream support
 - Request configuration for base URL, timeout, headers, and working directory header
 
-It does not include local `opencode serve` startup helpers or TUI process wrappers.
+It does not include local `opencode serve` startup helpers, TUI process wrappers, or TUI control queue APIs.
 
 The generated Java surface intentionally follows the endpoints documented in the official SDK and Server docs. Internal or undocumented routes that may still appear in the raw OpenAPI are not exposed through `OpencodeClient`.
+
+The SDK also intentionally omits `tui.control` endpoints to keep the public surface focused on direct HTTP API calls instead of terminal control queue coordination.
 
 ## What is included
 
