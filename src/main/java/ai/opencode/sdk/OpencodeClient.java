@@ -8,16 +8,10 @@ public final class OpencodeClient {
   private final GlobalApi global;
   private final AuthApi auth;
   private final ProjectApi project;
-  private final PtyApi pty;
   private final ConfigApi config;
   private final ToolApi tool;
-  private final WorktreeApi worktree;
-  private final ExperimentalApi experimental;
   private final SessionApi session;
-  private final PartApi part;
   private final PermissionApi permission;
-  private final QuestionApi question;
-  private final MirrorApi mirror;
   private final ProviderApi provider;
   private final FindApi find;
   private final FileApi file;
@@ -41,16 +35,10 @@ public final class OpencodeClient {
     this.global = new GlobalApi(transport);
     this.auth = new AuthApi(transport);
     this.project = new ProjectApi(transport);
-    this.pty = new PtyApi(transport);
     this.config = new ConfigApi(transport);
     this.tool = new ToolApi(transport);
-    this.worktree = new WorktreeApi(transport);
-    this.experimental = new ExperimentalApi(transport);
     this.session = new SessionApi(transport);
-    this.part = new PartApi(transport);
     this.permission = new PermissionApi(transport);
-    this.question = new QuestionApi(transport);
-    this.mirror = new MirrorApi(transport);
     this.provider = new ProviderApi(transport);
     this.find = new FindApi(transport);
     this.file = new FileApi(transport);
@@ -78,10 +66,6 @@ public final class OpencodeClient {
     return project;
   }
 
-  public PtyApi pty() {
-    return pty;
-  }
-
   public ConfigApi config() {
     return config;
   }
@@ -90,32 +74,12 @@ public final class OpencodeClient {
     return tool;
   }
 
-  public WorktreeApi worktree() {
-    return worktree;
-  }
-
-  public ExperimentalApi experimental() {
-    return experimental;
-  }
-
   public SessionApi session() {
     return session;
   }
 
-  public PartApi part() {
-    return part;
-  }
-
   public PermissionApi permission() {
     return permission;
-  }
-
-  public QuestionApi question() {
-    return question;
-  }
-
-  public MirrorApi mirror() {
-    return mirror;
   }
 
   public ProviderApi provider() {

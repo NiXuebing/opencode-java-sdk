@@ -7,7 +7,4 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record TuiControlResponseRequest(
-    @JsonProperty("directory") String directory,
-    @JsonProperty("body") JsonNode body
-) {
-}
+    @JsonProperty("directory") String directory, @JsonProperty("body") JsonNode body) {}

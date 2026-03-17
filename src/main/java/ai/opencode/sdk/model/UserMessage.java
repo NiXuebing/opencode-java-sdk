@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,6 +16,5 @@ public record UserMessage(
     @JsonProperty("model") UserMessageModel model,
     @JsonProperty("system") String system,
     @JsonProperty("tools") Map<String, Boolean> tools,
-    @JsonProperty("variant") String variant
-) implements Message {
-}
+    @JsonProperty("variant") String variant)
+    implements Message {}

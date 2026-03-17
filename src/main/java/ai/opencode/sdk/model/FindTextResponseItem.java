@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,4 @@ public record FindTextResponseItem(
     @JsonProperty("lines") FindTextResponseItemLines lines,
     @JsonProperty("line_number") Double lineNumber,
     @JsonProperty("absolute_offset") Double absoluteOffset,
-    @JsonProperty("submatches") List<FindTextResponseItemSubmatchesItem> submatches
-) {
-}
+    @JsonProperty("submatches") List<FindTextResponseItemSubmatchesItem> submatches) {}

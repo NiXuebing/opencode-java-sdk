@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,6 +9,5 @@ public record ResourceSource(
     @JsonProperty("text") FilePartSourceText text,
     @JsonProperty("type") String type,
     @JsonProperty("clientName") String clientName,
-    @JsonProperty("uri") String uri
-) implements FilePartSource {
-}
+    @JsonProperty("uri") String uri)
+    implements FilePartSource {}

@@ -7,6 +7,5 @@ import java.util.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record PermissionConfig(@JsonValue JsonNode value) {
   @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  public PermissionConfig {
-  }
+  public PermissionConfig {}
 }

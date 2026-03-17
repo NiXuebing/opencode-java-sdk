@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,6 +14,5 @@ public record SubtaskPart(
     @JsonProperty("description") String description,
     @JsonProperty("agent") String agent,
     @JsonProperty("model") SubtaskPartModel model,
-    @JsonProperty("command") String command
-) implements Part {
-}
+    @JsonProperty("command") String command)
+    implements Part {}

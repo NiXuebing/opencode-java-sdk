@@ -20,6 +20,4 @@ public record Agent(
     @JsonProperty("variant") String variant,
     @JsonProperty("prompt") String prompt,
     @JsonProperty("options") Map<String, JsonNode> options,
-    @JsonProperty("steps") Long steps
-) {
-}
+    @JsonProperty("steps") Long steps) {}

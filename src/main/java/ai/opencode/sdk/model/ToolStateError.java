@@ -11,6 +11,5 @@ public record ToolStateError(
     @JsonProperty("input") Map<String, JsonNode> input,
     @JsonProperty("error") String error,
     @JsonProperty("metadata") Map<String, JsonNode> metadata,
-    @JsonProperty("time") ToolStateErrorTime time
-) implements ToolState {
-}
+    @JsonProperty("time") ToolStateErrorTime time)
+    implements ToolState {}

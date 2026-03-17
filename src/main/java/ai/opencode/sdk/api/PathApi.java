@@ -3,8 +3,6 @@ package ai.opencode.sdk.api;
 import ai.opencode.sdk.core.*;
 import ai.opencode.sdk.model.*;
 import ai.opencode.sdk.request.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 public final class PathApi {
@@ -12,13 +10,11 @@ public final class PathApi {
 
   public PathApi(ApiTransport transport) {
     this.transport = transport;
-
   }
 
-
   /**
- * Get paths
- * Retrieve the current working directory and related path information for the OpenCode instance.
+   * Get paths Retrieve the current working directory and related path information for the OpenCode
+   * instance.
    */
   public Path get() {
     return get(new PathGetRequest(null));
@@ -33,5 +29,4 @@ public final class PathApi {
     Object body = null;
     return transport.execute("GET", "/path", path, query, headers, body, Path.class);
   }
-
 }

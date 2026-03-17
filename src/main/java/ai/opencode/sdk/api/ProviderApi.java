@@ -4,7 +4,6 @@ import ai.opencode.sdk.core.*;
 import ai.opencode.sdk.model.*;
 import ai.opencode.sdk.request.*;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 public final class ProviderApi {
@@ -14,7 +13,6 @@ public final class ProviderApi {
   public ProviderApi(ApiTransport transport) {
     this.transport = transport;
     this.oauth = new ProviderOauthApi(transport);
-
   }
 
   public ProviderOauthApi oauth() {
@@ -22,8 +20,8 @@ public final class ProviderApi {
   }
 
   /**
- * List providers
- * Get a list of all available AI providers, including both available and connected ones.
+   * List providers Get a list of all available AI providers, including both available and connected
+   * ones.
    */
   public ProviderListResponse list() {
     return list(new ProviderListRequest(null));
@@ -36,13 +34,11 @@ public final class ProviderApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute("GET", "/provider", path, query, headers, body, ProviderListResponse.class);
+    return transport.execute(
+        "GET", "/provider", path, query, headers, body, ProviderListResponse.class);
   }
 
-  /**
- * Get provider auth methods
- * Retrieve available authentication methods for all AI providers.
-   */
+  /** Get provider auth methods Retrieve available authentication methods for all AI providers. */
   public Map<String, List<ProviderAuthMethod>> auth() {
     return auth(new ProviderAuthRequest(null));
   }
@@ -54,7 +50,13 @@ public final class ProviderApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute("GET", "/provider/auth", path, query, headers, body, new TypeReference<Map<String, List<ProviderAuthMethod>>>() {});
+    return transport.execute(
+        "GET",
+        "/provider/auth",
+        path,
+        query,
+        headers,
+        body,
+        new TypeReference<Map<String, List<ProviderAuthMethod>>>() {});
   }
-
 }

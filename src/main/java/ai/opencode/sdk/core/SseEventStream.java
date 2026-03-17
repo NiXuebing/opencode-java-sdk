@@ -17,14 +17,16 @@ public final class SseEventStream<T> implements AutoCloseable, Iterable<SseEvent
   private final ObjectMapper mapper;
   private final JavaType type;
 
-  public SseEventStream(HttpClient client, ObjectMapper mapper, HttpRequest request, JavaType type) {
+  public SseEventStream(
+      HttpClient client, ObjectMapper mapper, HttpRequest request, JavaType type) {
     try {
       var response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
       if (response.statusCode() < 200 || response.statusCode() >= 300) {
         var body = new String(response.body().readAllBytes(), StandardCharsets.UTF_8);
         throw new ApiException(response.statusCode(), body, response.headers());
       }
-      this.reader = new BufferedReader(new InputStreamReader(response.body(), StandardCharsets.UTF_8));
+      this.reader =
+          new BufferedReader(new InputStreamReader(response.body(), StandardCharsets.UTF_8));
       this.mapper = mapper;
       this.type = type;
     } catch (InterruptedException error) {

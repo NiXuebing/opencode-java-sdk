@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,6 +14,4 @@ public record ProviderConfig(
     @JsonProperty("models") Map<String, ProviderConfigModelsValue> models,
     @JsonProperty("whitelist") List<String> whitelist,
     @JsonProperty("blacklist") List<String> blacklist,
-    @JsonProperty("options") ProviderConfigOptions options
-) {
-}
+    @JsonProperty("options") ProviderConfigOptions options) {}

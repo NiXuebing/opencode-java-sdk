@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,6 +8,5 @@ import java.util.*;
 public record SessionCreateBody(
     @JsonProperty("parentID") String parentID,
     @JsonProperty("title") String title,
-    @JsonProperty("permission") PermissionRuleset permission
-) {
-}
+    @JsonProperty("permission") PermissionRuleset permission,
+    @JsonProperty("workspaceID") String workspaceID) {}

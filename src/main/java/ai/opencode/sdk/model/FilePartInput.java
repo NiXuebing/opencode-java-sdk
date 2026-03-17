@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,5 @@ public record FilePartInput(
     @JsonProperty("mime") String mime,
     @JsonProperty("filename") String filename,
     @JsonProperty("url") String url,
-    @JsonProperty("source") FilePartSource source
-) implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {
-}
+    @JsonProperty("source") FilePartSource source)
+    implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {}

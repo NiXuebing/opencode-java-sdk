@@ -11,6 +11,4 @@ public record ConfigLsp2Value2(
     @JsonProperty("extensions") List<String> extensions,
     @JsonProperty("disabled") Boolean disabled,
     @JsonProperty("env") Map<String, String> env,
-    @JsonProperty("initialization") Map<String, JsonNode> initialization
-) {
-}
+    @JsonProperty("initialization") Map<String, JsonNode> initialization) {}

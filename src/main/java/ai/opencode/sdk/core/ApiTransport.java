@@ -2,18 +2,14 @@ package ai.opencode.sdk.core;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.*;
 
 public final class ApiTransport {
@@ -24,9 +20,11 @@ public final class ApiTransport {
   public ApiTransport(OpencodeClientConfig config) {
     this.config = config;
     this.client = config.httpClient();
-    this.mapper = config.objectMapper()
-        .copy()
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    this.mapper =
+        config
+            .objectMapper()
+            .copy()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
   public <T> T execute(
@@ -36,11 +34,19 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      Class<T> type
-  ) {
+      Class<T> type) {
     try {
-      var response = send(method, route, path, query, headers, body, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-      if (response.statusCode() < 200 || response.statusCode() >= 300) throw ApiException.from(response);
+      var response =
+          send(
+              method,
+              route,
+              path,
+              query,
+              headers,
+              body,
+              HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+      if (response.statusCode() < 200 || response.statusCode() >= 300)
+        throw ApiException.from(response);
       if (type == Void.class) return null;
       if (response.body() == null || response.body().isBlank()) return null;
       return mapper.readValue(response.body(), type);
@@ -59,11 +65,19 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      TypeReference<T> type
-  ) {
+      TypeReference<T> type) {
     try {
-      var response = send(method, route, path, query, headers, body, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-      if (response.statusCode() < 200 || response.statusCode() >= 300) throw ApiException.from(response);
+      var response =
+          send(
+              method,
+              route,
+              path,
+              query,
+              headers,
+              body,
+              HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+      if (response.statusCode() < 200 || response.statusCode() >= 300)
+        throw ApiException.from(response);
       if (response.body() == null || response.body().isBlank()) return null;
       return mapper.readValue(response.body(), type);
     } catch (InterruptedException error) {
@@ -81,9 +95,12 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      Class<T> type
-  ) {
-    return new SseEventStream<>(client, mapper, buildRequest(method, route, path, query, headers, body, "text/event-stream"), mapper.constructType(type));
+      Class<T> type) {
+    return new SseEventStream<>(
+        client,
+        mapper,
+        buildRequest(method, route, path, query, headers, body, "text/event-stream"),
+        mapper.constructType(type));
   }
 
   public <T> SseEventStream<T> stream(
@@ -93,9 +110,12 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      TypeReference<T> type
-  ) {
-    return new SseEventStream<>(client, mapper, buildRequest(method, route, path, query, headers, body, "text/event-stream"), mapper.constructType(type));
+      TypeReference<T> type) {
+    return new SseEventStream<>(
+        client,
+        mapper,
+        buildRequest(method, route, path, query, headers, body, "text/event-stream"),
+        mapper.constructType(type));
   }
 
   private <T> HttpResponse<T> send(
@@ -105,9 +125,10 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      HttpResponse.BodyHandler<T> handler
-  ) throws IOException, InterruptedException {
-    return client.send(buildRequest(method, route, path, query, headers, body, "application/json"), handler);
+      HttpResponse.BodyHandler<T> handler)
+      throws IOException, InterruptedException {
+    return client.send(
+        buildRequest(method, route, path, query, headers, body, "application/json"), handler);
   }
 
   private HttpRequest buildRequest(
@@ -117,11 +138,11 @@ public final class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      String accept
-  ) {
-    var builder = HttpRequest.newBuilder(buildUri(route, path, query))
-        .timeout(config.timeout())
-        .header("Accept", accept);
+      String accept) {
+    var builder =
+        HttpRequest.newBuilder(buildUri(route, path, query))
+            .timeout(config.timeout())
+            .header("Accept", accept);
 
     for (var entry : config.headers().entrySet()) {
       builder.header(entry.getKey(), entry.getValue());
@@ -152,7 +173,8 @@ public final class ApiTransport {
   private URI buildUri(String route, Map<String, Object> path, Map<String, Object> query) {
     var resolved = route;
     for (var entry : path.entrySet()) {
-      resolved = resolved.replace("{" + entry.getKey() + "}", encode(String.valueOf(entry.getValue())));
+      resolved =
+          resolved.replace("{" + entry.getKey() + "}", encode(String.valueOf(entry.getValue())));
     }
 
     var base = config.baseUrl();

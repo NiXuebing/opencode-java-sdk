@@ -13,6 +13,5 @@ public record ToolStateCompleted(
     @JsonProperty("title") String title,
     @JsonProperty("metadata") Map<String, JsonNode> metadata,
     @JsonProperty("time") ToolStateCompletedTime time,
-    @JsonProperty("attachments") List<FilePart> attachments
-) implements ToolState {
-}
+    @JsonProperty("attachments") List<FilePart> attachments)
+    implements ToolState {}

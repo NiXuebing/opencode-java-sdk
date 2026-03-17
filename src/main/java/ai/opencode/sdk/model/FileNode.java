@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,4 @@ public record FileNode(
     @JsonProperty("path") String path,
     @JsonProperty("absolute") String absolute,
     @JsonProperty("type") String type,
-    @JsonProperty("ignored") Boolean ignored
-) {
-}
+    @JsonProperty("ignored") Boolean ignored) {}

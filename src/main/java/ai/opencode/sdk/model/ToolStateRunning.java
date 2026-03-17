@@ -11,6 +11,5 @@ public record ToolStateRunning(
     @JsonProperty("input") Map<String, JsonNode> input,
     @JsonProperty("title") String title,
     @JsonProperty("metadata") Map<String, JsonNode> metadata,
-    @JsonProperty("time") ToolStateRunningTime time
-) implements ToolState {
-}
+    @JsonProperty("time") ToolStateRunningTime time)
+    implements ToolState {}

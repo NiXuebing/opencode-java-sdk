@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,4 @@ public record FileContentPatch(
     @JsonProperty("oldHeader") String oldHeader,
     @JsonProperty("newHeader") String newHeader,
     @JsonProperty("hunks") List<FileContentPatchHunksItem> hunks,
-    @JsonProperty("index") String index
-) {
-}
+    @JsonProperty("index") String index) {}

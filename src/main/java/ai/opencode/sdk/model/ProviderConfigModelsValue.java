@@ -24,6 +24,4 @@ public record ProviderConfigModelsValue(
     @JsonProperty("options") Map<String, JsonNode> options,
     @JsonProperty("headers") Map<String, String> headers,
     @JsonProperty("provider") ProviderConfigModelsValueProvider provider,
-    @JsonProperty("variants") Map<String, ProviderConfigModelsValueVariantsValue> variants
-) {
-}
+    @JsonProperty("variants") Map<String, ProviderConfigModelsValueVariantsValue> variants) {}

@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,6 +12,4 @@ public record ConfigAgent(
     @JsonProperty("explore") AgentConfig explore,
     @JsonProperty("title") AgentConfig title,
     @JsonProperty("summary") AgentConfig summary,
-    @JsonProperty("compaction") AgentConfig compaction
-) {
-}
+    @JsonProperty("compaction") AgentConfig compaction) {}

@@ -13,6 +13,5 @@ public record ReasoningPart(
     @JsonProperty("type") String type,
     @JsonProperty("text") String text,
     @JsonProperty("metadata") Map<String, JsonNode> metadata,
-    @JsonProperty("time") ReasoningPartTime time
-) implements Part {
-}
+    @JsonProperty("time") ReasoningPartTime time)
+    implements Part {}

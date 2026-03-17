@@ -8,10 +8,7 @@ import java.util.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record Config(
     @JsonProperty("$schema") String schema,
-    @JsonProperty("theme") String theme,
-    @JsonProperty("keybinds") KeybindsConfig keybinds,
     @JsonProperty("logLevel") LogLevel logLevel,
-    @JsonProperty("tui") ConfigTui tui,
     @JsonProperty("server") ServerConfig server,
     @JsonProperty("command") Map<String, ConfigCommandValue> command,
     @JsonProperty("skills") ConfigSkills skills,
@@ -39,6 +36,4 @@ public record Config(
     @JsonProperty("tools") Map<String, Boolean> tools,
     @JsonProperty("enterprise") ConfigEnterprise enterprise,
     @JsonProperty("compaction") ConfigCompaction compaction,
-    @JsonProperty("experimental") ConfigExperimental experimental
-) {
-}
+    @JsonProperty("experimental") ConfigExperimental experimental) {}

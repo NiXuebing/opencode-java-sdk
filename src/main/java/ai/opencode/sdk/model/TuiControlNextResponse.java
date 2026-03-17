@@ -7,7 +7,4 @@ import java.util.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record TuiControlNextResponse(
-    @JsonProperty("path") String path,
-    @JsonProperty("body") JsonNode body
-) {
-}
+    @JsonProperty("path") String path, @JsonProperty("body") JsonNode body) {}

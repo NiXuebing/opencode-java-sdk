@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,4 @@ public record QuestionInfo(
     @JsonProperty("header") String header,
     @JsonProperty("options") List<QuestionOption> options,
     @JsonProperty("multiple") Boolean multiple,
-    @JsonProperty("custom") Boolean custom
-) {
-}
+    @JsonProperty("custom") Boolean custom) {}

@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,6 +12,4 @@ public record SessionCommandBody(
     @JsonProperty("arguments") String arguments,
     @JsonProperty("command") String command,
     @JsonProperty("variant") String variant,
-    @JsonProperty("parts") List<SessionCommandBodyPartsItem> parts
-) {
-}
+    @JsonProperty("parts") List<SessionCommandBodyPartsItem> parts) {}

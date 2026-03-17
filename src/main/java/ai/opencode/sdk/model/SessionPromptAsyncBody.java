@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,6 +14,4 @@ public record SessionPromptAsyncBody(
     @JsonProperty("format") OutputFormat format,
     @JsonProperty("system") String system,
     @JsonProperty("variant") String variant,
-    @JsonProperty("parts") List<SessionPromptAsyncBodyPartsItem> parts
-) {
-}
+    @JsonProperty("parts") List<SessionPromptAsyncBodyPartsItem> parts) {}

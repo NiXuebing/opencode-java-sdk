@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,4 @@ public record APIErrorData(
     @JsonProperty("isRetryable") Boolean isRetryable,
     @JsonProperty("responseHeaders") Map<String, String> responseHeaders,
     @JsonProperty("responseBody") String responseBody,
-    @JsonProperty("metadata") Map<String, String> metadata
-) {
-}
+    @JsonProperty("metadata") Map<String, String> metadata) {}

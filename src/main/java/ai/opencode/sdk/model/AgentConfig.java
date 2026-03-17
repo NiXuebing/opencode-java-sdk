@@ -21,6 +21,4 @@ public record AgentConfig(
     @JsonProperty("color") String color,
     @JsonProperty("steps") Long steps,
     @JsonProperty("maxSteps") Long maxSteps,
-    @JsonProperty("permission") PermissionConfig permission
-) {
-}
+    @JsonProperty("permission") PermissionConfig permission) {}

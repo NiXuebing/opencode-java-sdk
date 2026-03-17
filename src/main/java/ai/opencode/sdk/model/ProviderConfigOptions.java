@@ -11,6 +11,5 @@ public record ProviderConfigOptions(
     @JsonProperty("baseURL") String baseURL,
     @JsonProperty("enterpriseUrl") String enterpriseUrl,
     @JsonProperty("setCacheKey") Boolean setCacheKey,
-    @JsonProperty("timeout") JsonNode timeout
-) {
-}
+    @JsonProperty("timeout") JsonNode timeout,
+    @JsonProperty("chunkTimeout") Long chunkTimeout) {}

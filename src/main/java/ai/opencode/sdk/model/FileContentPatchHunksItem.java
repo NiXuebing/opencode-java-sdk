@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,4 @@ public record FileContentPatchHunksItem(
     @JsonProperty("oldLines") Double oldLines,
     @JsonProperty("newStart") Double newStart,
     @JsonProperty("newLines") Double newLines,
-    @JsonProperty("lines") List<String> lines
-) {
-}
+    @JsonProperty("lines") List<String> lines) {}

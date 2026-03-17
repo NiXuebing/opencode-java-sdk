@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,5 @@ public record McpLocalConfig(
     @JsonProperty("command") List<String> command,
     @JsonProperty("environment") Map<String, String> environment,
     @JsonProperty("enabled") Boolean enabled,
-    @JsonProperty("timeout") Long timeout
-) implements McpAddBodyConfig {
-}
+    @JsonProperty("timeout") Long timeout)
+    implements McpAddBodyConfig {}

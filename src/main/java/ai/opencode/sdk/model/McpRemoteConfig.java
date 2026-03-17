@@ -12,6 +12,5 @@ public record McpRemoteConfig(
     @JsonProperty("enabled") Boolean enabled,
     @JsonProperty("headers") Map<String, String> headers,
     @JsonProperty("oauth") JsonNode oauth,
-    @JsonProperty("timeout") Long timeout
-) implements McpAddBodyConfig {
-}
+    @JsonProperty("timeout") Long timeout)
+    implements McpAddBodyConfig {}

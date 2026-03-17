@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,6 +13,5 @@ public record StepFinishPart(
     @JsonProperty("reason") String reason,
     @JsonProperty("snapshot") String snapshot,
     @JsonProperty("cost") Double cost,
-    @JsonProperty("tokens") StepFinishPartTokens tokens
-) implements Part {
-}
+    @JsonProperty("tokens") StepFinishPartTokens tokens)
+    implements Part {}

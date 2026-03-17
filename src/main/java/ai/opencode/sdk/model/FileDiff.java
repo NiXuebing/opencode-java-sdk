@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,4 @@ public record FileDiff(
     @JsonProperty("after") String after,
     @JsonProperty("additions") Double additions,
     @JsonProperty("deletions") Double deletions,
-    @JsonProperty("status") String status
-) {
-}
+    @JsonProperty("status") String status) {}

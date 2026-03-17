@@ -12,8 +12,7 @@ public record OpencodeClientConfig(
     ObjectMapper objectMapper,
     Map<String, String> headers,
     Duration timeout,
-    String directory
-) {
+    String directory) {
   public static Builder builder() {
     return new Builder();
   }
@@ -62,7 +61,8 @@ public record OpencodeClientConfig(
     }
 
     public OpencodeClientConfig build() {
-      return new OpencodeClientConfig(baseUrl, httpClient, objectMapper, Map.copyOf(headers), timeout, directory);
+      return new OpencodeClientConfig(
+          baseUrl, httpClient, objectMapper, Map.copyOf(headers), timeout, directory);
     }
   }
 }

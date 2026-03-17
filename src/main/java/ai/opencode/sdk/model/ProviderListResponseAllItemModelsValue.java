@@ -24,6 +24,4 @@ public record ProviderListResponseAllItemModelsValue(
     @JsonProperty("options") Map<String, JsonNode> options,
     @JsonProperty("headers") Map<String, String> headers,
     @JsonProperty("provider") ProviderListResponseAllItemModelsValueProvider provider,
-    @JsonProperty("variants") Map<String, Map<String, JsonNode>> variants
-) {
-}
+    @JsonProperty("variants") Map<String, Map<String, JsonNode>> variants) {}

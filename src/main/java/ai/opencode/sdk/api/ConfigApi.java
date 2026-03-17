@@ -3,8 +3,6 @@ package ai.opencode.sdk.api;
 import ai.opencode.sdk.core.*;
 import ai.opencode.sdk.model.*;
 import ai.opencode.sdk.request.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 public final class ConfigApi {
@@ -12,14 +10,9 @@ public final class ConfigApi {
 
   public ConfigApi(ApiTransport transport) {
     this.transport = transport;
-
   }
 
-
-  /**
- * Get configuration
- * Retrieve the current OpenCode configuration settings and preferences.
-   */
+  /** Get configuration Retrieve the current OpenCode configuration settings and preferences. */
   public Config get() {
     return get(new ConfigGetRequest(null));
   }
@@ -34,12 +27,10 @@ public final class ConfigApi {
     return transport.execute("GET", "/config", path, query, headers, body, Config.class);
   }
 
-  /**
- * Update configuration
- * Update OpenCode configuration settings and preferences.
-   */
+  /** Update configuration Update OpenCode configuration settings and preferences. */
   public Config update(ConfigUpdateRequest request) {
     Objects.requireNonNull(request, "request");
+    Objects.requireNonNull(request.body(), "request.body");
     Map<String, Object> path = Map.of();
     Map<String, Object> query = new LinkedHashMap<>();
     if (request.directory() != null) query.put("directory", request.directory());
@@ -48,10 +39,7 @@ public final class ConfigApi {
     return transport.execute("PATCH", "/config", path, query, headers, body, Config.class);
   }
 
-  /**
- * List config providers
- * Get a list of all configured AI providers and their default models.
-   */
+  /** List config providers Get a list of all configured AI providers and their default models. */
   public ConfigProvidersResponse providers() {
     return providers(new ConfigProvidersRequest(null));
   }
@@ -63,7 +51,7 @@ public final class ConfigApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute("GET", "/config/providers", path, query, headers, body, ConfigProvidersResponse.class);
+    return transport.execute(
+        "GET", "/config/providers", path, query, headers, body, ConfigProvidersResponse.class);
   }
-
 }

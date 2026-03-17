@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,6 +13,4 @@ public record Command(
     @JsonProperty("source") String source,
     @JsonProperty("template") String template,
     @JsonProperty("subtask") Boolean subtask,
-    @JsonProperty("hints") List<String> hints
-) {
-}
+    @JsonProperty("hints") List<String> hints) {}

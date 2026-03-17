@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,4 @@ public record ProviderListResponseAllItem(
     @JsonProperty("env") List<String> env,
     @JsonProperty("id") String id,
     @JsonProperty("npm") String npm,
-    @JsonProperty("models") Map<String, ProviderListResponseAllItemModelsValue> models
-) {
-}
+    @JsonProperty("models") Map<String, ProviderListResponseAllItemModelsValue> models) {}

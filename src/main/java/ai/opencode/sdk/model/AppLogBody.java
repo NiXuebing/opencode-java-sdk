@@ -10,6 +10,4 @@ public record AppLogBody(
     @JsonProperty("service") String service,
     @JsonProperty("level") String level,
     @JsonProperty("message") String message,
-    @JsonProperty("extra") Map<String, JsonNode> extra
-) {
-}
+    @JsonProperty("extra") Map<String, JsonNode> extra) {}

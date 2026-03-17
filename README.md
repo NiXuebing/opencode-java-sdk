@@ -1,8 +1,8 @@
 # opencode Java SDK
 
-JDK 17 Java SDK for the `opencode` HTTP API.
+JDK 17 Java SDK for the documented `opencode serve` HTTP API.
 
-This project is generated from the repository OpenAPI schema and intentionally focuses on API access only:
+This project is generated from the official OpenAPI schema snapshot and intentionally focuses on API access only:
 
 - Typed HTTP API calls
 - Generated request and response models
@@ -11,22 +11,24 @@ This project is generated from the repository OpenAPI schema and intentionally f
 
 It does not include local `opencode serve` startup helpers or TUI process wrappers.
 
+The generated Java surface intentionally follows the endpoints documented in the official SDK and Server docs. Internal or undocumented routes that may still appear in the raw OpenAPI are not exposed through `OpencodeClient`.
+
 ## What is included
 
 - Typed API groups exposed from `OpencodeClient`
 - Generated request and response models from `openapi.json`
-- Blocking SSE event stream support for `/event`, `/global/event`, and `/mirror/event`
+- Blocking SSE event stream support for `/event` and `/global/event`
 - Configurable base URL, timeouts, headers, and `x-opencode-directory`
 
 ## Build and test
 
 ```bash
-mvn test
+mvn spotless:check test
 ```
 
 ## CI
 
-GitHub Actions is set up to run `mvn test` on:
+GitHub Actions is set up to run `mvn spotless:check test` on:
 
 - pushes to `main`
 - all pull requests
@@ -39,7 +41,21 @@ The workflow lives in `.github/workflows/ci.yml`.
 node script/generate.mjs
 ```
 
-`script/generate.mjs` prefers the sibling `../opencode/packages/sdk/openapi.json` file when it exists, and falls back to this repository's checked-in `openapi.json` snapshot everywhere else, including GitHub Actions.
+`script/generate.mjs` regenerates from this repository's checked-in `openapi.json` snapshot by default.
+
+The checked-in snapshot is updated from the official `opencode` stable release. The current snapshot was refreshed from `v1.2.27` on March 16, 2026.
+
+If you want to regenerate from another downloaded snapshot, pass it explicitly:
+
+```bash
+OPENCODE_OPENAPI_SOURCE=/path/to/openapi.json node script/generate.mjs
+```
+
+After regeneration, format the generated sources before committing:
+
+```bash
+mvn spotless:apply
+```
 
 ## Use the SDK
 

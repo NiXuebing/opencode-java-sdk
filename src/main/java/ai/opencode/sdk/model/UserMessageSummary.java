@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,6 +8,4 @@ import java.util.*;
 public record UserMessageSummary(
     @JsonProperty("title") String title,
     @JsonProperty("body") String body,
-    @JsonProperty("diffs") List<FileDiff> diffs
-) {
-}
+    @JsonProperty("diffs") List<FileDiff> diffs) {}

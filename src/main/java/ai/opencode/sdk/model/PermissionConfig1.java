@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,6 +23,4 @@ public record PermissionConfig1(
     @JsonProperty("codesearch") PermissionActionConfig codesearch,
     @JsonProperty("lsp") PermissionRuleConfig lsp,
     @JsonProperty("doom_loop") PermissionActionConfig doomLoop,
-    @JsonProperty("skill") PermissionRuleConfig skill
-) {
-}
+    @JsonProperty("skill") PermissionRuleConfig skill) {}

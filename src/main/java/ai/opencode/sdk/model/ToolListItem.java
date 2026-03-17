@@ -9,6 +9,4 @@ import java.util.*;
 public record ToolListItem(
     @JsonProperty("id") String id,
     @JsonProperty("description") String description,
-    @JsonProperty("parameters") JsonNode parameters
-) {
-}
+    @JsonProperty("parameters") JsonNode parameters) {}

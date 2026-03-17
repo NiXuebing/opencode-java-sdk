@@ -14,6 +14,5 @@ public record ToolPart(
     @JsonProperty("callID") String callID,
     @JsonProperty("tool") String tool,
     @JsonProperty("state") ToolState state,
-    @JsonProperty("metadata") Map<String, JsonNode> metadata
-) implements Part {
-}
+    @JsonProperty("metadata") Map<String, JsonNode> metadata)
+    implements Part {}

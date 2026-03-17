@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,6 +9,4 @@ public record SessionTime(
     @JsonProperty("created") Double created,
     @JsonProperty("updated") Double updated,
     @JsonProperty("compacting") Double compacting,
-    @JsonProperty("archived") Double archived
-) {
-}
+    @JsonProperty("archived") Double archived) {}

@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,6 +12,4 @@ public record Pty(
     @JsonProperty("args") List<String> args,
     @JsonProperty("cwd") String cwd,
     @JsonProperty("status") String status,
-    @JsonProperty("pid") Double pid
-) {
-}
+    @JsonProperty("pid") Double pid) {}

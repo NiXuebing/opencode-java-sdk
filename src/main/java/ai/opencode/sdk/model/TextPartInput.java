@@ -13,6 +13,5 @@ public record TextPartInput(
     @JsonProperty("synthetic") Boolean synthetic,
     @JsonProperty("ignored") Boolean ignored,
     @JsonProperty("time") TextPartInputTime time,
-    @JsonProperty("metadata") Map<String, JsonNode> metadata
-) implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {
-}
+    @JsonProperty("metadata") Map<String, JsonNode> metadata)
+    implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {}

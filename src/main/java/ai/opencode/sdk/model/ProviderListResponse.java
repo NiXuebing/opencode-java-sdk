@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,6 +8,4 @@ import java.util.*;
 public record ProviderListResponse(
     @JsonProperty("all") List<ProviderListResponseAllItem> all,
     @JsonProperty("default") Map<String, String> defaultValue,
-    @JsonProperty("connected") List<String> connected
-) {
-}
+    @JsonProperty("connected") List<String> connected) {}

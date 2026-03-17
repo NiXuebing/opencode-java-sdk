@@ -23,6 +23,5 @@ public record AssistantMessage(
     @JsonProperty("tokens") AssistantMessageTokens tokens,
     @JsonProperty("structured") JsonNode structured,
     @JsonProperty("variant") String variant,
-    @JsonProperty("finish") String finish
-) implements Message {
-}
+    @JsonProperty("finish") String finish)
+    implements Message {}

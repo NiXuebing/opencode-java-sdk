@@ -27,11 +27,13 @@ async function existing(candidates) {
   throw new Error(`No OpenAPI source found. Checked: ${candidates.join(", ")}`)
 }
 
-const source = await existing([
-  path.resolve(root, "../opencode/packages/sdk/openapi.json"),
-  target,
-])
-const spec = JSON.parse(await readFile(source, "utf8"))
+const source = process.env.OPENCODE_OPENAPI_SOURCE
+  ? await existing([
+      path.resolve(root, process.env.OPENCODE_OPENAPI_SOURCE),
+      process.env.OPENCODE_OPENAPI_SOURCE,
+    ])
+  : target
+const rawSpec = JSON.parse(await readFile(source, "utf8"))
 
 if (source !== target) {
   await copyFile(source, target)
@@ -46,6 +48,75 @@ const variantInterfaces = new Map()
 const operationTypes = new Map()
 
 const preferredDiscriminators = ["type", "role", "name", "status", "kind", "mode"]
+const documentedOperations = new Set([
+  "GET /global/health",
+  "GET /global/event",
+  "GET /project",
+  "GET /project/current",
+  "GET /path",
+  "GET /vcs",
+  "POST /instance/dispose",
+  "GET /config",
+  "PATCH /config",
+  "GET /config/providers",
+  "GET /provider",
+  "GET /provider/auth",
+  "POST /provider/{providerID}/oauth/authorize",
+  "POST /provider/{providerID}/oauth/callback",
+  "GET /session",
+  "POST /session",
+  "GET /session/status",
+  "GET /session/{sessionID}",
+  "DELETE /session/{sessionID}",
+  "PATCH /session/{sessionID}",
+  "GET /session/{sessionID}/children",
+  "GET /session/{sessionID}/todo",
+  "POST /session/{sessionID}/init",
+  "POST /session/{sessionID}/fork",
+  "POST /session/{sessionID}/abort",
+  "POST /session/{sessionID}/share",
+  "DELETE /session/{sessionID}/share",
+  "GET /session/{sessionID}/diff",
+  "POST /session/{sessionID}/summarize",
+  "POST /session/{sessionID}/revert",
+  "POST /session/{sessionID}/unrevert",
+  "POST /session/{sessionID}/permissions/{permissionID}",
+  "GET /session/{sessionID}/message",
+  "POST /session/{sessionID}/message",
+  "GET /session/{sessionID}/message/{messageID}",
+  "POST /session/{sessionID}/prompt_async",
+  "POST /session/{sessionID}/command",
+  "POST /session/{sessionID}/shell",
+  "GET /command",
+  "GET /find",
+  "GET /find/file",
+  "GET /find/symbol",
+  "GET /file",
+  "GET /file/content",
+  "GET /file/status",
+  "GET /experimental/tool/ids",
+  "GET /experimental/tool",
+  "GET /lsp",
+  "GET /formatter",
+  "GET /mcp",
+  "POST /mcp",
+  "GET /agent",
+  "POST /log",
+  "POST /tui/append-prompt",
+  "POST /tui/open-help",
+  "POST /tui/open-sessions",
+  "POST /tui/open-themes",
+  "POST /tui/open-models",
+  "POST /tui/submit-prompt",
+  "POST /tui/clear-prompt",
+  "POST /tui/execute-command",
+  "POST /tui/show-toast",
+  "GET /tui/control/next",
+  "POST /tui/control/response",
+  "PUT /auth/{providerID}",
+  "GET /event",
+])
+const undocumentedQueryParams = new Set(["workspace", "cursor", "archived", "before"])
 const javaKeywords = new Set([
   "abstract",
   "assert",
@@ -103,6 +174,47 @@ const javaKeywords = new Set([
   "var",
   "yield",
 ])
+
+function cloneJson(value) {
+  return JSON.parse(JSON.stringify(value))
+}
+
+function sanitizeSpec(input) {
+  const spec = cloneJson(input)
+  spec.paths = Object.fromEntries(
+    Object.entries(spec.paths).flatMap(([route, methods]) => {
+      const kept = Object.fromEntries(
+        Object.entries(methods)
+          .filter(([method]) => documentedOperations.has(`${method.toUpperCase()} ${route}`))
+          .map(([method, operation]) => {
+            const next = cloneJson(operation)
+            next.parameters = (next.parameters ?? []).filter(
+              (parameter) => !(parameter.in === "query" && undocumentedQueryParams.has(parameter.name)),
+            )
+            return [method, next]
+          }),
+      )
+      if (Object.keys(kept).length === 0) return []
+      return [[route, kept]]
+    }),
+  )
+
+  // The stable server returns a user message for noReply=true, so the prompt
+  // response must allow both user and assistant payloads.
+  const promptResponse =
+    spec.paths["/session/{sessionID}/message"]?.post?.responses?.["200"]?.content?.[
+      "application/json"
+    ]?.schema
+  if (promptResponse?.properties?.info) {
+    promptResponse.properties.info = {
+      $ref: "#/components/schemas/Message",
+    }
+  }
+
+  return spec
+}
+
+const spec = sanitizeSpec(rawSpec)
 
 function words(value) {
   return value
@@ -396,10 +508,6 @@ function resolveType(schema, suggestedName, trail) {
   return "JsonNode"
 }
 
-for (const [name, schema] of Object.entries(spec.components.schemas)) {
-  ensureType(name, schema)
-}
-
 function responseSchema(operation) {
   const entries = Object.entries(operation.responses ?? {})
   const success = entries.find(([status]) => status.startsWith("2"))
@@ -444,6 +552,7 @@ for (const [route, methods] of Object.entries(spec.paths)) {
     const bodyType = bodySchema
       ? resolveType(bodySchema, `${baseName}Body`, `body/${baseName}`)
       : undefined
+    const bodyRequired = Boolean(bodyType)
 
     const response = responseSchema(operation)
     const responseType = response
@@ -460,7 +569,7 @@ for (const [route, methods] of Object.entries(spec.paths)) {
               jsonName: "body",
               name: "body",
               type: bodyType,
-              required: true,
+              required: bodyRequired,
             },
           ]
         : []),
@@ -674,6 +783,14 @@ function requireRequest(operation) {
   return `    Objects.requireNonNull(request, "request");\n`
 }
 
+function requireFields(operation) {
+  const lines = operation.requestFields
+    .filter((field) => field.required)
+    .map((field) => `    Objects.requireNonNull(request.${field.name}(), "request.${field.name}");`)
+  if (lines.length === 0) return ""
+  return `${lines.join("\n")}\n`
+}
+
 function mapLines(items, source) {
   if (items.length === 0) return `    Map<String, Object> ${source} = Map.of();\n`
   const lines = [`    Map<String, Object> ${source} = new LinkedHashMap<>();`]
@@ -722,7 +839,7 @@ function operationMethod(operation) {
     ? `  public ${returnType} ${name}() {\n    return ${name}(new ${operation.requestName}(${operation.requestFields.map(() => "null").join(", ")}));\n  }\n\n`
     : ""
   return `${javadoc(operation)}${overload}  public ${returnType} ${name}(${request}) {
-${requireRequest(operation)}${mapLines(operation.pathParams, "path")}${mapLines(operation.queryParams, "query")}${headerLines(operation)}${bodyLine(operation)}${call}
+${requireRequest(operation)}${requireFields(operation)}${mapLines(operation.pathParams, "path")}${mapLines(operation.queryParams, "query")}${headerLines(operation)}${bodyLine(operation)}${call}
   }
 `
 }

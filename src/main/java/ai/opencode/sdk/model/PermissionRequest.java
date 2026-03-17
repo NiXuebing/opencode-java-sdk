@@ -13,6 +13,4 @@ public record PermissionRequest(
     @JsonProperty("patterns") List<String> patterns,
     @JsonProperty("metadata") Map<String, JsonNode> metadata,
     @JsonProperty("always") List<String> always,
-    @JsonProperty("tool") PermissionRequestTool tool
-) {
-}
+    @JsonProperty("tool") PermissionRequestTool tool) {}

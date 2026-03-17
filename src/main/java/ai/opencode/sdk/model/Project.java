@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -14,6 +13,4 @@ public record Project(
     @JsonProperty("icon") ProjectIcon icon,
     @JsonProperty("commands") ProjectCommands commands,
     @JsonProperty("time") ProjectTime time,
-    @JsonProperty("sandboxes") List<String> sandboxes
-) {
-}
+    @JsonProperty("sandboxes") List<String> sandboxes) {}

@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,5 @@ public record OAuth(
     @JsonProperty("access") String access,
     @JsonProperty("expires") Double expires,
     @JsonProperty("accountId") String accountId,
-    @JsonProperty("enterpriseUrl") String enterpriseUrl
-) implements Auth {
-}
+    @JsonProperty("enterpriseUrl") String enterpriseUrl)
+    implements Auth {}

@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,4 @@ public record FileContent(
     @JsonProperty("diff") String diff,
     @JsonProperty("patch") FileContentPatch patch,
     @JsonProperty("encoding") String encoding,
-    @JsonProperty("mimeType") String mimeType
-) {
-}
+    @JsonProperty("mimeType") String mimeType) {}

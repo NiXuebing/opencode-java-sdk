@@ -13,6 +13,4 @@ public record Provider(
     @JsonProperty("env") List<String> env,
     @JsonProperty("key") String key,
     @JsonProperty("options") Map<String, JsonNode> options,
-    @JsonProperty("models") Map<String, Model> models
-) {
-}
+    @JsonProperty("models") Map<String, Model> models) {}

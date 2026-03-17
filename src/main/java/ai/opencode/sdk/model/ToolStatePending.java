@@ -9,6 +9,5 @@ import java.util.*;
 public record ToolStatePending(
     @JsonProperty("status") String status,
     @JsonProperty("input") Map<String, JsonNode> input,
-    @JsonProperty("raw") String raw
-) implements ToolState {
-}
+    @JsonProperty("raw") String raw)
+    implements ToolState {}

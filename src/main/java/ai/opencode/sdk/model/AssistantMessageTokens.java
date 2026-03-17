@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,4 @@ public record AssistantMessageTokens(
     @JsonProperty("input") Double input,
     @JsonProperty("output") Double output,
     @JsonProperty("reasoning") Double reasoning,
-    @JsonProperty("cache") AssistantMessageTokensCache cache
-) {
-}
+    @JsonProperty("cache") AssistantMessageTokensCache cache) {}

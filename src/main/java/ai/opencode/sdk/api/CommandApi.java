@@ -4,7 +4,6 @@ import ai.opencode.sdk.core.*;
 import ai.opencode.sdk.model.*;
 import ai.opencode.sdk.request.*;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 public final class CommandApi {
@@ -12,14 +11,9 @@ public final class CommandApi {
 
   public CommandApi(ApiTransport transport) {
     this.transport = transport;
-
   }
 
-
-  /**
- * List commands
- * Get a list of all available commands in the OpenCode system.
-   */
+  /** List commands Get a list of all available commands in the OpenCode system. */
   public List<Command> list() {
     return list(new CommandListRequest(null));
   }
@@ -31,7 +25,7 @@ public final class CommandApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute("GET", "/command", path, query, headers, body, new TypeReference<List<Command>>() {});
+    return transport.execute(
+        "GET", "/command", path, query, headers, body, new TypeReference<List<Command>>() {});
   }
-
 }

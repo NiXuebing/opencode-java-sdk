@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,5 @@ public record SnapshotPart(
     @JsonProperty("sessionID") String sessionID,
     @JsonProperty("messageID") String messageID,
     @JsonProperty("type") String type,
-    @JsonProperty("snapshot") String snapshot
-) implements Part {
-}
+    @JsonProperty("snapshot") String snapshot)
+    implements Part {}

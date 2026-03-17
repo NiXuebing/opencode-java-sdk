@@ -19,6 +19,4 @@ public record Model(
     @JsonProperty("options") Map<String, JsonNode> options,
     @JsonProperty("headers") Map<String, String> headers,
     @JsonProperty("release_date") String releaseDate,
-    @JsonProperty("variants") Map<String, Map<String, JsonNode>> variants
-) {
-}
+    @JsonProperty("variants") Map<String, Map<String, JsonNode>> variants) {}

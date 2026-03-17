@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,6 +9,4 @@ public record LSPStatus(
     @JsonProperty("id") String id,
     @JsonProperty("name") String name,
     @JsonProperty("root") String root,
-    @JsonProperty("status") String status
-) {
-}
+    @JsonProperty("status") String status) {}

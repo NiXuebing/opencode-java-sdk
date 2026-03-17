@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +11,5 @@ public record AgentPart(
     @JsonProperty("messageID") String messageID,
     @JsonProperty("type") String type,
     @JsonProperty("name") String name,
-    @JsonProperty("source") AgentPartSource source
-) implements Part {
-}
+    @JsonProperty("source") AgentPartSource source)
+    implements Part {}

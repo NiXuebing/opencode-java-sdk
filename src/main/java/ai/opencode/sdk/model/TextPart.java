@@ -15,6 +15,5 @@ public record TextPart(
     @JsonProperty("synthetic") Boolean synthetic,
     @JsonProperty("ignored") Boolean ignored,
     @JsonProperty("time") TextPartTime time,
-    @JsonProperty("metadata") Map<String, JsonNode> metadata
-) implements Part {
-}
+    @JsonProperty("metadata") Map<String, JsonNode> metadata)
+    implements Part {}

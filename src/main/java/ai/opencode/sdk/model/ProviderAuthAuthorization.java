@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,6 +8,4 @@ import java.util.*;
 public record ProviderAuthAuthorization(
     @JsonProperty("url") String url,
     @JsonProperty("method") String method,
-    @JsonProperty("instructions") String instructions
-) {
-}
+    @JsonProperty("instructions") String instructions) {}

@@ -13,6 +13,4 @@ public record ModelCapabilities(
     @JsonProperty("toolcall") Boolean toolcall,
     @JsonProperty("input") ModelCapabilitiesInput input,
     @JsonProperty("output") ModelCapabilitiesOutput output,
-    @JsonProperty("interleaved") JsonNode interleaved
-) {
-}
+    @JsonProperty("interleaved") JsonNode interleaved) {}

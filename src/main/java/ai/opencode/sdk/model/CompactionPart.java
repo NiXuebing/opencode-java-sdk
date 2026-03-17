@@ -1,7 +1,6 @@
 package ai.opencode.sdk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,6 +10,6 @@ public record CompactionPart(
     @JsonProperty("sessionID") String sessionID,
     @JsonProperty("messageID") String messageID,
     @JsonProperty("type") String type,
-    @JsonProperty("auto") Boolean auto
-) implements Part {
-}
+    @JsonProperty("auto") Boolean auto,
+    @JsonProperty("overflow") Boolean overflow)
+    implements Part {}
