@@ -55,17 +55,11 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      Class<T> type) {
+      Class<T> type
+  ) {
     try {
       return parseResponse(
-          send(
-              method,
-              route,
-              path,
-              query,
-              headers,
-              body,
-              HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)),
+          send(method, route, path, query, headers, body, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)),
           type);
     } catch (InterruptedException error) {
       Thread.currentThread().interrupt();
@@ -95,17 +89,11 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      TypeReference<T> type) {
+      TypeReference<T> type
+  ) {
     try {
       return parseResponse(
-          send(
-              method,
-              route,
-              path,
-              query,
-              headers,
-              body,
-              HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)),
+          send(method, route, path, query, headers, body, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)),
           type);
     } catch (InterruptedException error) {
       Thread.currentThread().interrupt();
@@ -135,7 +123,8 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      Class<T> type) {
+      Class<T> type
+  ) {
     return openStream(method, route, path, query, headers, body, mapper.constructType(type));
   }
 
@@ -159,7 +148,8 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      TypeReference<T> type) {
+      TypeReference<T> type
+  ) {
     return openStream(method, route, path, query, headers, body, mapper.constructType(type));
   }
 
@@ -198,7 +188,8 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      JavaType type) {
+      JavaType type
+  ) {
     return new SseEventStream<>(
         client,
         mapper,
@@ -213,10 +204,9 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      HttpResponse.BodyHandler<T> handler)
-      throws IOException, InterruptedException {
-    return client.send(
-        buildRequest(method, route, path, query, headers, body, "application/json"), handler);
+      HttpResponse.BodyHandler<T> handler
+  ) throws IOException, InterruptedException {
+    return client.send(buildRequest(method, route, path, query, headers, body, "application/json"), handler);
   }
 
   private HttpRequest buildRequest(
@@ -226,7 +216,8 @@ public class ApiTransport {
       Map<String, Object> query,
       Map<String, String> headers,
       Object body,
-      String accept) {
+      String accept
+  ) {
     var builder =
         HttpRequest.newBuilder(buildUri(route, path, query))
             .timeout(config.timeout())
@@ -261,8 +252,7 @@ public class ApiTransport {
   private URI buildUri(String route, Map<String, Object> path, Map<String, Object> query) {
     var resolved = route;
     for (var entry : path.entrySet()) {
-      resolved =
-          resolved.replace("{" + entry.getKey() + "}", encode(String.valueOf(entry.getValue())));
+      resolved = resolved.replace("{" + entry.getKey() + "}", encode(String.valueOf(entry.getValue())));
     }
 
     var base = config.baseUrl();
@@ -272,7 +262,8 @@ public class ApiTransport {
 
     var parts = new ArrayList<String>();
     for (var entry : query.entrySet()) {
-      if (entry.getValue() instanceof Iterable<?> items) {
+      if (entry.getValue() instanceof Iterable<?>) {
+        Iterable<?> items = (Iterable<?>) entry.getValue();
         for (var item : items) {
           if (item != null) parts.add(encode(entry.getKey()) + "=" + encode(String.valueOf(item)));
         }

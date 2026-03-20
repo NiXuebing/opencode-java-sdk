@@ -162,8 +162,19 @@ public final class TestHttpSupport {
     }
   }
 
-  public record StubHttpResponse<T>(
-      int statusCode, T body, HttpHeaders headers, HttpRequest request) implements HttpResponse<T> {
+  public static final class StubHttpResponse<T> implements HttpResponse<T> {
+    private final int statusCode;
+    private final T body;
+    private final HttpHeaders headers;
+    private final HttpRequest request;
+
+    public StubHttpResponse(int statusCode, T body, HttpHeaders headers, HttpRequest request) {
+      this.statusCode = statusCode;
+      this.body = body;
+      this.headers = headers;
+      this.request = request;
+    }
+
     @Override
     public int statusCode() {
       return statusCode;

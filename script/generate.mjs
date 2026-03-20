@@ -54,15 +54,10 @@ const documentedOperations = new Set([
   "GET /project",
   "GET /project/current",
   "GET /path",
-  "GET /vcs",
   "POST /instance/dispose",
   "GET /config",
   "PATCH /config",
   "GET /config/providers",
-  "GET /provider",
-  "GET /provider/auth",
-  "POST /provider/{providerID}/oauth/authorize",
-  "POST /provider/{providerID}/oauth/callback",
   "GET /session",
   "POST /session",
   "GET /session/status",
@@ -85,6 +80,9 @@ const documentedOperations = new Set([
   "POST /session/{sessionID}/message",
   "GET /session/{sessionID}/message/{messageID}",
   "POST /session/{sessionID}/prompt_async",
+  "GET /question",
+  "POST /question/{requestID}/reply",
+  "POST /question/{requestID}/reject",
   "POST /session/{sessionID}/command",
   "POST /session/{sessionID}/shell",
   "GET /command",
@@ -102,16 +100,6 @@ const documentedOperations = new Set([
   "POST /mcp",
   "GET /agent",
   "POST /log",
-  "POST /tui/append-prompt",
-  "POST /tui/open-help",
-  "POST /tui/open-sessions",
-  "POST /tui/open-themes",
-  "POST /tui/open-models",
-  "POST /tui/submit-prompt",
-  "POST /tui/clear-prompt",
-  "POST /tui/execute-command",
-  "POST /tui/show-toast",
-  "PUT /auth/{providerID}",
   "GET /event",
 ])
 const zhOperationSummary = new Map([
@@ -120,15 +108,10 @@ const zhOperationSummary = new Map([
   ["GET /project", "列出项目"],
   ["GET /project/current", "获取当前项目"],
   ["GET /path", "获取路径信息"],
-  ["GET /vcs", "获取版本控制信息"],
   ["POST /instance/dispose", "释放实例"],
   ["GET /config", "获取配置"],
   ["PATCH /config", "更新配置"],
   ["GET /config/providers", "获取提供商配置"],
-  ["GET /provider", "列出提供商"],
-  ["GET /provider/auth", "获取提供商认证信息"],
-  ["POST /provider/{providerID}/oauth/authorize", "发起提供商 OAuth 授权"],
-  ["POST /provider/{providerID}/oauth/callback", "处理提供商 OAuth 回调"],
   ["GET /session", "列出会话"],
   ["POST /session", "创建会话"],
   ["GET /session/status", "获取会话状态"],
@@ -151,6 +134,9 @@ const zhOperationSummary = new Map([
   ["POST /session/{sessionID}/message", "发送会话提示"],
   ["GET /session/{sessionID}/message/{messageID}", "获取消息详情"],
   ["POST /session/{sessionID}/prompt_async", "异步发送提示"],
+  ["GET /question", "列出待处理问题"],
+  ["POST /question/{requestID}/reply", "回复问题请求"],
+  ["POST /question/{requestID}/reject", "拒绝问题请求"],
   ["POST /session/{sessionID}/command", "发送会话命令"],
   ["POST /session/{sessionID}/shell", "执行会话 Shell 命令"],
   ["GET /command", "列出命令"],
@@ -168,35 +154,21 @@ const zhOperationSummary = new Map([
   ["POST /mcp", "添加 MCP 服务"],
   ["GET /agent", "列出代理"],
   ["POST /log", "写入日志"],
-  ["POST /tui/append-prompt", "追加 TUI 输入"],
-  ["POST /tui/open-help", "打开 TUI 帮助"],
-  ["POST /tui/open-sessions", "打开 TUI 会话面板"],
-  ["POST /tui/open-themes", "打开 TUI 主题面板"],
-  ["POST /tui/open-models", "打开 TUI 模型面板"],
-  ["POST /tui/submit-prompt", "提交 TUI 输入"],
-  ["POST /tui/clear-prompt", "清空 TUI 输入"],
-  ["POST /tui/execute-command", "执行 TUI 命令"],
-  ["POST /tui/show-toast", "显示 TUI 提示"],
-  ["PUT /auth/{providerID}", "设置提供商认证"],
   ["GET /event", "订阅服务事件"],
 ])
 const zhApiAccessorSummary = new Map([
   ["global", "全局接口"],
-  ["auth", "认证接口"],
   ["project", "项目接口"],
   ["config", "配置接口"],
   ["tool", "工具接口"],
   ["session", "会话接口"],
+  ["question", "问题接口"],
   ["permission", "权限接口"],
-  ["provider", "提供商接口"],
-  ["provider.oauth", "提供商 OAuth 子接口"],
   ["find", "检索接口"],
   ["file", "文件接口"],
   ["mcp", "MCP 接口"],
-  ["tui", "TUI 接口"],
   ["instance", "实例接口"],
   ["path", "路径接口"],
-  ["vcs", "版本控制接口"],
   ["command", "命令接口"],
   ["app", "应用接口"],
   ["lsp", "LSP 接口"],
@@ -1548,31 +1520,89 @@ async function emitJava(pkg, name, body) {
   await writeFile(path.join(dir, `${name}.java`), `${body.trim()}\n`)
 }
 
+function constructorArgs(fields) {
+  return fields
+    .map(
+      (field) =>
+        `      @JsonProperty("${escape(field.jsonName)}") ${field.type} ${field.name}`,
+    )
+    .join(",\n")
+}
+
+function fieldDeclarations(fields) {
+  return fields.map((field) => `  @JsonProperty("${escape(field.jsonName)}")\n  private final ${field.type} ${field.name};`).join("\n")
+}
+
+function constructorAssignments(fields) {
+  return fields.map((field) => `    this.${field.name} = ${field.name};`).join("\n")
+}
+
+function accessorMethods(fields) {
+  return fields
+    .map(
+      (field) =>
+        `${docBlock([sentence(`获取${translatedLabel(field.jsonName)}。`), "", `@return ${propertyDescription(field, "Accessor")}`])}  public ${field.type} ${field.name}() {\n    return ${field.name};\n  }\n`,
+    )
+    .join("\n")
+}
+
+function equalsBody(fields, typeName) {
+  if (fields.length === 0) return `    return other instanceof ${typeName};`
+  return `    if (!(other instanceof ${typeName})) return false;\n    ${typeName} that = (${typeName}) other;\n    return ${fields.map((field) => `Objects.equals(${field.name}, that.${field.name})`).join("\n        && ")};`
+}
+
+function hashCodeArgs(fields) {
+  return fields.length === 0 ? "" : fields.map((field) => field.name).join(", ")
+}
+
+function toStringBody(fields, typeName) {
+  if (fields.length === 0) return `    return "${typeName}{}";`
+  return `    return "${typeName}{" +\n${fields.map((field, index) => `        "${field.name}=" + ${field.name}${index === fields.length - 1 ? ' +\n        "}"' : ' + "," +\n'}`).join("")};`
+}
+
 function recordFile(def) {
   const imports = mergeImports(
     [
+      "com.fasterxml.jackson.annotation.JsonCreator",
       "com.fasterxml.jackson.annotation.JsonIgnoreProperties",
       "com.fasterxml.jackson.annotation.JsonInclude",
+      "java.util.Objects",
     ],
     def.fields.length > 0 ? ["com.fasterxml.jackson.annotation.JsonProperty"] : [],
     importsForTypes(def.fields.map((field) => field.type), modelPackage),
   )
   const interfaces = variantInterfaces.get(def.name) ?? []
   const impl = interfaces.length ? ` implements ${interfaces.join(", ")}` : ""
-  const fields = def.fields
-    .map(
-      (field) =>
-        `    @JsonProperty("${escape(field.jsonName)}") ${field.type} ${field.name}`,
-    )
-    .join(",\n")
   return `
 package ${modelPackage};
 
 ${renderImports(modelPackage, imports)}${recordDoc(def.name, def.fields)}@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record ${def.name}(
-${fields}
-)${impl} {
+public final class ${def.name}${impl} {
+${fieldDeclarations(def.fields)}
+
+${docBlock([sentence(`使用字段创建${translatedLabel(def.name)}。`)])}  @JsonCreator
+  public ${def.name}(
+${constructorArgs(def.fields)}
+  ) {
+${constructorAssignments(def.fields)}
+  }
+
+${accessorMethods(def.fields)}
+  @Override
+  public boolean equals(Object other) {
+${equalsBody(def.fields, def.name)}
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(${hashCodeArgs(def.fields)});
+  }
+
+  @Override
+  public String toString() {
+${toStringBody(def.fields, def.name)}
+  }
 }
 `
 }
@@ -1600,6 +1630,7 @@ function wrapperFile(def) {
       "com.fasterxml.jackson.annotation.JsonCreator",
       "com.fasterxml.jackson.annotation.JsonInclude",
       "com.fasterxml.jackson.annotation.JsonValue",
+      "java.util.Objects",
     ],
     importsForTypes([def.valueType], modelPackage),
   )
@@ -1607,9 +1638,34 @@ function wrapperFile(def) {
 package ${modelPackage};
 
 ${renderImports(modelPackage, imports)}${wrapperDoc(def.name)}@JsonInclude(JsonInclude.Include.NON_NULL)
-public record ${def.name}(@JsonValue ${def.valueType} value) {
+public final class ${def.name} {
+  private final ${def.valueType} value;
+
 ${docBlock([sentence("使用实际值创建对象"), "", "@param value 实际值。"])}  @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  public ${def.name} {
+  public ${def.name}(${def.valueType} value) {
+    this.value = value;
+  }
+
+${docBlock([sentence("获取实际值"), "", "@return 实际值。"])}  @JsonValue
+  public ${def.valueType} value() {
+    return value;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof ${def.name})) return false;
+    ${def.name} that = (${def.name}) other;
+    return Objects.equals(value, that.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
+  }
+
+  @Override
+  public String toString() {
+    return "${def.name}{" + "value=" + value + "}";
   }
 }
 `
@@ -1662,7 +1718,6 @@ function unionFile(def) {
     "com.fasterxml.jackson.annotation.JsonSubTypes",
     "com.fasterxml.jackson.annotation.JsonTypeInfo",
   ]
-  const permits = def.variants.map((variant) => variant.name).join(", ")
   const subTypes = def.variants
     .map((variant) => `    @JsonSubTypes.Type(value = ${variant.name}.class, name = "${escape(variant.label)}")`)
     .join(",\n")
@@ -1673,30 +1728,50 @@ ${renderImports(modelPackage, imports)}${unionDoc(def)}@JsonTypeInfo(use = JsonT
 @JsonSubTypes({
 ${subTypes}
 })
-public sealed interface ${def.name} permits ${permits} {
+public interface ${def.name} {
 }
 `
 }
 
 function requestFile(def) {
   const imports = mergeImports(
-    ["com.fasterxml.jackson.annotation.JsonInclude"],
+    [
+      "com.fasterxml.jackson.annotation.JsonCreator",
+      "com.fasterxml.jackson.annotation.JsonInclude",
+      "java.util.Objects",
+    ],
     def.fields.length > 0 ? ["com.fasterxml.jackson.annotation.JsonProperty"] : [],
     importsForTypes(def.fields.map((field) => field.type), requestPackage),
   )
-  const fields = def.fields
-    .map(
-      (field) =>
-        `    @JsonProperty("${escape(field.jsonName)}") ${field.type} ${field.name}`,
-    )
-    .join(",\n")
   return `
 package ${requestPackage};
 
 ${renderImports(requestPackage, imports)}${recordDoc(def.name, def.fields, "request")}@JsonInclude(JsonInclude.Include.NON_NULL)
-public record ${def.name}(
-${fields}
-) {
+public final class ${def.name} {
+${fieldDeclarations(def.fields)}
+
+${docBlock([sentence(`创建${translatedLabel(def.name)}。`)])}  @JsonCreator
+  public ${def.name}(
+${constructorArgs(def.fields)}
+  ) {
+${constructorAssignments(def.fields)}
+  }
+
+${accessorMethods(def.fields)}
+  @Override
+  public boolean equals(Object other) {
+${equalsBody(def.fields, def.name)}
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(${hashCodeArgs(def.fields)});
+  }
+
+  @Override
+  public String toString() {
+${toStringBody(def.fields, def.name)}
+  }
 }
 `
 }
@@ -2156,7 +2231,8 @@ ${docBlock([
 
     var parts = new ArrayList<String>();
     for (var entry : query.entrySet()) {
-      if (entry.getValue() instanceof Iterable<?> items) {
+      if (entry.getValue() instanceof Iterable<?>) {
+        Iterable<?> items = (Iterable<?>) entry.getValue();
         for (var item : items) {
           if (item != null) parts.add(encode(entry.getKey()) + "=" + encode(String.valueOf(item)));
         }
@@ -2209,14 +2285,53 @@ ${docBlock([
     "@param headers 默认请求头。",
     "@param timeout 请求超时时间。",
     "@param directory 默认工作目录。",
-  ], "")}public record OpencodeClientConfig(
-    String baseUrl,
-    HttpClient httpClient,
-    ObjectMapper objectMapper,
-    Map<String, String> headers,
-    Duration timeout,
-    String directory
-) {
+  ], "")}public final class OpencodeClientConfig {
+  private final String baseUrl;
+  private final HttpClient httpClient;
+  private final ObjectMapper objectMapper;
+  private final Map<String, String> headers;
+  private final Duration timeout;
+  private final String directory;
+
+  public OpencodeClientConfig(
+      String baseUrl,
+      HttpClient httpClient,
+      ObjectMapper objectMapper,
+      Map<String, String> headers,
+      Duration timeout,
+      String directory) {
+    this.baseUrl = baseUrl;
+    this.httpClient = httpClient;
+    this.objectMapper = objectMapper;
+    this.headers = headers;
+    this.timeout = timeout;
+    this.directory = directory;
+  }
+
+  public String baseUrl() {
+    return baseUrl;
+  }
+
+  public HttpClient httpClient() {
+    return httpClient;
+  }
+
+  public ObjectMapper objectMapper() {
+    return objectMapper;
+  }
+
+  public Map<String, String> headers() {
+    return headers;
+  }
+
+  public Duration timeout() {
+    return timeout;
+  }
+
+  public String directory() {
+    return directory;
+  }
+
 ${docBlock([sentence("创建配置构建器")])}  public static Builder builder() {
     return new Builder();
   }
@@ -2279,14 +2394,13 @@ package ${corePackage};
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.Serial;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
 ${docBlock([sentence("表示 OpenCode HTTP 调用过程中抛出的运行时异常")], "")}public class ApiException extends RuntimeException {
-  @Serial private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
   private static final ObjectMapper RESPONSE_MAPPER = new ObjectMapper();
 
   private final Integer statusCode;
@@ -2307,10 +2421,21 @@ ${docBlock([
     "@param responseBody 原始响应体。",
     "@param headers 原始响应头。",
   ])}  public ApiException(Integer statusCode, String responseBody, HttpHeaders headers) {
+    this(statusCode, responseBody, headers.map());
+  }
+
+${docBlock([
+    sentence("使用 HTTP 响应信息创建异常"),
+    "",
+    "@param statusCode HTTP 状态码。",
+    "@param responseBody 原始响应体。",
+    "@param responseHeaders 原始响应头。",
+  ])}  public ApiException(
+      Integer statusCode, String responseBody, Map<String, List<String>> responseHeaders) {
     super("API request failed with status " + statusCode);
     this.statusCode = statusCode;
     this.responseBody = responseBody;
-    this.responseHeaders = headers.map();
+    this.responseHeaders = responseHeaders;
   }
 
 ${docBlock([sentence("获取 HTTP 状态码"), "", "@return HTTP 状态码；若异常并非由 HTTP 响应产生则返回 null。"])}  public Integer statusCode() {
@@ -2345,6 +2470,8 @@ function sseEventFile() {
   return `
 package ${corePackage};
 
+import java.util.Objects;
+
 ${docBlock([
     sentence("单条 SSE 事件"),
     "",
@@ -2352,12 +2479,63 @@ ${docBlock([
     "@param event 事件名称。",
     "@param id 事件 ID。",
     "@param retry 服务端建议的重试间隔，单位为毫秒。",
-  ], "")}public record SseEvent<T>(
-    T data,
-    String event,
-    String id,
-    Integer retry
-) {
+  ], "")}public final class SseEvent<T> {
+  private final T data;
+  private final String event;
+  private final String id;
+  private final Integer retry;
+
+  public SseEvent(T data, String event, String id, Integer retry) {
+    this.data = data;
+    this.event = event;
+    this.id = id;
+    this.retry = retry;
+  }
+
+  public T data() {
+    return data;
+  }
+
+  public String event() {
+    return event;
+  }
+
+  public String id() {
+    return id;
+  }
+
+  public Integer retry() {
+    return retry;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof SseEvent)) return false;
+    SseEvent<?> that = (SseEvent<?>) other;
+    return Objects.equals(data, that.data)
+        && Objects.equals(event, that.event)
+        && Objects.equals(id, that.id)
+        && Objects.equals(retry, that.retry);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(data, event, id, retry);
+  }
+
+  @Override
+  public String toString() {
+    return "SseEvent{"
+        + "data="
+        + data
+        + ",event="
+        + event
+        + ",id="
+        + id
+        + ",retry="
+        + retry
+        + "}";
+  }
 }
 `
 }

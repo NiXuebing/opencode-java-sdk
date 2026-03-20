@@ -1,7 +1,6 @@
 package ai.opencode.sdk;
 
 import ai.opencode.sdk.api.AppApi;
-import ai.opencode.sdk.api.AuthApi;
 import ai.opencode.sdk.api.CommandApi;
 import ai.opencode.sdk.api.ConfigApi;
 import ai.opencode.sdk.api.EventApi;
@@ -15,11 +14,9 @@ import ai.opencode.sdk.api.McpApi;
 import ai.opencode.sdk.api.PathApi;
 import ai.opencode.sdk.api.PermissionApi;
 import ai.opencode.sdk.api.ProjectApi;
-import ai.opencode.sdk.api.ProviderApi;
+import ai.opencode.sdk.api.QuestionApi;
 import ai.opencode.sdk.api.SessionApi;
 import ai.opencode.sdk.api.ToolApi;
-import ai.opencode.sdk.api.TuiApi;
-import ai.opencode.sdk.api.VcsApi;
 import ai.opencode.sdk.core.ApiTransport;
 import ai.opencode.sdk.core.OpencodeClientConfig;
 
@@ -27,20 +24,17 @@ import ai.opencode.sdk.core.OpencodeClientConfig;
 public final class OpencodeClient {
   private final ApiTransport transport;
   private final GlobalApi global;
-  private final AuthApi auth;
   private final ProjectApi project;
   private final ConfigApi config;
   private final ToolApi tool;
   private final SessionApi session;
   private final PermissionApi permission;
-  private final ProviderApi provider;
+  private final QuestionApi question;
   private final FindApi find;
   private final FileApi file;
   private final McpApi mcp;
-  private final TuiApi tui;
   private final InstanceApi instance;
   private final PathApi path;
-  private final VcsApi vcs;
   private final CommandApi command;
   private final AppApi app;
   private final LspApi lsp;
@@ -60,20 +54,17 @@ public final class OpencodeClient {
   public OpencodeClient(OpencodeClientConfig config) {
     this.transport = new ApiTransport(config);
     this.global = new GlobalApi(transport);
-    this.auth = new AuthApi(transport);
     this.project = new ProjectApi(transport);
     this.config = new ConfigApi(transport);
     this.tool = new ToolApi(transport);
     this.session = new SessionApi(transport);
     this.permission = new PermissionApi(transport);
-    this.provider = new ProviderApi(transport);
+    this.question = new QuestionApi(transport);
     this.find = new FindApi(transport);
     this.file = new FileApi(transport);
     this.mcp = new McpApi(transport);
-    this.tui = new TuiApi(transport);
     this.instance = new InstanceApi(transport);
     this.path = new PathApi(transport);
-    this.vcs = new VcsApi(transport);
     this.command = new CommandApi(transport);
     this.app = new AppApi(transport);
     this.lsp = new LspApi(transport);
@@ -88,15 +79,6 @@ public final class OpencodeClient {
    */
   public GlobalApi global() {
     return global;
-  }
-
-  /**
-   * 获取认证接口。
-   *
-   * @return 认证接口实例。
-   */
-  public AuthApi auth() {
-    return auth;
   }
 
   /**
@@ -145,12 +127,12 @@ public final class OpencodeClient {
   }
 
   /**
-   * 获取提供商接口。
+   * 获取问题接口。
    *
-   * @return 提供商接口实例。
+   * @return 问题接口实例。
    */
-  public ProviderApi provider() {
-    return provider;
+  public QuestionApi question() {
+    return question;
   }
 
   /**
@@ -181,15 +163,6 @@ public final class OpencodeClient {
   }
 
   /**
-   * 获取 TUI 接口。
-   *
-   * @return TUI 接口实例。
-   */
-  public TuiApi tui() {
-    return tui;
-  }
-
-  /**
    * 获取实例接口。
    *
    * @return 实例接口实例。
@@ -205,15 +178,6 @@ public final class OpencodeClient {
    */
   public PathApi path() {
     return path;
-  }
-
-  /**
-   * 获取版本控制接口。
-   *
-   * @return 版本控制接口实例。
-   */
-  public VcsApi vcs() {
-    return vcs;
   }
 
   /**

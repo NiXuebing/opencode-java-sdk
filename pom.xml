@@ -9,7 +9,7 @@
   <version>0.1.0</version>
   <packaging>jar</packaging>
   <name>opencode Java SDK</name>
-  <description>JDK 17 Java SDK for the opencode HTTP API.</description>
+  <description>JDK 11 Java SDK for the opencode HTTP API.</description>
   <url>https://github.com/NiXuebing/opencode-java-sdk</url>
 
   <licenses>
@@ -44,9 +44,10 @@
   </distributionManagement>
 
   <properties>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackson.version>2.18.2</jackson.version>
+    <spring.framework.version>5.3.39</spring.framework.version>
     <junit.version>5.10.0</junit.version>
     <spotless.version>2.44.3</spotless.version>
     <google-java-format.version>1.35.0</google-java-format.version>
@@ -58,6 +59,16 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webflux</artifactId>
+      <version>${spring.framework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor.netty</groupId>
+      <artifactId>reactor-netty-http</artifactId>
+      <version>1.0.39</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -161,4 +172,35 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>integration</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.2.5</version>
+            <configuration>
+              <includes>
+                <include>**/*IT.java</include>
+              </includes>
+              <forkCount>1</forkCount>
+              <reuseForks>true</reuseForks>
+              <trimStackTrace>false</trimStackTrace>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

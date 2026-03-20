@@ -44,8 +44,7 @@ public final class ToolApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/experimental/tool/ids", path, query, headers, body, ToolIDs.class);
+    return transport.execute("GET", "/experimental/tool/ids", path, query, headers, body, ToolIDs.class);
   }
 
   /**
@@ -65,7 +64,7 @@ public final class ToolApi {
     query.put("model", request.model());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/experimental/tool", path, query, headers, body, ToolList.class);
+    return transport.execute("GET", "/experimental/tool", path, query, headers, body, ToolList.class);
   }
+
 }

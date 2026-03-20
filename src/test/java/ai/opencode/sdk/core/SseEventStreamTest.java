@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import ai.opencode.sdk.testutil.TestHttpSupport;
 import ai.opencode.sdk.testutil.TestHttpSupport.StubHttpClient;
 import ai.opencode.sdk.testutil.TestHttpSupport.StubHttpResponse;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -31,14 +33,12 @@ class SseEventStreamTest {
   @Test
   void iteratorParsesEventsAndFlushesFinalEventAtEndOfStream() throws Exception {
     var body =
-        """
-        event: message
-        id: 1
-        retry: 500
-        data: {"value":"first"}
-
-        data: {"value":"second"}
-        """;
+        "event: message\n"
+            + "id: 1\n"
+            + "retry: 500\n"
+            + "data: {\"value\":\"first\"}\n"
+            + "\n"
+            + "data: {\"value\":\"second\"}\n";
 
     try (var stream = stream(new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)))) {
       var iterator = stream.iterator();
@@ -60,10 +60,7 @@ class SseEventStreamTest {
   @Test
   void iteratorReturnsNullDataWhenEventContainsOnlyMetadata() throws Exception {
     var body =
-        """
-        event: ping
-
-        """;
+        "event: ping\n\n";
 
     try (var stream = stream(new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)))) {
       var event = stream.iterator().next();
@@ -169,7 +166,18 @@ class SseEventStreamTest {
         mapper.constructType(Payload.class));
   }
 
-  private record Payload(String value) {}
+  private static final class Payload {
+    private final String value;
+
+    @JsonCreator
+    private Payload(@JsonProperty("value") String value) {
+      this.value = value;
+    }
+
+    private String value() {
+      return value;
+    }
+  }
 
   private static final class FailingInputStream extends InputStream {
     @Override

@@ -45,8 +45,7 @@ public final class ProjectApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/project", path, query, headers, body, new TypeReference<List<Project>>() {});
+    return transport.execute("GET", "/project", path, query, headers, body, new TypeReference<List<Project>>() {});
   }
 
   /**
@@ -73,4 +72,5 @@ public final class ProjectApi {
     Object body = null;
     return transport.execute("GET", "/project/current", path, query, headers, body, Project.class);
   }
+
 }

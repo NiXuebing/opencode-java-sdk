@@ -3,9 +3,9 @@ package ai.opencode.sdk;
 import static org.junit.jupiter.api.Assertions.*;
 
 import ai.opencode.sdk.api.AppApi;
-import ai.opencode.sdk.api.AuthApi;
 import ai.opencode.sdk.api.GlobalApi;
 import ai.opencode.sdk.api.McpApi;
+import ai.opencode.sdk.api.QuestionApi;
 import ai.opencode.sdk.core.OpencodeClientConfig;
 import ai.opencode.sdk.model.EventInstallationUpdated;
 import ai.opencode.sdk.model.SessionPromptBody;
@@ -41,9 +41,7 @@ class OpencodeClientTest {
                       assertEquals("/global/health", exchange.getRequestURI().getPath());
                       json(
                           exchange,
-                          """
-               {"healthy":true,"version":"1.2.3"}
-               """);
+                          "{\"healthy\":true,\"version\":\"1.2.3\"}");
                     }))) {
       var client =
           new OpencodeClient(
@@ -73,12 +71,10 @@ class OpencodeClientTest {
                       exchange.sendResponseHeaders(200, 0);
                       try (var out = exchange.getResponseBody()) {
                         out.write(
-                            """
-                 event: message
-                 id: 1
-                 data: {"type":"installation.updated","properties":{"version":"1.2.3"}}
-
-                 """
+                            ("event: message\n"
+                                    + "id: 1\n"
+                                    + "data: {\"type\":\"installation.updated\",\"properties\":{\"version\":\"1.2.3\"}}\n"
+                                    + "\n")
                                 .getBytes(StandardCharsets.UTF_8));
                         out.flush();
                       }
@@ -112,16 +108,14 @@ class OpencodeClientTest {
                       assertEquals("/session/ses_123/message", exchange.getRequestURI().getPath());
                       json(
                           exchange,
-                          """
-               {
-                 "info": {
-                   "id": "msg_1",
-                   "sessionID": "ses_123",
-                   "role": "user"
-                 },
-                 "parts": []
-               }
-               """);
+                          "{\n"
+                              + "  \"info\": {\n"
+                              + "    \"id\": \"msg_1\",\n"
+                              + "    \"sessionID\": \"ses_123\",\n"
+                              + "    \"role\": \"user\"\n"
+                              + "  },\n"
+                              + "  \"parts\": []\n"
+                              + "}");
                     }))) {
       var client =
           new OpencodeClient(OpencodeClientConfig.builder().baseUrl(server.baseUrl()).build());
@@ -160,16 +154,21 @@ class OpencodeClientTest {
     assertFalse(clientMethods.contains("pty"));
     assertFalse(clientMethods.contains("worktree"));
     assertFalse(clientMethods.contains("experimental"));
-    assertFalse(clientMethods.contains("question"));
+    assertTrue(clientMethods.contains("question"));
+    assertFalse(clientMethods.contains("auth"));
+    assertFalse(clientMethods.contains("provider"));
+    assertFalse(clientMethods.contains("tui"));
+    assertFalse(clientMethods.contains("vcs"));
 
     assertFalse(declaredMethodNames(GlobalApi.class).contains("config"));
     assertFalse(declaredMethodNames(GlobalApi.class).contains("dispose"));
     assertFalse(declaredMethodNames(AppApi.class).contains("skills"));
-    assertFalse(declaredMethodNames(AuthApi.class).contains("remove"));
+    assertTrue(declaredMethodNames(QuestionApi.class).contains("list"));
+    assertTrue(declaredMethodNames(QuestionApi.class).contains("reply"));
+    assertTrue(declaredMethodNames(QuestionApi.class).contains("reject"));
     assertFalse(declaredMethodNames(McpApi.class).contains("auth"));
     assertFalse(declaredMethodNames(McpApi.class).contains("connect"));
     assertFalse(declaredMethodNames(McpApi.class).contains("disconnect"));
-    assertFalse(declaredMethodNames(ai.opencode.sdk.api.TuiApi.class).contains("control"));
   }
 
   private TestServer server(Map<String, HttpHandler> handlers) throws IOException {
@@ -190,7 +189,13 @@ class OpencodeClientTest {
     }
   }
 
-  private record TestServer(HttpServer server) implements AutoCloseable {
+  private static final class TestServer implements AutoCloseable {
+    private final HttpServer server;
+
+    private TestServer(HttpServer server) {
+      this.server = server;
+    }
+
     private String baseUrl() {
       return "http://127.0.0.1:" + server.getAddress().getPort();
     }

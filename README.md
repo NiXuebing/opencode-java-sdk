@@ -1,45 +1,49 @@
 # opencode Java SDK
 
-JDK 17 Java SDK for the documented `opencode serve` HTTP API.
+JDK 11+ Java SDK for the server-side `opencode serve` HTTP API.
 
 [中文说明](./README.zh-CN.md)
 
-This project is generated from the official OpenAPI schema snapshot and intentionally focuses on API access only:
+This project is generated from the official OpenAPI schema snapshot and intentionally focuses on server-side API access:
 
 - Typed HTTP API calls
-- Generated request and response models
+- Generated request and response models compatible with JDK 11
 - Blocking SSE event stream support
+- Reactive WebFlux client support via `ReactiveOpencodeClient`
 - Request configuration for base URL, timeout, headers, and working directory header
 
-It does not include local `opencode serve` startup helpers, TUI process wrappers, or TUI control queue APIs.
+It does not include local `opencode serve` startup helpers, TUI wrappers, VCS helpers, provider auth flows, or terminal control APIs.
 
 The generated Java surface intentionally follows the endpoints documented in the official SDK and Server docs. Internal or undocumented routes that may still appear in the raw OpenAPI are not exposed through `OpencodeClient`.
 
-The SDK also intentionally omits `tui.control` endpoints to keep the public surface focused on direct HTTP API calls instead of terminal control queue coordination.
+The SDK keeps the public surface focused on server-side coding workflows instead of desktop-side controls.
 
 ## API groups
 
 The current public surface exposed by `OpencodeClient` includes these API groups:
 
 - `global`
-- `auth`
 - `project`
 - `config`
 - `tool`
 - `session`
 - `permission`
-- `provider`
+- `question`
 - `find`
 - `file`
 - `mcp`
-- `tui`
 - `instance`
 - `path`
-- `vcs`
 - `command`
 - `app`
 - `lsp`
 - `formatter`
+- `event`
+
+`ReactiveOpencodeClient` currently provides reactive access for:
+
+- `session`
+- `question`
 - `event`
 
 Notable exclusions from the public Java surface:
@@ -47,15 +51,20 @@ Notable exclusions from the public Java surface:
 - `mirror`
 - `pty`
 - `worktree`
-- `question`
+- `auth`
+- `provider`
+- `tui`
+- `vcs`
 - `tui.control`
 - undocumented internal route groups from the raw OpenAPI snapshot
 
 ## What is included
 
 - Typed API groups exposed from `OpencodeClient`
+- Reactive session/question/event APIs exposed from `ReactiveOpencodeClient`
 - Generated request and response models from `openapi.json`
 - Blocking SSE event stream support for `/event` and `/global/event`
+- Reactive SSE event stream support for `/event`
 - Configurable base URL, timeouts, headers, and `x-opencode-directory`
 
 ## Build and test
@@ -63,6 +72,49 @@ Notable exclusions from the public Java surface:
 ```bash
 mvn spotless:check test
 ```
+
+Run the full unit-test + coverage gate locally with:
+
+```bash
+mvn verify
+```
+
+## Integration tests
+
+The repository now includes a dedicated Maven integration-test profile that boots a real
+`opencode serve` process in an isolated temporary HOME and workspace, then runs `*IT.java`
+against the live HTTP/SSE endpoints.
+
+Prerequisites:
+
+- `opencode` must be available on `PATH`, or provide `OPENCODE_BIN=/absolute/path/to/opencode`
+- `git` must be available on `PATH`
+
+Run the full integration suite with:
+
+```bash
+mvn verify -P integration
+```
+
+What the integration profile does:
+
+- creates a temporary git workspace with sample files
+- starts an isolated `opencode serve` instance on a random localhost port
+- points `OpencodeClient` at that live server using `x-opencode-directory`
+- validates real `/doc`, core HTTP APIs, SSE streams, session lifecycle, file/VCS endpoints, and safe TUI/app endpoints
+
+Helpful environment variables:
+
+- `OPENCODE_BIN`: path to a specific `opencode` binary
+- `OPENCODE_IT_KEEP_TMP=true`: keep the temporary HOME/workspace/log directory for debugging
+
+The default `mvn test` / `mvn verify` flow is unchanged. Integration tests only run when the
+`integration` profile is explicitly enabled.
+
+Note: the documented `/find` routes are currently left out of the default stable integration suite.
+Against the official `opencode serve` process we observed search requests occasionally blocking past
+the 90-second client timeout in a clean-room test environment, so they are better treated as
+exploratory/manual verification until the upstream behavior is consistently deterministic.
 
 ## CI
 

@@ -1,8 +1,10 @@
 package ai.opencode.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * MCP状态需要认证数据模型。
@@ -11,4 +13,43 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record MCPStatusNeedsAuth(@JsonProperty("status") String status) implements MCPStatus {}
+public final class MCPStatusNeedsAuth implements MCPStatus {
+  @JsonProperty("status")
+  private final String status;
+
+  /** 使用字段创建MCP状态需要认证。 */
+  @JsonCreator
+  public MCPStatusNeedsAuth(
+      @JsonProperty("status") String status
+  ) {
+    this.status = status;
+  }
+
+  /**
+   * 获取状态。
+   *
+   * @return 当前状态。
+   */
+  public String status() {
+    return status;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof MCPStatusNeedsAuth)) return false;
+    MCPStatusNeedsAuth that = (MCPStatusNeedsAuth) other;
+    return Objects.equals(status, that.status);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(status);
+  }
+
+  @Override
+  public String toString() {
+    return "MCPStatusNeedsAuth{" +
+        "status=" + status +
+        "}";
+  }
+}

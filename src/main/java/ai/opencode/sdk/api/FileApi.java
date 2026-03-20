@@ -41,8 +41,7 @@ public final class FileApi {
     query.put("path", request.path());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/file", path, query, headers, body, new TypeReference<List<FileNode>>() {});
+    return transport.execute("GET", "/file", path, query, headers, body, new TypeReference<List<FileNode>>() {});
   }
 
   /**
@@ -85,7 +84,7 @@ public final class FileApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/file/status", path, query, headers, body, new TypeReference<List<File>>() {});
+    return transport.execute("GET", "/file/status", path, query, headers, body, new TypeReference<List<File>>() {});
   }
+
 }

@@ -24,7 +24,6 @@ class ApiInvocationCoverageTest {
     var apis =
         List.of(
             new AppApi(transport),
-            new AuthApi(transport),
             new CommandApi(transport),
             new ConfigApi(transport),
             new EventApi(transport),
@@ -38,25 +37,15 @@ class ApiInvocationCoverageTest {
             new PathApi(transport),
             new PermissionApi(transport),
             new ProjectApi(transport),
-            new ProviderApi(transport),
-            new ProviderOauthApi(transport),
+            new QuestionApi(transport),
             new SessionApi(transport),
-            new ToolApi(transport),
-            new TuiApi(transport),
-            new VcsApi(transport));
+            new ToolApi(transport));
 
     int expectedTransportCalls = 0;
     for (var api : apis) {
       for (var method : publicMethods(api.getClass())) {
         int before = transport.invocations.size();
         var result = method.invoke(api, argumentsFor(method));
-
-        if (api instanceof ProviderApi && method.getName().equals("oauth")) {
-          assertNotNull(result);
-          assertTrue(result instanceof ProviderOauthApi);
-          assertEquals(before, transport.invocations.size());
-          continue;
-        }
 
         expectedTransportCalls++;
         assertEquals(before + 1, transport.invocations.size(), api.getClass().getSimpleName());
@@ -159,13 +148,41 @@ class ApiInvocationCoverageTest {
     }
   }
 
-  private record Invocation(
-      String kind,
-      String method,
-      String route,
-      Map<String, Object> path,
-      Map<String, Object> query,
-      Map<String, String> headers,
-      Object body,
-      Type responseType) {}
+  private static final class Invocation {
+    private final String kind;
+    private final String method;
+    private final String route;
+    private final Map<String, Object> path;
+    private final Map<String, Object> query;
+    private final Map<String, String> headers;
+    private final Object body;
+    private final Type responseType;
+
+    private Invocation(
+        String kind,
+        String method,
+        String route,
+        Map<String, Object> path,
+        Map<String, Object> query,
+        Map<String, String> headers,
+        Object body,
+        Type responseType) {
+      this.kind = kind;
+      this.method = method;
+      this.route = route;
+      this.path = path;
+      this.query = query;
+      this.headers = headers;
+      this.body = body;
+      this.responseType = responseType;
+    }
+
+    private String method() {
+      return method;
+    }
+
+    private String route() {
+      return route;
+    }
+  }
 }

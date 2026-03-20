@@ -1,8 +1,10 @@
 package ai.opencode.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * 检索文本响应项行数据模型。
@@ -11,4 +13,43 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record FindTextResponseItemLines(@JsonProperty("text") String text) {}
+public final class FindTextResponseItemLines {
+  @JsonProperty("text")
+  private final String text;
+
+  /** 使用字段创建检索文本响应项行。 */
+  @JsonCreator
+  public FindTextResponseItemLines(
+      @JsonProperty("text") String text
+  ) {
+    this.text = text;
+  }
+
+  /**
+   * 获取文本。
+   *
+   * @return 文本内容。
+   */
+  public String text() {
+    return text;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof FindTextResponseItemLines)) return false;
+    FindTextResponseItemLines that = (FindTextResponseItemLines) other;
+    return Objects.equals(text, that.text);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(text);
+  }
+
+  @Override
+  public String toString() {
+    return "FindTextResponseItemLines{" +
+        "text=" + text +
+        "}";
+  }
+}

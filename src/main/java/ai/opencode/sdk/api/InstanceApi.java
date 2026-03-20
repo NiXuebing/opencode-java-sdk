@@ -41,7 +41,7 @@ public final class InstanceApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "POST", "/instance/dispose", path, query, headers, body, Boolean.class);
+    return transport.execute("POST", "/instance/dispose", path, query, headers, body, Boolean.class);
   }
+
 }

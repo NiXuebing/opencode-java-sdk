@@ -44,4 +44,5 @@ public final class PathApi {
     Object body = null;
     return transport.execute("GET", "/path", path, query, headers, body, Path.class);
   }
+
 }

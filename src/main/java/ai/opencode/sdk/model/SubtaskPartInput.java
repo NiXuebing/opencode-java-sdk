@@ -1,8 +1,10 @@
 package ai.opencode.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * 子任务片段输入数据模型。
@@ -17,12 +19,133 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record SubtaskPartInput(
-    @JsonProperty("id") String id,
-    @JsonProperty("type") String type,
-    @JsonProperty("prompt") String prompt,
-    @JsonProperty("description") String description,
-    @JsonProperty("agent") String agent,
-    @JsonProperty("model") SubtaskPartInputModel model,
-    @JsonProperty("command") String command)
-    implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {}
+public final class SubtaskPartInput implements SessionPromptBodyPartsItem, SessionPromptAsyncBodyPartsItem {
+  @JsonProperty("id")
+  private final String id;
+  @JsonProperty("type")
+  private final String type;
+  @JsonProperty("prompt")
+  private final String prompt;
+  @JsonProperty("description")
+  private final String description;
+  @JsonProperty("agent")
+  private final String agent;
+  @JsonProperty("model")
+  private final SubtaskPartInputModel model;
+  @JsonProperty("command")
+  private final String command;
+
+  /** 使用字段创建子任务片段输入。 */
+  @JsonCreator
+  public SubtaskPartInput(
+      @JsonProperty("id") String id,
+      @JsonProperty("type") String type,
+      @JsonProperty("prompt") String prompt,
+      @JsonProperty("description") String description,
+      @JsonProperty("agent") String agent,
+      @JsonProperty("model") SubtaskPartInputModel model,
+      @JsonProperty("command") String command
+  ) {
+    this.id = id;
+    this.type = type;
+    this.prompt = prompt;
+    this.description = description;
+    this.agent = agent;
+    this.model = model;
+    this.command = command;
+  }
+
+  /**
+   * 获取id。
+   *
+   * @return 唯一标识。
+   */
+  public String id() {
+    return id;
+  }
+
+  /**
+   * 获取类型。
+   *
+   * @return 类型标识。
+   */
+  public String type() {
+    return type;
+  }
+
+  /**
+   * 获取提示词。
+   *
+   * @return 提示词。
+   */
+  public String prompt() {
+    return prompt;
+  }
+
+  /**
+   * 获取description。
+   *
+   * @return 描述信息。
+   */
+  public String description() {
+    return description;
+  }
+
+  /**
+   * 获取代理。
+   *
+   * @return 代理名称。
+   */
+  public String agent() {
+    return agent;
+  }
+
+  /**
+   * 获取模型。
+   *
+   * @return 模型配置。
+   */
+  public SubtaskPartInputModel model() {
+    return model;
+  }
+
+  /**
+   * 获取命令。
+   *
+   * @return 命令内容。
+   */
+  public String command() {
+    return command;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof SubtaskPartInput)) return false;
+    SubtaskPartInput that = (SubtaskPartInput) other;
+    return Objects.equals(id, that.id)
+        && Objects.equals(type, that.type)
+        && Objects.equals(prompt, that.prompt)
+        && Objects.equals(description, that.description)
+        && Objects.equals(agent, that.agent)
+        && Objects.equals(model, that.model)
+        && Objects.equals(command, that.command);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, type, prompt, description, agent, model, command);
+  }
+
+  @Override
+  public String toString() {
+    return "SubtaskPartInput{" +
+        "id=" + id + "," +
+        "type=" + type + "," +
+        "prompt=" + prompt + "," +
+        "description=" + description + "," +
+        "agent=" + agent + "," +
+        "model=" + model + "," +
+        "command=" + command +
+        "}";
+  }
+}

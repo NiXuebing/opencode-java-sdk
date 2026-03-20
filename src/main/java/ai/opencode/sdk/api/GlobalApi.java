@@ -21,7 +21,6 @@ public final class GlobalApi {
 
   /**
    * 获取全局健康状态。
-   *
    * @return 全局健康状态。
    */
   public GlobalHealthResponse health() {
@@ -29,13 +28,11 @@ public final class GlobalApi {
     Map<String, Object> query = Map.of();
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/global/health", path, query, headers, body, GlobalHealthResponse.class);
+    return transport.execute("GET", "/global/health", path, query, headers, body, GlobalHealthResponse.class);
   }
 
   /**
    * 订阅全局事件。
-   *
    * @return 服务端持续推送的事件流。
    */
   public SseEventStream<GlobalEvent> event() {
@@ -45,4 +42,5 @@ public final class GlobalApi {
     Object body = null;
     return transport.stream("GET", "/global/event", path, query, headers, body, GlobalEvent.class);
   }
+
 }

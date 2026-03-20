@@ -44,7 +44,7 @@ public final class LspApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/lsp", path, query, headers, body, new TypeReference<List<LSPStatus>>() {});
+    return transport.execute("GET", "/lsp", path, query, headers, body, new TypeReference<List<LSPStatus>>() {});
   }
+
 }

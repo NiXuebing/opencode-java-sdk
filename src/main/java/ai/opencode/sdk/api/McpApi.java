@@ -44,8 +44,7 @@ public final class McpApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/mcp", path, query, headers, body, new TypeReference<Map<String, MCPStatus>>() {});
+    return transport.execute("GET", "/mcp", path, query, headers, body, new TypeReference<Map<String, MCPStatus>>() {});
   }
 
   /**
@@ -62,7 +61,7 @@ public final class McpApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/mcp", path, query, headers, body, new TypeReference<Map<String, MCPStatus>>() {});
+    return transport.execute("POST", "/mcp", path, query, headers, body, new TypeReference<Map<String, MCPStatus>>() {});
   }
+
 }

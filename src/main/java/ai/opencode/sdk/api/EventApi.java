@@ -45,4 +45,5 @@ public final class EventApi {
     Object body = null;
     return transport.stream("GET", "/event", path, query, headers, body, Event.class);
   }
+
 }

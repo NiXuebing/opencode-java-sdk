@@ -78,8 +78,7 @@ public final class SessionApi {
     if (request.limit() != null) query.put("limit", request.limit());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/session", path, query, headers, body, new TypeReference<List<Session>>() {});
+    return transport.execute("GET", "/session", path, query, headers, body, new TypeReference<List<Session>>() {});
   }
 
   /**
@@ -121,14 +120,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/status",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<Map<String, SessionStatus>>() {});
+    return transport.execute("GET", "/session/status", path, query, headers, body, new TypeReference<Map<String, SessionStatus>>() {});
   }
 
   /**
@@ -146,8 +138,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/session/{sessionID}", path, query, headers, body, Session.class);
+    return transport.execute("GET", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
   /**
@@ -165,8 +156,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "DELETE", "/session/{sessionID}", path, query, headers, body, Boolean.class);
+    return transport.execute("DELETE", "/session/{sessionID}", path, query, headers, body, Boolean.class);
   }
 
   /**
@@ -185,8 +175,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "PATCH", "/session/{sessionID}", path, query, headers, body, Session.class);
+    return transport.execute("PATCH", "/session/{sessionID}", path, query, headers, body, Session.class);
   }
 
   /**
@@ -204,14 +193,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/{sessionID}/children",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<Session>>() {});
+    return transport.execute("GET", "/session/{sessionID}/children", path, query, headers, body, new TypeReference<List<Session>>() {});
   }
 
   /**
@@ -229,14 +211,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/{sessionID}/todo",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<Todo>>() {});
+    return transport.execute("GET", "/session/{sessionID}/todo", path, query, headers, body, new TypeReference<List<Todo>>() {});
   }
 
   /**
@@ -255,8 +230,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/init", path, query, headers, body, Boolean.class);
+    return transport.execute("POST", "/session/{sessionID}/init", path, query, headers, body, Boolean.class);
   }
 
   /**
@@ -275,8 +249,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/fork", path, query, headers, body, Session.class);
+    return transport.execute("POST", "/session/{sessionID}/fork", path, query, headers, body, Session.class);
   }
 
   /**
@@ -294,8 +267,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "POST", "/session/{sessionID}/abort", path, query, headers, body, Boolean.class);
+    return transport.execute("POST", "/session/{sessionID}/abort", path, query, headers, body, Boolean.class);
   }
 
   /**
@@ -313,8 +285,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "POST", "/session/{sessionID}/share", path, query, headers, body, Session.class);
+    return transport.execute("POST", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
   /**
@@ -332,8 +303,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "DELETE", "/session/{sessionID}/share", path, query, headers, body, Session.class);
+    return transport.execute("DELETE", "/session/{sessionID}/share", path, query, headers, body, Session.class);
   }
 
   /**
@@ -352,14 +322,7 @@ public final class SessionApi {
     if (request.messageID() != null) query.put("messageID", request.messageID());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/{sessionID}/diff",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<FileDiff>>() {});
+    return transport.execute("GET", "/session/{sessionID}/diff", path, query, headers, body, new TypeReference<List<FileDiff>>() {});
   }
 
   /**
@@ -378,8 +341,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/summarize", path, query, headers, body, Boolean.class);
+    return transport.execute("POST", "/session/{sessionID}/summarize", path, query, headers, body, Boolean.class);
   }
 
   /**
@@ -398,14 +360,7 @@ public final class SessionApi {
     if (request.limit() != null) query.put("limit", request.limit());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/{sessionID}/message",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<SessionMessagesResponseItem>>() {});
+    return transport.execute("GET", "/session/{sessionID}/message", path, query, headers, body, new TypeReference<List<SessionMessagesResponseItem>>() {});
   }
 
   /**
@@ -424,14 +379,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST",
-        "/session/{sessionID}/message",
-        path,
-        query,
-        headers,
-        body,
-        SessionPromptResponse.class);
+    return transport.execute("POST", "/session/{sessionID}/message", path, query, headers, body, SessionPromptResponse.class);
   }
 
   /**
@@ -451,14 +399,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/session/{sessionID}/message/{messageID}",
-        path,
-        query,
-        headers,
-        body,
-        SessionMessageResponse.class);
+    return transport.execute("GET", "/session/{sessionID}/message/{messageID}", path, query, headers, body, SessionMessageResponse.class);
   }
 
   /**
@@ -477,8 +418,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/prompt_async", path, query, headers, body, Void.class);
+    return transport.execute("POST", "/session/{sessionID}/prompt_async", path, query, headers, body, Void.class);
   }
 
   /**
@@ -497,14 +437,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST",
-        "/session/{sessionID}/command",
-        path,
-        query,
-        headers,
-        body,
-        SessionCommandResponse.class);
+    return transport.execute("POST", "/session/{sessionID}/command", path, query, headers, body, SessionCommandResponse.class);
   }
 
   /**
@@ -523,8 +456,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/shell", path, query, headers, body, AssistantMessage.class);
+    return transport.execute("POST", "/session/{sessionID}/shell", path, query, headers, body, AssistantMessage.class);
   }
 
   /**
@@ -543,8 +475,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST", "/session/{sessionID}/revert", path, query, headers, body, Session.class);
+    return transport.execute("POST", "/session/{sessionID}/revert", path, query, headers, body, Session.class);
   }
 
   /**
@@ -562,7 +493,7 @@ public final class SessionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "POST", "/session/{sessionID}/unrevert", path, query, headers, body, Session.class);
+    return transport.execute("POST", "/session/{sessionID}/unrevert", path, query, headers, body, Session.class);
   }
+
 }

@@ -16,13 +16,53 @@ import java.util.Map;
  * @param timeout 请求超时时间。
  * @param directory 默认工作目录。
  */
-public record OpencodeClientConfig(
-    String baseUrl,
-    HttpClient httpClient,
-    ObjectMapper objectMapper,
-    Map<String, String> headers,
-    Duration timeout,
-    String directory) {
+public final class OpencodeClientConfig {
+  private final String baseUrl;
+  private final HttpClient httpClient;
+  private final ObjectMapper objectMapper;
+  private final Map<String, String> headers;
+  private final Duration timeout;
+  private final String directory;
+
+  public OpencodeClientConfig(
+      String baseUrl,
+      HttpClient httpClient,
+      ObjectMapper objectMapper,
+      Map<String, String> headers,
+      Duration timeout,
+      String directory) {
+    this.baseUrl = baseUrl;
+    this.httpClient = httpClient;
+    this.objectMapper = objectMapper;
+    this.headers = headers;
+    this.timeout = timeout;
+    this.directory = directory;
+  }
+
+  public String baseUrl() {
+    return baseUrl;
+  }
+
+  public HttpClient httpClient() {
+    return httpClient;
+  }
+
+  public ObjectMapper objectMapper() {
+    return objectMapper;
+  }
+
+  public Map<String, String> headers() {
+    return headers;
+  }
+
+  public Duration timeout() {
+    return timeout;
+  }
+
+  public String directory() {
+    return directory;
+  }
+
   /** 创建配置构建器。 */
   public static Builder builder() {
     return new Builder();
@@ -37,92 +77,91 @@ public record OpencodeClientConfig(
     private Duration timeout = Duration.ofSeconds(30);
     private String directory;
 
-    /**
-     * 设置服务端基础地址。
-     *
-     * @param baseUrl 服务端基础地址。
-     * @return 当前构建器。
-     */
+  /**
+   * 设置服务端基础地址。
+   *
+   * @param baseUrl 服务端基础地址。
+   * @return 当前构建器。
+   */
     public Builder baseUrl(String baseUrl) {
       this.baseUrl = baseUrl;
       return this;
     }
 
-    /**
-     * 设置底层 HTTP 客户端。
-     *
-     * @param httpClient 底层 HTTP 客户端。
-     * @return 当前构建器。
-     */
+  /**
+   * 设置底层 HTTP 客户端。
+   *
+   * @param httpClient 底层 HTTP 客户端。
+   * @return 当前构建器。
+   */
     public Builder httpClient(HttpClient httpClient) {
       this.httpClient = httpClient;
       return this;
     }
 
-    /**
-     * 设置 Jackson 对象映射器。
-     *
-     * @param objectMapper Jackson 对象映射器。
-     * @return 当前构建器。
-     */
+  /**
+   * 设置 Jackson 对象映射器。
+   *
+   * @param objectMapper Jackson 对象映射器。
+   * @return 当前构建器。
+   */
     public Builder objectMapper(ObjectMapper objectMapper) {
       this.objectMapper = objectMapper;
       return this;
     }
 
-    /**
-     * 批量设置默认请求头。
-     *
-     * @param headers 默认请求头。
-     * @return 当前构建器。
-     */
+  /**
+   * 批量设置默认请求头。
+   *
+   * @param headers 默认请求头。
+   * @return 当前构建器。
+   */
     public Builder headers(Map<String, String> headers) {
       this.headers = new LinkedHashMap<>(headers);
       return this;
     }
 
-    /**
-     * 追加单个默认请求头。
-     *
-     * @param key 请求头名称。
-     * @param value 请求头值。
-     * @return 当前构建器。
-     */
+  /**
+   * 追加单个默认请求头。
+   *
+   * @param key 请求头名称。
+   * @param value 请求头值。
+   * @return 当前构建器。
+   */
     public Builder header(String key, String value) {
       this.headers.put(key, value);
       return this;
     }
 
-    /**
-     * 设置请求超时时间。
-     *
-     * @param timeout 请求超时时间。
-     * @return 当前构建器。
-     */
+  /**
+   * 设置请求超时时间。
+   *
+   * @param timeout 请求超时时间。
+   * @return 当前构建器。
+   */
     public Builder timeout(Duration timeout) {
       this.timeout = timeout;
       return this;
     }
 
-    /**
-     * 设置默认工作目录。
-     *
-     * @param directory 默认工作目录。
-     * @return 当前构建器。
-     */
+  /**
+   * 设置默认工作目录。
+   *
+   * @param directory 默认工作目录。
+   * @return 当前构建器。
+   */
     public Builder directory(String directory) {
       this.directory = directory;
       return this;
     }
 
-    /**
-     * 构建客户端配置。
-     *
-     * @return 构建完成的客户端配置。
-     */
+  /**
+   * 构建客户端配置。
+   *
+   * @return 构建完成的客户端配置。
+   */
     public OpencodeClientConfig build() {
-      return new OpencodeClientConfig(
-          baseUrl, httpClient, objectMapper, Map.copyOf(headers), timeout, directory);
+      return new OpencodeClientConfig(baseUrl, httpClient, objectMapper, Map.copyOf(headers), timeout, directory);
     }
   }
 }

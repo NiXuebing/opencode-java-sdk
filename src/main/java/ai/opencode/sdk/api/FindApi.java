@@ -40,14 +40,7 @@ public final class FindApi {
     query.put("pattern", request.pattern());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/find",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<FindTextResponseItem>>() {});
+    return transport.execute("GET", "/find", path, query, headers, body, new TypeReference<List<FindTextResponseItem>>() {});
   }
 
   /**
@@ -68,8 +61,7 @@ public final class FindApi {
     if (request.limit() != null) query.put("limit", request.limit());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/find/file", path, query, headers, body, new TypeReference<List<String>>() {});
+    return transport.execute("GET", "/find/file", path, query, headers, body, new TypeReference<List<String>>() {});
   }
 
   /**
@@ -87,7 +79,7 @@ public final class FindApi {
     query.put("query", request.query());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/find/symbol", path, query, headers, body, new TypeReference<List<Symbol>>() {});
+    return transport.execute("GET", "/find/symbol", path, query, headers, body, new TypeReference<List<Symbol>>() {});
   }
+
 }

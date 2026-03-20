@@ -3,7 +3,6 @@ package ai.opencode.sdk.core;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.Serial;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Map;
 
 /** 表示 OpenCode HTTP 调用过程中抛出的运行时异常。 */
 public class ApiException extends RuntimeException {
-  @Serial private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
   private static final ObjectMapper RESPONSE_MAPPER = new ObjectMapper();
 
   private final Integer statusCode;
@@ -39,10 +38,22 @@ public class ApiException extends RuntimeException {
    * @param headers 原始响应头。
    */
   public ApiException(Integer statusCode, String responseBody, HttpHeaders headers) {
+    this(statusCode, responseBody, headers.map());
+  }
+
+  /**
+   * 使用 HTTP 响应信息创建异常。
+   *
+   * @param statusCode HTTP 状态码。
+   * @param responseBody 原始响应体。
+   * @param responseHeaders 原始响应头。
+   */
+  public ApiException(
+      Integer statusCode, String responseBody, Map<String, List<String>> responseHeaders) {
     super("API request failed with status " + statusCode);
     this.statusCode = statusCode;
     this.responseBody = responseBody;
-    this.responseHeaders = headers.map();
+    this.responseHeaders = responseHeaders;
   }
 
   /**

@@ -7,7 +7,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.RecordComponent;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
@@ -34,24 +33,27 @@ public final class SampleFactory {
   }
 
   private Object sample(Type type, String hint) {
-    if (type instanceof Class<?> cls) {
-      return sampleClass(cls, hint);
+    if (type instanceof Class<?>) {
+      return sampleClass((Class<?>) type, hint);
     }
-    if (type instanceof ParameterizedType parameterizedType) {
-      return sampleParameterizedType(parameterizedType, hint);
+    if (type instanceof ParameterizedType) {
+      return sampleParameterizedType((ParameterizedType) type, hint);
     }
-    if (type instanceof GenericArrayType genericArrayType) {
-      var component = genericArrayType.getGenericComponentType();
+    if (type instanceof GenericArrayType) {
+      GenericArrayType genericArrayType = (GenericArrayType) type;
+      Type component = genericArrayType.getGenericComponentType();
       var array = Array.newInstance(rawType(component), 1);
       Array.set(array, 0, sample(component, hint + "Item"));
       return array;
     }
-    if (type instanceof WildcardType wildcardType) {
-      var upperBounds = wildcardType.getUpperBounds();
+    if (type instanceof WildcardType) {
+      WildcardType wildcardType = (WildcardType) type;
+      Type[] upperBounds = wildcardType.getUpperBounds();
       return sample(upperBounds.length == 0 ? Object.class : upperBounds[0], hint);
     }
-    if (type instanceof TypeVariable<?> typeVariable) {
-      var bounds = typeVariable.getBounds();
+    if (type instanceof TypeVariable<?>) {
+      TypeVariable<?> typeVariable = (TypeVariable<?>) type;
+      Type[] bounds = typeVariable.getBounds();
       return sample(bounds.length == 0 ? Object.class : bounds[0], hint);
     }
     return null;
@@ -114,19 +116,12 @@ public final class SampleFactory {
     if (List.class.isAssignableFrom(type)) return new ArrayList<>();
     if (Set.class.isAssignableFrom(type)) return new LinkedHashSet<>();
     if (Map.class.isAssignableFrom(type)) return new LinkedHashMap<>();
-    if (type.isSealed()) {
-      var permitted = type.getPermittedSubclasses();
-      if (permitted.length > 0) return sample(permitted[0], hint);
-    }
     if (type.isInterface() || Modifier.isAbstract(type.getModifiers())) {
       return null;
     }
 
     building.add(type);
     try {
-      if (type.isRecord()) {
-        return instantiateRecord(type);
-      }
       Constructor<?> constructor =
           java.util.Arrays.stream(type.getDeclaredConstructors())
               .sorted(java.util.Comparator.comparingInt(Constructor::getParameterCount))
@@ -146,30 +141,18 @@ public final class SampleFactory {
     }
   }
 
-  private Object instantiateRecord(Class<?> type) throws ReflectiveOperationException {
-    RecordComponent[] components = type.getRecordComponents();
-    Class<?>[] parameterTypes = new Class<?>[components.length];
-    Object[] arguments = new Object[components.length];
-    for (int i = 0; i < components.length; i++) {
-      parameterTypes[i] = components[i].getType();
-      arguments[i] = sample(components[i].getGenericType(), components[i].getName());
-    }
-    var constructor = type.getDeclaredConstructor(parameterTypes);
-    constructor.setAccessible(true);
-    return constructor.newInstance(arguments);
-  }
-
   private Object sampleKey(Type type, String hint) {
     var key = sample(type, hint);
     return key == null ? stringValue(hint) : key;
   }
 
   private Class<?> rawType(Type type) {
-    if (type instanceof Class<?> cls) return cls;
-    if (type instanceof ParameterizedType parameterizedType) {
-      return (Class<?>) parameterizedType.getRawType();
+    if (type instanceof Class<?>) return (Class<?>) type;
+    if (type instanceof ParameterizedType) {
+      return (Class<?>) ((ParameterizedType) type).getRawType();
     }
-    if (type instanceof GenericArrayType genericArrayType) {
+    if (type instanceof GenericArrayType) {
+      GenericArrayType genericArrayType = (GenericArrayType) type;
       return Array.newInstance(rawType(genericArrayType.getGenericComponentType()), 0).getClass();
     }
     return Object.class;

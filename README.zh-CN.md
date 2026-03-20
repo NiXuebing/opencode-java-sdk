@@ -1,16 +1,17 @@
 # opencode Java SDK
 
-面向官方 `opencode serve` HTTP 接口的 JDK 17 Java SDK。
+面向服务端 `opencode serve` HTTP 接口的 JDK 11+ Java SDK。
 
 [English README](./README.md)
 
-这个项目基于官方 OpenAPI 快照生成，目标是提供稳定、清晰、可维护的 Java HTTP 调用层，而不是封装本地 CLI 启动流程。
+这个项目基于官方 OpenAPI 快照生成，目标是提供稳定、清晰、可维护的服务端 Java HTTP 调用层，而不是封装本地 CLI 或桌面侧流程。
 
 ## 项目定位
 
 - 提供类型安全的 HTTP API 调用
-- 提供生成的请求与响应模型
+- 提供兼容 JDK 11 的生成请求与响应模型
 - 提供 `/event` 与 `/global/event` 的阻塞式 SSE 订阅能力
+- 提供基于 `ReactiveOpencodeClient` 的 WebFlux / Reactive 调用能力
 - 支持基础 URL、超时、自定义请求头和 `x-opencode-directory`
 
 以下能力不在当前公开 Java 接口范围内：
@@ -18,7 +19,10 @@
 - `mirror`
 - `pty`
 - `worktree`
-- `question`
+- `auth`
+- `provider`
+- `tui`
+- `vcs`
 - `tui.control`
 - 原始 OpenAPI 中存在但未纳入官方对外文档约束的内部路由
 
@@ -27,24 +31,27 @@
 `OpencodeClient` 当前公开以下 API 分组：
 
 - `global`
-- `auth`
 - `project`
 - `config`
 - `tool`
 - `session`
 - `permission`
-- `provider`
+- `question`
 - `find`
 - `file`
 - `mcp`
-- `tui`
 - `instance`
 - `path`
-- `vcs`
 - `command`
 - `app`
 - `lsp`
 - `formatter`
+- `event`
+
+`ReactiveOpencodeClient` 当前提供以下 reactive API：
+
+- `session`
+- `question`
 - `event`
 
 ## 构建与校验
@@ -52,6 +59,44 @@
 ```bash
 mvn spotless:check test
 ```
+
+如果你想执行完整的单测、覆盖率和格式校验，可以直接运行：
+
+```bash
+mvn verify
+```
+
+## 集成测试
+
+仓库已经落地独立的 Maven 集成测试方案。启用 `integration` profile 后，测试会自动：
+
+- 创建隔离的临时 HOME 和临时 git 工作区
+- 启动一个真实的 `opencode serve`
+- 使用真实 HTTP 和 SSE 接口执行 `*IT.java`
+- 校验 `/doc`、基础只读接口、文件/VCS、会话生命周期、事件流，以及安全的 TUI / app 接口
+
+前置条件：
+
+- 系统中可直接执行 `opencode`，或者通过 `OPENCODE_BIN=/绝对路径/opencode` 指定
+- 系统中可直接执行 `git`
+
+执行命令：
+
+```bash
+mvn verify -P integration
+```
+
+可选调试环境变量：
+
+- `OPENCODE_BIN`：指定测试时使用的 `opencode` 可执行文件
+- `OPENCODE_IT_KEEP_TMP=true`：保留临时 HOME、工作区和服务日志目录，便于排查问题
+
+默认的 `mvn test` / `mvn verify` 行为保持不变；只有显式开启 `integration` profile 时，
+这些集成测试才会运行。
+
+补充说明：文档中的 `/find` 路由目前没有纳入默认稳定集成测试。我们在官方
+`opencode serve` 的隔离环境下观察到搜索请求偶发会阻塞超过 90 秒客户端超时，因此更适合作为
+人工联调或探索性验证项，待上游行为稳定后再纳入必跑集。
 
 CI 会在以下场景执行同样的校验：
 

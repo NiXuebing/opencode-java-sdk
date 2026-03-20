@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import ai.opencode.sdk.testutil.TestHttpSupport;
 import ai.opencode.sdk.testutil.TestHttpSupport.StubHttpClient;
 import ai.opencode.sdk.testutil.TestHttpSupport.StubHttpResponse;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -386,7 +388,18 @@ class ApiTransportTest {
         "text/event-stream", requestRef.get().headers().firstValue("Accept").orElseThrow());
   }
 
-  private record Payload(String value) {}
+  private static final class Payload {
+    private final String value;
+
+    @JsonCreator
+    private Payload(@JsonProperty("value") String value) {
+      this.value = value;
+    }
+
+    private String value() {
+      return value;
+    }
+  }
 
   private Map<String, Object> orderedQuery() {
     var query = new LinkedHashMap<String, Object>();

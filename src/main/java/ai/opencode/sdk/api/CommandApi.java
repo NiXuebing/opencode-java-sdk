@@ -44,7 +44,7 @@ public final class CommandApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/command", path, query, headers, body, new TypeReference<List<Command>>() {});
+    return transport.execute("GET", "/command", path, query, headers, body, new TypeReference<List<Command>>() {});
   }
+
 }

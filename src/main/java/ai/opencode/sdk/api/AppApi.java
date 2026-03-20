@@ -62,7 +62,7 @@ public final class AppApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/agent", path, query, headers, body, new TypeReference<List<Agent>>() {});
+    return transport.execute("GET", "/agent", path, query, headers, body, new TypeReference<List<Agent>>() {});
   }
+
 }

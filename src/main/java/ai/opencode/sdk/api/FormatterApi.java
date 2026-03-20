@@ -44,13 +44,7 @@ public final class FormatterApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET",
-        "/formatter",
-        path,
-        query,
-        headers,
-        body,
-        new TypeReference<List<FormatterStatus>>() {});
+    return transport.execute("GET", "/formatter", path, query, headers, body, new TypeReference<List<FormatterStatus>>() {});
   }
+
 }

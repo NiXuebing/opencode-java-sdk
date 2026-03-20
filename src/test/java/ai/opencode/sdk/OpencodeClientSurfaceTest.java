@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import ai.opencode.sdk.core.OpencodeClientConfig;
+import ai.opencode.sdk.core.ReactiveOpencodeClientConfig;
 import java.time.Duration;
 import java.util.LinkedHashMap;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,29 @@ class OpencodeClientSurfaceTest {
       assertSame(first, second, method.getName());
     }
 
-    assertSame(client.provider().oauth(), client.provider().oauth());
+    assertSame(client.question(), client.question());
+  }
+
+  @Test
+  void reactiveClientGettersReturnStableApiInstance() throws Exception {
+    var client =
+        new ReactiveOpencodeClient(
+            ReactiveOpencodeClientConfig.builder()
+                .baseUrl("http://localhost:4096/")
+                .timeout(Duration.ofSeconds(5))
+                .directory("/workspace/sample")
+                .build());
+
+    for (var method : ReactiveOpencodeClient.class.getDeclaredMethods()) {
+      if (!java.lang.reflect.Modifier.isPublic(method.getModifiers())) continue;
+
+      var first = method.invoke(client);
+      var second = method.invoke(client);
+
+      assertNotNull(first, method.getName());
+      assertSame(first, second, method.getName());
+    }
+
+    assertNotNull(new ReactiveOpencodeClient().session());
   }
 }

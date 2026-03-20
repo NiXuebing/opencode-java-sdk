@@ -1,8 +1,10 @@
 package ai.opencode.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * MCP状态需要客户端注册数据模型。
@@ -12,6 +14,58 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record MCPStatusNeedsClientRegistration(
-    @JsonProperty("status") String status, @JsonProperty("error") String error)
-    implements MCPStatus {}
+public final class MCPStatusNeedsClientRegistration implements MCPStatus {
+  @JsonProperty("status")
+  private final String status;
+  @JsonProperty("error")
+  private final String error;
+
+  /** 使用字段创建MCP状态需要客户端注册。 */
+  @JsonCreator
+  public MCPStatusNeedsClientRegistration(
+      @JsonProperty("status") String status,
+      @JsonProperty("error") String error
+  ) {
+    this.status = status;
+    this.error = error;
+  }
+
+  /**
+   * 获取状态。
+   *
+   * @return 当前状态。
+   */
+  public String status() {
+    return status;
+  }
+
+  /**
+   * 获取错误。
+   *
+   * @return 错误信息。
+   */
+  public String error() {
+    return error;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof MCPStatusNeedsClientRegistration)) return false;
+    MCPStatusNeedsClientRegistration that = (MCPStatusNeedsClientRegistration) other;
+    return Objects.equals(status, that.status)
+        && Objects.equals(error, that.error);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(status, error);
+  }
+
+  @Override
+  public String toString() {
+    return "MCPStatusNeedsClientRegistration{" +
+        "status=" + status + "," +
+        "error=" + error +
+        "}";
+  }
+}

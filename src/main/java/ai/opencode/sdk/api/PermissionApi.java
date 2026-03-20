@@ -37,13 +37,7 @@ public final class PermissionApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = request.body();
-    return transport.execute(
-        "POST",
-        "/session/{sessionID}/permissions/{permissionID}",
-        path,
-        query,
-        headers,
-        body,
-        Boolean.class);
+    return transport.execute("POST", "/session/{sessionID}/permissions/{permissionID}", path, query, headers, body, Boolean.class);
   }
+
 }

@@ -87,7 +87,7 @@ public final class ConfigApi {
     if (request.directory() != null) query.put("directory", request.directory());
     Map<String, String> headers = Map.of();
     Object body = null;
-    return transport.execute(
-        "GET", "/config/providers", path, query, headers, body, ConfigProvidersResponse.class);
+    return transport.execute("GET", "/config/providers", path, query, headers, body, ConfigProvidersResponse.class);
   }
+
 }
